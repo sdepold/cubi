@@ -1,15 +1,20 @@
 (function() {
-  GridCell = function(type) {
-    this.type = type
-    this.dom  = document.createElement('td')
-    this.dom.className = type
-    this.dom.cell = this
+  GridCell = function() {
+    this.dom           = document.createElement('td')
+    this.dom.cell      = this
+
+    this.setType(GridCell.INACCESSABLE)
   }
 
   GridCell.INACCESSABLE = 'inaccessable'
-  GridCell.ACCESSABLE   = 'accessable'
+  GridCell.PATH         = 'path'
 
   GridCell.prototype.getElement = function() {
     return this.dom
+  }
+
+  GridCell.prototype.setType = function(type) {
+    this.type          = type
+    this.dom.className = this.type
   }
 })()

@@ -7,7 +7,7 @@
     <script type="text/javascript" src="game.js"></script>
     <script type="text/javascript">
       window.addEventListener('load', function() {
-        new Game('body', { cols: 30, rows: 20 }).render()
+        new Game('body', { cols: 40, rows: 5 }).render()
       }, false);
     </script>
 
@@ -24,6 +24,10 @@
 
       table td.inaccessable {
         background: #900;
+      }
+
+      table td.path {
+        background: #090;
       }
     </style>
   </head>

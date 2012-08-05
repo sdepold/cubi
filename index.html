@@ -2,12 +2,30 @@
 <html>
   <head>
     <title>Cubi</title>
+    <script type="text/javascript" src="grid.js"></script>
+    <script type="text/javascript" src="grid-cell.js"></script>
     <script type="text/javascript" src="game.js"></script>
     <script type="text/javascript">
       window.addEventListener('load', function() {
-        Game.init()
+        new Game('body', { cols: 30, rows: 20 }).render()
       }, false);
     </script>
+
+    <style type="text/css">
+      table {
+        border: 1px solid black;
+      }
+
+      table td {
+        height: 20px;
+        width: 20px;
+        border: 1px solid black;
+      }
+
+      table td.inaccessable {
+        background: #900;
+      }
+    </style>
   </head>
   <body></body>
 </html>

@@ -35,23 +35,31 @@
 
   var createPath = function() {
     var accessableCells = []
-      , self            = this
+      , lastWayPoint    = null
 
     for(var colIndex = 0; colIndex < this.cols; colIndex++) {
-      var rowIndex1 = ~~(Math.random() * this.rows)
+      console.log('column: #' + colIndex)
+
+      var rowIndex1 = lastWayPoint || ~~(Math.random() * this.rows)
         , rowIndex2 = ~~(Math.random() * this.rows)
 
+
       if(rowIndex1 === rowIndex2) {
-        accessableCells.push(getCell.call(this, colIndex, rowIndex1))
+        var cell = getCell.call(this, colIndex, rowIndex1)
+        accessableCells.push(cell)
       } else {
-        var start = [rowIndex1, rowIndex2].sort()[0]
-          , end   = [rowIndex1, rowIndex2].sort()[1]
+        var sorted = [rowIndex1, rowIndex2].sort(function(a,b){ return (a<b) ? -1 : 1})
+          , start  = sorted[0]
+          , end    = sorted[1]
 
         while(start < end) {
-          accessableCells.push(getCell.call(self, colIndex, start))
+          var cell = getCell.call(this, colIndex, start)
+          accessableCells.push(cell)
           start++
         }
       }
+
+      lastWayPoint = rowIndex2
     }
 
     return accessableCells

@@ -34,35 +34,57 @@
   }
 
   var createPath = function() {
-    var accessableCells = []
-      , lastWayPoint    = null
+    var indexes = getPathCellIndexes.call(this)
+      , cells   = []
+      , self    = this
+
+    indexes.forEach(function(col, x) {
+      col.forEach(function(y) {
+        var cell = getCell.call(self, x, y)
+        cells.push(cell)
+      })
+    })
+
+
+    // for(var colIndex = 0; colIndex < this.cols; colIndex++) {
+    //   indexes[colIndex].forEach(function(y) {
+    //     console.log()
+    //     var cell = getCell.call(this, colIndex, y)
+    //     cells.push(cell)
+    //   })
+    // }
+
+    return cells
+  }
+
+  var getPathCellIndexes = function() {
+    var indexes      = []
+      , lastWayPoint = null
 
     for(var colIndex = 0; colIndex < this.cols; colIndex++) {
-      console.log('column: #' + colIndex)
+      var cells = []
 
       var rowIndex1 = lastWayPoint || ~~(Math.random() * this.rows)
         , rowIndex2 = ~~(Math.random() * this.rows)
 
-
       if(rowIndex1 === rowIndex2) {
-        var cell = getCell.call(this, colIndex, rowIndex1)
-        accessableCells.push(cell)
+        cells.push(rowIndex1)
       } else {
         var sorted = [rowIndex1, rowIndex2].sort(function(a,b){ return (a<b) ? -1 : 1})
           , start  = sorted[0]
           , end    = sorted[1]
 
         while(start < end) {
-          var cell = getCell.call(this, colIndex, start)
-          accessableCells.push(cell)
+          cells.push(start)
           start++
         }
       }
 
+      indexes.push(cells)
       lastWayPoint = rowIndex2
     }
 
-    return accessableCells
+    return indexes
   }
 
   var getCell = function(x, y) {

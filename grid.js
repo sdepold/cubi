@@ -54,21 +54,24 @@
 
     for(var colIndex = 0; colIndex < this.cols; colIndex++) {
       var cells = []
-
-      var start = lastWayPoint || (~~(Math.random() * this.rows))
+        , start = (lastWayPoint !== null) ? lastWayPoint : (~~(Math.random() * this.rows))
         , end   = ~~(Math.random() * this.rows)
 
-      if(start === end) {
+      if(colIndex % 2 == 0) {
         cells.push(start)
+        lastWayPoint = start
+      } else if(start === end) {
+        cells.push(start)
+        lastWayPoint = end
       } else {
         for(var i = start; i !== end; (start > end) ? i-- : i++) {
           cells.push(i)
         }
         cells.push(i)
+        lastWayPoint = end
       }
 
       indexes.push(cells)
-      lastWayPoint = end
     }
 
     return indexes

@@ -60,16 +60,20 @@
       if(colIndex % 2 == 0) {
         cells.push(start)
         lastWayPoint = start
-      } else if(start === end) {
-        cells.push(start)
-        lastWayPoint = end
       } else {
-        for(var i = start; i !== end; (start > end) ? i-- : i++) {
+        if(start === end) {
+          cells.push(start)
+        } else {
+          for(var i = start; i !== end; (start > end) ? i-- : i++) {
+            cells.push(i)
+          }
           cells.push(i)
         }
-        cells.push(i)
+
         lastWayPoint = end
       }
+
+
 
       indexes.push(cells)
     }

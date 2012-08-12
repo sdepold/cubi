@@ -10,5 +10,11 @@
 
   Game.prototype.render = function(options) {
     this.grid.render()
+
+    var monster = new Monster(this.grid.path)
+
+    setInterval(function() {
+      monster.move()
+    }, 1000)
   }
 })()

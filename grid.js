@@ -4,14 +4,15 @@
     this.cols      = cols
     this.canvas    = canvas
     this.container = document.createElement('table')
+    this.path      = []
   }
 
   Grid.prototype.render = function() {
     createDOM.call(this)
 
-    var cells = createPath.call(this)
+    this.path = createPath.call(this)
 
-    cells.forEach(function(cell) {
+    this.path.forEach(function(cell) {
       cell.setType(GridCell.PATH)
     })
   }
@@ -57,7 +58,7 @@
         , start = (lastWayPoint !== null) ? lastWayPoint : (~~(Math.random() * this.rows))
         , end   = ~~(Math.random() * this.rows)
 
-      if(colIndex % 2 == 0) {
+      if(colIndex % 2 === 0) {
         cells.push(start)
         lastWayPoint = start
       } else {
@@ -72,8 +73,6 @@
 
         lastWayPoint = end
       }
-
-
 
       indexes.push(cells)
     }

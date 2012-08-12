@@ -8,6 +8,7 @@
 
   GridCell.INACCESSABLE = 'inaccessable'
   GridCell.PATH         = 'path'
+  GridCell.MONSTER      = 'monster'
 
   GridCell.prototype.getElement = function() {
     return this.dom

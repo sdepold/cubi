@@ -2,13 +2,14 @@
 <html>
   <head>
     <title>Cubi</title>
+    <script type="text/javascript" src="utils.js"></script>
     <script type="text/javascript" src="grid.js"></script>
     <script type="text/javascript" src="grid-cell.js"></script>
     <script type="text/javascript" src="monster.js"></script>
     <script type="text/javascript" src="game.js"></script>
     <script type="text/javascript">
       window.addEventListener('load', function() {
-        new Game('body', { cols: 40, rows: 20 }).render()
+        new Game('body', { cols: 40, rows: 10 }).render()
       }, false);
     </script>
 

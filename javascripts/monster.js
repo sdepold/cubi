@@ -2,7 +2,8 @@
   Monster = function(path, options) {
     this.options = Utils.merge({
       speed: 100,
-      health: 10
+      health: 10,
+      onReachedGoal: function(){}
     }, options || {})
 
     this.path        = path
@@ -19,6 +20,7 @@
         self.move()
       } else {
         setPosition.call(self, null)
+        self.options.onReachedGoal()
         clearInterval(self.intervalId)
       }
     }, this.options.speed)

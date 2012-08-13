@@ -1,0 +1,21 @@
+table {
+  border: 1px solid black;
+}
+
+table td {
+  height: 20px;
+  width: 20px;
+  border: 1px solid black;
+}
+
+table .inaccessable {
+  background: #900;
+}
+
+table .path {
+  background: yellow;
+}
+
+table .monster {
+  background: blue;
+}

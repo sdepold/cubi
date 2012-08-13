@@ -5,6 +5,7 @@
     this.canvas    = canvas
     this.container = document.createElement('table')
     this.path      = []
+    this.cells     = []
   }
 
   Grid.prototype.render = function() {
@@ -21,14 +22,18 @@
 
   var createDOM = function() {
     for(var i = 0; i < this.rows; i++) {
-      var tr = document.createElement('tr')
+      var tr    = document.createElement('tr')
+        , cells = []
 
       for(var j = 0; j < this.cols; j++) {
         var cell = new GridCell()
+
+        cells.push(cell)
         tr.appendChild(cell.getElement())
       }
 
       this.container.appendChild(tr)
+      this.cells.push(cells)
     }
 
     this.canvas.appendChild(this.container)

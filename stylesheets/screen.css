@@ -3,8 +3,8 @@ table {
 }
 
 table td {
-  height: 20px;
-  width: 20px;
+  height: 32px;
+  width: 32px;
   border: 1px solid black;
 }
 
@@ -17,5 +17,9 @@ table .path {
 }
 
 table .monster {
-  background: blue;
+  background: yellow url('../images/monsters/monster_5_32.png');
+}
+
+table .tower {
+  background: white url('../images/towers/factory.png') no-repeat;
 }

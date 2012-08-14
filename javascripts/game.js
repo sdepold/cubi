@@ -13,6 +13,27 @@
     this.grid.render()
     this.player.render()
 
+    initTowerPanel.call(this)
+    spawnMonsters.call(this)
+
+    return this
+  }
+
+  // private
+
+  var initTowerPanel = function() {
+    this.grid.cells.forEach(function(cellGroup) {
+      cellGroup.filter(function(cell) {
+        return cell.type !== GridCell.PATH
+      }).forEach(function(cell) {
+        cell.on('click', function() {
+          new Tower(Tower.TYPES.LASER, cell).render()
+        })
+      })
+    })
+  }
+
+  var spawnMonsters = function() {
     var monsters = []
       , speed    = Math.min(250, ~~(Math.random() * 2000))
 
@@ -30,7 +51,5 @@
         monster.initMoving()
       }, i * 2 * speed)
     })
-
-    return this
   }
 })()

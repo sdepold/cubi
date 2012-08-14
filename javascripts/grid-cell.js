@@ -5,14 +5,6 @@
     this.dom           = document.createElement('td')
     this.dom.cell      = this
 
-    this.options = Utils.merge({
-      onClick: function(){}
-    }, options || {})
-
-    this.dom.onclick = function() {
-      new Tower(Tower.TYPES.LASER, self).render()
-    }
-
     this.setType(GridCell.INACCESSABLE)
   }
 
@@ -28,5 +20,9 @@
   GridCell.prototype.setType = function(type, additionalClasses) {
     this.type          = type
     this.dom.className = [this.type].concat(additionalClasses || []).join(' ')
+  }
+
+  GridCell.prototype.on = function(eventName, callback) {
+    this.dom['on' + eventName.toLowerCase()] = callback
   }
 })()

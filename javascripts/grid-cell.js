@@ -1,11 +1,12 @@
 (function() {
   GridCell = function(options) {
-    var self = this
-
-    this.dom           = document.createElement('td')
-    this.dom.cell      = this
+    this.dom         = document.createElement('td')
+    this.dom.cell    = this
+    this.dom.onclick = onClick.bind(this)
 
     this.setType(GridCell.INACCESSABLE)
+
+    Utils.addObserverMethods(this)
   }
 
   GridCell.INACCESSABLE = 'inaccessable'
@@ -22,7 +23,20 @@
     this.dom.className = [this.type].concat(additionalClasses || []).join(' ')
   }
 
-  GridCell.prototype.on = function(eventName, callback) {
-    this.dom['on' + eventName.toLowerCase()] = callback
+  // private
+
+  var onClick = function() {
+    var self = this
+
+    var onSelect = function(type) {
+      TowerMenu.off('select', onSelect)
+      TowerMenu.clear()
+
+
+      new Tower(type, self).render()
+    }
+
+    TowerMenu.on('select', onSelect)
+    TowerMenu.render()
   }
 })()

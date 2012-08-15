@@ -2,14 +2,15 @@
   Monster = function(path, options) {
     this.options = Utils.merge({
       speed: 100,
-      health: 10,
-      onReachedGoal: function(){}
+      health: 10
     }, options || {})
 
     this.path        = path
     this.pathIndex   = 0
     this.currentCell = null
     this.intervalId  = null
+
+    Utils.addObserverMethods(this)
   }
 
   Monster.prototype.initMoving = function() {
@@ -20,7 +21,7 @@
         self.move()
       } else {
         setPosition.call(self, null)
-        self.options.onReachedGoal()
+        self.fire('goal:reached')
         clearInterval(self.intervalId)
       }
     }, this.options.speed)
@@ -29,6 +30,7 @@
   Monster.prototype.move = function() {
     setPosition.call(this, this.path[this.pathIndex])
     this.pathIndex++
+    this.fire('moved')
   }
 
   // private

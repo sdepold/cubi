@@ -39,9 +39,10 @@
 
     for(var i = 0; i < 10; i++) {
       var monster = new Monster(this.grid.path, {
-        speed: speed,
-        onReachedGoal: this.player.hurt.bind(this.player)
+        speed: speed
       })
+
+      monster.on('goal:reached', this.player.hurt.bind(this.player))
 
       monsters.push(monster)
     }

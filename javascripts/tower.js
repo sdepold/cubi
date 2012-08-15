@@ -30,7 +30,7 @@
   // private
 
   var toClassNames = function() {
-    var towerName = this.type.name.toLowerCase().replace(/ /, '-')
+    var towerName = this.type.toLowerCase().replace(/ /, '-')
       , levelName = 'level-' + this.level
 
     return [towerName, levelName]

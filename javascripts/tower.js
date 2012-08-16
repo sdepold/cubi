@@ -20,6 +20,14 @@
       damages:      [10, 15, 25],
       ranges:       [7, 9, 12],
       frequencies:  [3000, 2700, 2200]
+    },
+
+    FREEZER: {
+      name:         'Freezer',
+      costs:        [200, 500, 750],
+      damages:      [5, 7, 9],
+      ranges:       [3, 4, 5],
+      frequencies:  [5000, 4000, 3000]
     }
   }
 

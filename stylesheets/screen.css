@@ -29,6 +29,17 @@ table .tower:after {
   content: '';
   height: 28px;
   width: 24px;
-  background: transparent url('../images/towers/laser.gif') no-repeat;
   display: block;
+}
+
+table .freezer:after {
+  background: transparent url('../images/towers/freezer.gif') no-repeat;
+}
+
+table .laser:after {
+  background: transparent url('../images/towers/laser.gif') no-repeat;
+}
+
+table .rocket:after {
+  background: transparent url('../images/towers/rocket.gif') no-repeat;
 }

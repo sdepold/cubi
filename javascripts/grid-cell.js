@@ -32,7 +32,6 @@
       TowerMenu.off('select', onSelect)
       TowerMenu.clear()
 
-
       new Tower(type, self).render()
     }
 

@@ -10,11 +10,13 @@
 
         for(var type in Tower.TYPES) {
           var li   = document.createElement('li')
-            , text = document.createTextNode(type)
+            , text = document.createTextNode(Tower.TYPES[type].name)
 
           li.appendChild(text)
+          li.setAttribute('data-tower-type', type)
+
           li.onclick = function() {
-            self.fire('select', type)
+            self.fire('select', this.getAttribute('data-tower-type'))
           }
 
           container.appendChild(li)

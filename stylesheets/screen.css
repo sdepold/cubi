@@ -1,19 +1,20 @@
 table {
-  border: 1px solid black;
+  border-collapse: collapse;
 }
 
 table td {
-  height: 32px;
-  width: 32px;
-  border: 1px solid black;
+  height: 28px;
+  width: 24px;
+  padding: 0;
 }
 
 table .inaccessable {
-  background: #900;
+  background: url('../images/surfaces/ice.gif');
 }
 
 table .path {
-  background: yellow;
+  background: url('../images/surfaces/path.gif') no-repeat;
+
 }
 
 table .monster {
@@ -21,5 +22,13 @@ table .monster {
 }
 
 table .tower {
-  background: white url('../images/towers/factory.png') no-repeat;
+  background: url('../images/surfaces/ice.gif') no-repeat;
+}
+
+table .tower:after {
+  content: '';
+  height: 28px;
+  width: 24px;
+  background: transparent url('../images/towers/laser.gif') no-repeat;
+  display: block;
 }

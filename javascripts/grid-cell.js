@@ -1,8 +1,12 @@
 (function() {
   GridCell = function(options) {
+    var self = this
+
     this.dom         = document.createElement('td')
     this.dom.cell    = this
-    this.dom.onclick = onClick.bind(this)
+    this.dom.onclick = function() {
+      self.fire('click')
+    }
 
     this.setType(GridCell.INACCESSABLE)
 
@@ -21,21 +25,5 @@
   GridCell.prototype.setType = function(type, additionalClasses) {
     this.type          = type
     this.dom.className = [this.type].concat(additionalClasses || []).join(' ')
-  }
-
-  // private
-
-  var onClick = function() {
-    var self = this
-
-    var onSelect = function(type) {
-      TowerMenu.off('select', onSelect)
-      TowerMenu.clear()
-
-      new Tower(type, self).render()
-    }
-
-    TowerMenu.on('select', onSelect)
-    TowerMenu.render()
   }
 })()

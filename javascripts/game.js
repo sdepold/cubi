@@ -13,7 +13,7 @@
     this.grid.render()
     this.player.render()
 
-    initTowerPanel.call(this)
+    initTowerMenu.call(this)
     spawnMonsters.call(this)
 
     return this
@@ -21,13 +21,41 @@
 
   // private
 
-  var initTowerPanel = function() {
+  var initTowerMenu = function() {
+    var self = this
+
     this.grid.cells.forEach(function(cellGroup) {
       cellGroup.filter(function(cell) {
         return cell.type !== GridCell.PATH
       }).forEach(function(cell) {
         cell.on('click', function() {
-          new Tower(Tower.TYPES.LASER, cell).render()
+          var menu = new TowerMenu(cell).render()
+
+          menu.on('select', function(towerType) {
+            if(self.player.canBuy(towerType)) {
+              self.player.buy(towerType)
+              new Tower(towerType, cell).render()
+            } else {
+              alert('too expensive!')
+            }
+
+            menu.remove()
+          })
+          // var onClick = function() {
+          // var self = this
+
+          // var onSelect = function(type) {
+          //   TowerMenu.off('select', onSelect)
+          //   TowerMenu.clear()
+
+
+          //   new Tower(type, self).render()
+          // }
+
+          // TowerMenu.on('select', onSelect)
+          // TowerMenu.render()
+        // }
+          // new Tower(Tower.TYPES.LASER, cell).render()
         })
       })
     })

@@ -35,6 +35,10 @@
     this.cell.setType(GridCell.TOWER, toClassNames.call(this))
   }
 
+  Tower.prototype.getPrice = function() {
+    return Tower.TYPES[this.type].costs[this.level]
+  }
+
   // private
 
   var toClassNames = function() {

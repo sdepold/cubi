@@ -27,10 +27,21 @@
     }, this.options.speed)
   }
 
+  Monster.prototype.stop = function() {
+    clearInterval(this.intervalId)
+  }
+
   Monster.prototype.move = function() {
     setPosition.call(this, this.path[this.pathIndex])
     this.pathIndex++
-    this.fire('moved')
+
+    if(this.currentCell) {
+      this.fire('move')
+    }
+  }
+
+  Monster.prototype.getPosition = function() {
+    return this.currentCell && this.currentCell.getCoordinates()
   }
 
   // private

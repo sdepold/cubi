@@ -33,10 +33,34 @@
 
   Tower.prototype.render = function() {
     this.cell.setType(GridCell.TOWER, toClassNames.call(this))
+    return this
   }
 
   Tower.prototype.getPrice = function() {
     return Tower.TYPES[this.type].costs[this.level]
+  }
+
+  Tower.prototype.getRange = function() {
+    return Tower.TYPES[this.type].ranges[this.level]
+  }
+
+  Tower.prototype.checkDistanceTo = function(monster) {
+    var towerCoordinates   = this.cell.getCoordinates()
+      , monsterCoordinates = monster.getPosition()
+
+    if(monsterCoordinates) {
+      var xDistance = Math.abs(towerCoordinates.x - monsterCoordinates.x)
+        , yDistance = Math.abs(towerCoordinates.y - monsterCoordinates.y)
+        , distance  = xDistance + yDistance
+
+      if((xDistance !== 0) && (yDistance !== 0)) {
+        distance = distance / 2
+      }
+
+      if(distance <= this.getRange()) {
+        console.log('pew')
+      }
+    }
   }
 
   // private

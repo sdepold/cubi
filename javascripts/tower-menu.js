@@ -6,12 +6,13 @@
   }
 
   TowerMenu.prototype.render = function() {
-    var container = document.getElementById('tower-menu')
-      , self      = this
+    var self      = this
+      , container = document.getElementById('tower-menu')
+
+    this.cell.addClassName('selected')
 
     if(!container) {
       container = buildContainer.call(this)
-      console.log(container)
       document.querySelector('body').appendChild(container)
     }
 
@@ -21,6 +22,8 @@
   TowerMenu.prototype.remove = function() {
     var menu = document.getElementById('tower-menu')
       , body = document.querySelector('body')
+
+    this.cell.removeClassName('selected')
 
     body.removeChild(menu)
   }

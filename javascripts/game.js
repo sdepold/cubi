@@ -1,12 +1,17 @@
 (function() {
   Game = function(canvasSelector, options) {
-    this.options = options || {}
-    this.options.rows = this.options.rows || 10
-    this.options.cols = this.options.cols || 10
+    this.options = Utils.merge({
+      rows: 10,
+      cols: 10
+    }, options || {})
 
-    this.canvas = document.querySelectorAll(canvasSelector)[0]
-    this.grid   = new Grid(this.options.rows, this.options.cols, this.canvas)
-    this.player = new Player(canvasSelector)
+    this.canvas    = document.querySelectorAll(canvasSelector)[0]
+    this.grid      = new Grid(this.options.rows, this.options.cols, this.canvas)
+    this.player    = new Player(canvasSelector)
+
+    this.monsters  = []
+    this.towers    = []
+    this.towerMenu = null
   }
 
   Game.prototype.render = function(options) {
@@ -15,8 +20,21 @@
 
     initTowerMenu.call(this)
     spawnMonsters.call(this)
+    moveMonsters.call(this)
 
     return this
+  }
+
+  Game.prototype.pause = function() {
+    this.monsters.forEach(function(monster) {
+      monster.stop()
+    })
+  }
+
+  Game.prototype.continue = function() {
+    this.monsters.forEach(function(monster) {
+      monster.initMoving()
+    })
   }
 
   // private
@@ -29,41 +47,30 @@
         return cell.type !== GridCell.PATH
       }).forEach(function(cell) {
         cell.on('click', function() {
-          var menu = new TowerMenu(cell).render()
+          if(self.menu) {
+            self.menu.remove()
+          }
 
-          menu.on('select', function(towerType) {
+          self.menu = new TowerMenu(cell).render()
+          self.menu.on('select', function(towerType) {
             if(self.player.canBuy(towerType)) {
               self.player.buy(towerType)
-              new Tower(towerType, cell).render()
+              self.towers.push(new Tower(towerType, cell).render())
             } else {
               alert('too expensive!')
             }
 
-            menu.remove()
+            self.menu.remove()
+            self.menu = null
           })
-          // var onClick = function() {
-          // var self = this
-
-          // var onSelect = function(type) {
-          //   TowerMenu.off('select', onSelect)
-          //   TowerMenu.clear()
-
-
-          //   new Tower(type, self).render()
-          // }
-
-          // TowerMenu.on('select', onSelect)
-          // TowerMenu.render()
-        // }
-          // new Tower(Tower.TYPES.LASER, cell).render()
         })
       })
     })
   }
 
   var spawnMonsters = function() {
-    var monsters = []
-      , speed    = Math.min(250, ~~(Math.random() * 2000))
+    var self  = this
+      , speed = Math.min(250, ~~(Math.random() * 2000))
 
     for(var i = 0; i < 10; i++) {
       var monster = new Monster(this.grid.path, {
@@ -71,14 +78,25 @@
       })
 
       monster.on('goal:reached', this.player.hurt.bind(this.player))
+      monster.on('move', function() {
+        checkTowerDistances.call(self, monster)
+      })
 
-      monsters.push(monster)
+      self.monsters.push(monster)
     }
+  }
 
-    monsters.forEach(function(monster, i) {
+  var checkTowerDistances = function(monster) {
+    this.towers.forEach(function(tower) {
+      tower.checkDistanceTo(monster)
+    })
+  }
+
+  var moveMonsters = function() {
+    this.monsters.forEach(function(monster, i) {
       setTimeout(function() {
         monster.initMoving()
-      }, i * 2 * speed)
+      }, i * 2 * monster.options.speed)
     })
   }
 })()

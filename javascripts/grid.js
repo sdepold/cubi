@@ -21,12 +21,14 @@
   // private
 
   var createDOM = function() {
+    var self = this
+
     for(var i = 0; i < this.rows; i++) {
       var tr    = document.createElement('tr')
         , cells = []
 
       for(var j = 0; j < this.cols; j++) {
-        var cell = new GridCell()
+        var cell = new GridCell(self)
 
         cells.push(cell)
         tr.appendChild(cell.getElement())

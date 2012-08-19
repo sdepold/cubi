@@ -16,7 +16,6 @@ var ignoreFolder = function(path) {
 
 
 file.walkSync(__dirname + '/..', function(path) {
-
   if(!ignoreFolder(path)) {
     fs.readdirSync(path).forEach(function(file) {
       var _path = path + '/' + file
@@ -32,6 +31,10 @@ for(var path in sizeMap) {
 
   groupedSizeMap[type] = groupedSizeMap[type] || 0
   groupedSizeMap[type] += sizeMap[path]
+
+  groupedSizeMap.total = groupedSizeMap.total || 0
+  groupedSizeMap.total += sizeMap[path]
 }
+
 
 console.log(groupedSizeMap)

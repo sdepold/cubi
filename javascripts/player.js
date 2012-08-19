@@ -27,6 +27,11 @@
     this.render()
   }
 
+  Player.prototype.earn = function(money) {
+    this.cash += money
+    this.render()
+  }
+
   Player.prototype.sell = function(tower) {
     this.cash += tower.getPrice()
     render()

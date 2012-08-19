@@ -18,9 +18,8 @@
     this.grid.render()
     this.player.render()
 
-    initTowerMenu.call(this)
-    spawnMonsters.call(this)
-    moveMonsters.call(this)
+    this.spawnMonsters()
+    observeGridCellClicks.call(this)
 
     return this
   }
@@ -37,40 +36,16 @@
     })
   }
 
-  // private
-
-  var initTowerMenu = function() {
-    var self = this
-
-    this.grid.cells.forEach(function(cellGroup) {
-      cellGroup.filter(function(cell) {
-        return cell.type !== GridCell.PATH
-      }).forEach(function(cell) {
-        cell.on('click', function() {
-          if(self.menu) {
-            self.menu.remove()
-          }
-
-          self.menu = new TowerMenu(cell).render()
-          self.menu.on('select', function(towerType) {
-            if(self.player.canBuy(towerType)) {
-              self.player.buy(towerType)
-              self.towers.push(new Tower(towerType, cell).render())
-            } else {
-              alert('too expensive!')
-            }
-
-            self.menu.remove()
-            self.menu = null
-          })
-        })
-      })
-    })
+  Game.prototype.spawnMonsters = function() {
+    generateMonsters.call(this)
+    moveMonsters.call(this)
   }
 
-  var spawnMonsters = function() {
+  // private
+
+  var generateMonsters = function() {
     var self  = this
-      , speed = Math.min(250, ~~(Math.random() * 2000))
+      , speed = Math.min(1000, ~~(Math.random() * 2000))
 
     for(var i = 0; i < 10; i++) {
       var monster = new Monster(this.grid.path, {
@@ -81,9 +56,69 @@
       monster.on('move', function() {
         checkTowerDistances.call(self, monster)
       })
+      monster.on('die', function() {
+        self.monsters = self.monsters.filter(function(_monster) {
+          return _monster !== monster
+        })
+        self.player.earn(monster.options.revenue)
+      })
 
       self.monsters.push(monster)
     }
+  }
+
+  var observeGridCellClicks = function() {
+    var self = this
+
+    this.grid.cells.forEach(function(cellGroup) {
+      cellGroup.filter(function(cell) {
+        return cell.type !== GridCell.PATH
+      }).forEach(function(cell) {
+        cell.on('click', function() {
+
+          initTowerMenu.call(self, cell)
+          removeTowerRanges.call(self)
+
+        })
+      })
+    })
+  }
+
+  var removeTowerRanges = function() {
+    this.towers.forEach(function(tower) {
+      tower.removeRange()
+    })
+  }
+
+  var initTowerMenu = function(cell) {
+    var self = this
+
+    if(this.menu) {
+      this.menu.remove()
+    }
+
+    if(cell.hasClassName('tower')) {
+      return
+    }
+
+    this.menu = new TowerMenu(cell).render()
+    this.menu.on('select', function(towerType) {
+      if(self.player.canBuy(towerType)) {
+        var tower = new Tower(towerType, cell).render()
+
+        self.player.buy(towerType)
+        self.towers.push(tower)
+
+        tower.on('click', tower.renderRange.bind(tower))
+
+        tower.renderRange()
+      } else {
+        alert('too expensive!')
+      }
+
+      self.menu.remove()
+      self.menu = null
+    })
   }
 
   var checkTowerDistances = function(monster) {

@@ -77,7 +77,16 @@ table .selected:before {
 .range {
   position: absolute;
   background: orange;
-  /*border-radius: 50%;*/
+  border-radius: 50%;
   opacity: 0.5;
   border: 2px solid yellow;
+}
+
+.bullet {
+  position: absolute;
+  height: 5px;
+  width: 5px;
+  background: black;
+  opacity: 0.9;
+  border-radius: 50%;
 }

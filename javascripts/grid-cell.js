@@ -38,6 +38,10 @@
     }).join(' ')
   }
 
+  GridCell.prototype.hasClassName = function(className) {
+    return this.dom.className.split(' ').indexOf(className) !== -1
+  }
+
   GridCell.prototype.getCoordinates = function() {
     var result = this.coordinates
       , self   = this

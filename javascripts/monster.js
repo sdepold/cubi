@@ -2,13 +2,14 @@
   Monster = function(path, options) {
     this.options = Utils.merge({
       speed: 100,
-      health: 10
+      health: 10,
+      revenue: 100
     }, options || {})
 
-    this.path        = path
-    this.pathIndex   = 0
-    this.currentCell = null
-    this.intervalId  = null
+    this.path       = path
+    this.pathIndex  = 0
+    this.cell       = null
+    this.intervalId = null
 
     Utils.addObserverMethods(this)
   }
@@ -35,26 +36,40 @@
     setPosition.call(this, this.path[this.pathIndex])
     this.pathIndex++
 
-    if(this.currentCell) {
+    if(this.cell) {
       this.fire('move')
     }
   }
 
   Monster.prototype.getPosition = function() {
-    return this.currentCell && this.currentCell.getCoordinates()
+    return this.cell && this.cell.getCoordinates()
+  }
+
+  Monster.prototype.hurt = function(damage) {
+    this.options.health -= damage
+
+    if(this.options.health <= 0) {
+      this.die()
+    }
+  }
+
+  Monster.prototype.die = function() {
+    this.stop()
+    this.cell.setType(GridCell.PATH)
+    this.fire('die')
   }
 
   // private
 
   var setPosition = function(cell) {
-    if(this.currentCell) {
-      this.currentCell.setType(GridCell.PATH)
+    if(this.cell) {
+      this.cell.setType(GridCell.PATH)
     }
 
     if(cell) {
       cell.setType(GridCell.MONSTER)
     }
 
-    this.currentCell = cell
+    this.cell = cell
   }
 })()

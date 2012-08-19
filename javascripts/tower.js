@@ -4,6 +4,9 @@
     this.level    = 0
     this.cell     = cell
     this.lastShot = null
+    this.range    = null
+
+    Utils.addObserverMethods(this)
   }
 
   Tower.TYPES = {
@@ -49,6 +52,10 @@
     return Tower.TYPES[this.type].frequencies[this.level]
   }
 
+  Tower.prototype.getDamage = function() {
+    return Tower.TYPES[this.type].damages[this.level]
+  }
+
   Tower.prototype.checkDistanceTo = function(monster) {
     var towerCoordinates   = this.cell.getCoordinates()
       , monsterCoordinates = monster.getPosition()
@@ -74,21 +81,51 @@
   }
 
   Tower.prototype.shoot = function(monster) {
-    var bullet = document.createElement('div')
+    var bullet  = document.createElement('div')
+      , body    = document.querySelector('body')
+      , xTarget = monster.cell.dom.offsetLeft
+      , yTarget = monster.cell.dom.offsetTop
+      , self    = this
 
-    bullet.style.position = 'absolute';
+    bullet.className      = 'bullet'
     bullet.style.left     = this.cell.dom.offsetLeft + 'px'
     bullet.style.top      = this.cell.dom.offsetTop + 'px'
 
-    document.querySelector('body').appendChild(bullet)
+    body.appendChild(bullet)
+
+    var xStep = Math.abs(bullet.offsetLeft - xTarget) / 10
+      , yStep = Math.abs(bullet.offsetTop  - yTarget) / 10
+      , steps = 0
+
+    var intervalId = setInterval(function() {
+      if(xTarget < bullet.offsetLeft) {
+        bullet.style.left = (parseInt(bullet.style.left, 10) - xStep) + 'px'
+      } else {
+        bullet.style.left = (parseInt(bullet.style.left, 10) + xStep) + 'px'
+      }
+
+      if(yTarget < bullet.offsetTop) {
+        bullet.style.top  = (parseInt(bullet.style.top, 10) - yStep) + 'px'
+      } else {
+        bullet.style.top  = (parseInt(bullet.style.top, 10) + yStep) + 'px'
+      }
+
+      if(steps === 10) {
+        clearInterval(intervalId)
+        body.removeChild(bullet)
+        console.log(monster)
+        monster.hurt(self.getDamage())
+      }
+
+      steps++
+    }, 20)
   }
 
   Tower.prototype.renderRange = function() {
     var circle = document.createElement('div')
       , dom    = this.cell.dom
       , size   = dom.offsetHeight
-
-      console.log(getCenter.call(this))
+      , self   = this
 
     circle.className    = 'range'
     circle.style.width  = this.getRange() * dom.offsetWidth + 'px'
@@ -97,10 +134,25 @@
     var x = getCenter.call(this).x - parseInt(circle.style.width) / 2 - 4
       , y = getCenter.call(this).y - parseInt(circle.style.height) / 2 - 4
 
-    circle.style.left   = x + 'px'//((getCenter.call(this).x) - ((this.getRange() / 2) * parseInt(circle.style.width))) + 'px' //(dom.offsetLeft + 16 - (parseInt(circle.style.width) / 2) + 'px')
-    circle.style.top    = y + 'px'// ((getCenter.call(this).y) - ((this.getRange() / 2) * parseInt(circle.style.height))) + 'px' // (dom.offsetTop - ((this.getRange() / 2) - 0.5) * size) + 'px'
+    circle.style.left   = x + 'px'
+    circle.style.top    = y + 'px'
+
+    this.range = circle
+    this.range.onclick = function() {
+      self.removeRange()
+    }
 
     document.querySelector('body').appendChild(circle)
+  }
+
+  Tower.prototype.removeRange = function() {
+    var body = document.querySelector('body')
+
+    if(this.range) {
+      body.removeChild(this.range)
+    }
+
+    this.range = null
   }
 
   // private

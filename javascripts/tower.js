@@ -83,7 +83,34 @@
     document.querySelector('body').appendChild(bullet)
   }
 
+  Tower.prototype.renderRange = function() {
+    var circle = document.createElement('div')
+      , dom    = this.cell.dom
+      , size   = dom.offsetHeight
+
+      console.log(getCenter.call(this))
+
+    circle.className    = 'range'
+    circle.style.width  = this.getRange() * dom.offsetWidth + 'px'
+    circle.style.height = this.getRange() * dom.offsetHeight + 'px'
+
+    var x = getCenter.call(this).x - parseInt(circle.style.width) / 2 - 4
+      , y = getCenter.call(this).y - parseInt(circle.style.height) / 2 - 4
+
+    circle.style.left   = x + 'px'//((getCenter.call(this).x) - ((this.getRange() / 2) * parseInt(circle.style.width))) + 'px' //(dom.offsetLeft + 16 - (parseInt(circle.style.width) / 2) + 'px')
+    circle.style.top    = y + 'px'// ((getCenter.call(this).y) - ((this.getRange() / 2) * parseInt(circle.style.height))) + 'px' // (dom.offsetTop - ((this.getRange() / 2) - 0.5) * size) + 'px'
+
+    document.querySelector('body').appendChild(circle)
+  }
+
   // private
+
+  var getCenter = function() {
+    return {
+      x: this.cell.dom.offsetLeft + this.cell.dom.offsetWidth,
+      y: this.cell.dom.offsetTop  + this.cell.dom.offsetHeight
+    }
+  }
 
   var toClassNames = function() {
     var towerName = this.type.toLowerCase().replace(/ /, '-')

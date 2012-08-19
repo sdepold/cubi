@@ -73,3 +73,11 @@ table .selected:before {
   color: white;
   line-height: 16px;
 }
+
+.range {
+  position: absolute;
+  background: orange;
+  /*border-radius: 50%;*/
+  opacity: 0.5;
+  border: 2px solid yellow;
+}

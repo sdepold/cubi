@@ -1,8 +1,9 @@
 (function() {
   Tower = function(type, cell) {
-    this.type  = type
-    this.level = 1
-    this.cell  = cell
+    this.type     = type
+    this.level    = 0
+    this.cell     = cell
+    this.lastShot = null
   }
 
   Tower.TYPES = {
@@ -44,6 +45,10 @@
     return Tower.TYPES[this.type].ranges[this.level]
   }
 
+  Tower.prototype.getFrequency = function() {
+    return Tower.TYPES[this.type].frequencies[this.level]
+  }
+
   Tower.prototype.checkDistanceTo = function(monster) {
     var towerCoordinates   = this.cell.getCoordinates()
       , monsterCoordinates = monster.getPosition()
@@ -57,10 +62,25 @@
         distance = distance / 2
       }
 
-      if(distance <= this.getRange()) {
-        console.log('pew')
+      if((distance <= this.getRange()) && this.canShoot()) {
+        this.shoot(monster)
+        this.lastShot = +new Date()
       }
     }
+  }
+
+  Tower.prototype.canShoot = function() {
+    return !this.lastShot || (((+new Date()) - this.lastShot) >= this.getFrequency())
+  }
+
+  Tower.prototype.shoot = function(monster) {
+    var bullet = document.createElement('div')
+
+    bullet.style.position = 'absolute';
+    bullet.style.left     = this.cell.dom.offsetLeft + 'px'
+    bullet.style.top      = this.cell.dom.offsetTop + 'px'
+
+    document.querySelector('body').appendChild(bullet)
   }
 
   // private

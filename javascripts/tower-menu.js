@@ -13,7 +13,7 @@
 
     if(!container) {
       container = buildContainer.call(this)
-      document.querySelector('body').appendChild(container)
+      document.body.appendChild(container)
     }
 
     return this
@@ -21,7 +21,7 @@
 
   TowerMenu.prototype.remove = function() {
     var menu = document.getElementById('tower-menu')
-      , body = document.querySelector('body')
+      , body = document.body
 
     this.cell.removeClassName('selected')
 

@@ -1,8 +1,8 @@
 (function() {
-  Player = function(canvasSelector) {
+  Player = function(canvasSelector, metaDataContainer) {
     this.life   = 20
     this.cash   = 1000
-    this.dom    = document.createElement('div')
+    this.dom    = metaDataContainer
     this.canvas = document.querySelectorAll(canvasSelector)[0]
   }
 
@@ -58,7 +58,7 @@
       this.dom.appendChild(lifeContainer)
     }
 
-    lifeContainer.innerHTML = this.life.toString() + ' / 20'
+    lifeContainer.innerHTML = 'HP: ' + this.life.toString() + ' / 20'
   }
 
   var renderCash = function() {
@@ -70,6 +70,6 @@
       this.dom.appendChild(cashContainer)
     }
 
-    cashContainer.innerHTML = this.cash
+    cashContainer.innerHTML = 'Cash: ' + this.cash
   }
 })()

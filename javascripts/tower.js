@@ -82,7 +82,7 @@
 
   Tower.prototype.shoot = function(monster) {
     var bullet  = document.createElement('div')
-      , body    = document.querySelector('body')
+      , body    = document.body
       , xTarget = monster.cell.dom.offsetLeft
       , yTarget = monster.cell.dom.offsetTop
       , self    = this
@@ -142,11 +142,11 @@
       self.removeRange()
     }
 
-    document.querySelector('body').appendChild(circle)
+    document.body.appendChild(circle)
   }
 
   Tower.prototype.removeRange = function() {
-    var body = document.querySelector('body')
+    var body = document.body
 
     if(this.range) {
       body.removeChild(this.range)

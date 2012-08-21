@@ -1,24 +1,40 @@
 (function() {
   Game = function(canvasSelector, options) {
     this.options = Utils.merge({
-      rows: 10,
-      cols: 10
+      rows:         10,
+      cols:         10,
+      waveDuration: 20 * 1000
     }, options || {})
 
-    this.canvas    = document.querySelectorAll(canvasSelector)[0]
-    this.grid      = new Grid(this.options.rows, this.options.cols, this.canvas)
-    this.player    = new Player(canvasSelector)
+    this.canvas        = document.querySelectorAll(canvasSelector)[0]
+    this.grid          = new Grid(this.options.rows, this.options.cols, this.canvas)
+    this.meta          = document.createElement('div')
+    this.player        = new Player(canvasSelector, this.meta)
 
-    this.monsters  = []
-    this.towers    = []
-    this.towerMenu = null
+    this.monsters      = []
+    this.towers        = []
+    this.nextWaveStartsAt = null
+
+    this.towerMenu     = null
   }
 
   Game.prototype.render = function(options) {
+    var self = this
+
     this.grid.render()
     this.player.render()
 
-    this.spawnMonsters()
+    this.meta.id = 'meta-data'
+    document.body.appendChild(this.meta)
+
+    waitUntilNextWaveStart.call(this, function() {
+      self.spawnMonsters()
+    })
+
+    updateWaveDuration.call(this)
+    setInterval(updateWaveDuration.bind(this), 1000)
+
+
     observeGridCellClicks.call(this)
 
     return this
@@ -51,9 +67,33 @@
 
   // private
 
+  var waitUntilNextWaveStart = function(callback) {
+    var self = this
+
+    this.nextWaveStartsAt = this.nextWaveStartsAt || (+new Date() + 10000)
+
+    setTimeout(function() {
+      callback()
+      self.nextWaveStartsAt = (+new Date() + self.options.waveDuration)
+    }, Math.abs(+new Date() - this.nextWaveStartsAt))
+  }
+
+  var updateWaveDuration = function() {
+    var container = document.getElementById('wave-duration')
+
+    if(!container) {
+      container = document.createElement('span')
+      container.id = 'wave-duration'
+
+      this.meta.appendChild(container)
+    }
+
+    container.innerHTML = 'Next wave in: ' + Math.ceil(Math.abs(+new Date() - this.nextWaveStartsAt) / 1000) + 's'
+  }
+
   var generateMonsters = function() {
     var self  = this
-      , speed = Math.min(1000, ~~(Math.random() * 2000))
+      , speed = Math.max(250, ~~(Math.random() * 1000))
 
     for(var i = 0; i < 10; i++) {
       var monster = new Monster(this.grid.path, {

@@ -1,5 +1,24 @@
 table {
   border-collapse: collapse;
+  border: 1px solid black;
+  box-shadow:  0 0 5px 0 rgba(0, 0, 0, 1);
+}
+
+#meta-data {
+  background: black;
+  box-shadow:  0 0 5px 0 rgba(0, 0, 0, 1);
+  color: white;
+  font-family: Arial;
+  font-size: 12px;
+  padding: 5px;
+}
+
+#meta-data span {
+  padding: 0px 5px;
+}
+
+#meta-data span:not(:last-child) {
+  border-right: 1px solid white;
 }
 
 table td {

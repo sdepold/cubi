@@ -13,7 +13,15 @@
     <link rel="stylesheet" href="stylesheets/screen.css" />
     <script type="text/javascript">
       window.addEventListener('load', function() {
-        game = new Game('body', { cols: 40, rows: 10 }).render()
+        var w=window,d=document,e=d.documentElement,g=d.getElementsByTagName('body')[0],x=w.innerWidth||e.clientWidth||g.clientWidth,y=w.innerHeight||e.clientHeight||g.clientHeight
+
+        var cellWidth  = 24
+          , cellHeight = 28
+
+        game = new Game('body', {
+          cols: ~~(x / cellWidth),
+          rows: ~~((y - 50) / cellHeight)
+        }).render()
       }, false);
     </script>
   </head>

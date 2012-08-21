@@ -41,6 +41,14 @@
     moveMonsters.call(this)
   }
 
+  Game.prototype.getTowerByGridCell = function(cell) {
+    var towers = this.towers.filter(function(tower) {
+      return tower.cell === cell
+    })
+
+    return (towers.length === 1) ? towers[0] : null
+  }
+
   // private
 
   var generateMonsters = function() {
@@ -71,14 +79,18 @@
     var self = this
 
     this.grid.cells.forEach(function(cellGroup) {
-      cellGroup.filter(function(cell) {
-        return cell.type !== GridCell.PATH
-      }).forEach(function(cell) {
+      cellGroup.forEach(function(cell) {
         cell.on('click', function() {
-
-          initTowerMenu.call(self, cell)
-          removeTowerRanges.call(self)
-
+          switch(this.type) {
+            case GridCell.INACCESSABLE:
+              initTowerMenu.call(self, this)
+              removeTowerRanges.call(self)
+              break
+            case GridCell.TOWER:
+              removeTowerRanges.call(self)
+              self.getTowerByGridCell(this).renderRange()
+              break
+          }
         })
       })
     })

@@ -3,18 +3,20 @@
     var self = this
 
     this.grid        = grid
+    this.type        = GridCell.INACCESSABLE
     this.dom         = document.createElement('td')
     this.dom.cell    = this
     this.dom.onclick = function() {
       self.fire('click')
     }
 
-    this.setType(GridCell.INACCESSABLE)
+    this.setType(this.type)
 
     Utils.addObserverMethods(this)
   }
 
   GridCell.INACCESSABLE = 'inaccessable'
+  GridCell.ACCESSABLE   = 'accessable'
   GridCell.PATH         = 'path'
   GridCell.MONSTER      = 'monster'
   GridCell.TOWER        = 'tower'

@@ -6,34 +6,30 @@
       waveDuration: 20 * 1000
     }, options || {})
 
-    this.canvas        = document.querySelectorAll(canvasSelector)[0]
-    this.grid          = new Grid(this.options.rows, this.options.cols, this.canvas)
-    this.meta          = document.createElement('div')
-    this.player        = new Player(canvasSelector, this.meta)
+    this.canvas   = document.querySelectorAll(canvasSelector)[0]
+    this.grid     = new Grid(this.options.rows, this.options.cols, this.canvas)
+    this.meta     = document.createElement('div')
+    this.player   = new Player(canvasSelector, this.meta)
 
-    this.monsters      = []
-    this.towers        = []
+    this.monsters = []
+    this.towers   = []
+    this.wave     = -1
+
     this.nextWaveStartsAt = null
-
-    this.towerMenu     = null
+    this.towerMenu        = null
   }
 
   Game.prototype.render = function(options) {
-    var self = this
-
     this.grid.render()
     this.player.render()
 
     this.meta.id = 'meta-data'
     document.body.appendChild(this.meta)
 
-    waitUntilNextWaveStart.call(this, function() {
-      self.spawnMonsters()
-    })
+    waitUntilNextWaveStart.call(this, this.spawnNextWave.bind(this))
 
     updateWaveDuration.call(this)
     setInterval(updateWaveDuration.bind(this), 1000)
-
 
     observeGridCellClicks.call(this)
 
@@ -52,17 +48,18 @@
     })
   }
 
-  Game.prototype.spawnMonsters = function() {
-    generateMonsters.call(this)
-    moveMonsters.call(this)
-  }
-
   Game.prototype.getTowerByGridCell = function(cell) {
     var towers = this.towers.filter(function(tower) {
       return tower.cell === cell
     })
 
     return (towers.length === 1) ? towers[0] : null
+  }
+
+  Game.prototype.spawnNextWave = function() {
+    this.wave++
+    this.monsters[this.wave] = generateMonsters.call(this)
+    moveMonsters.call(this)
   }
 
   // private
@@ -75,6 +72,7 @@
     setTimeout(function() {
       callback()
       self.nextWaveStartsAt = (+new Date() + self.options.waveDuration)
+      waitUntilNextWaveStart.call(self, callback)
     }, Math.abs(+new Date() - this.nextWaveStartsAt))
   }
 
@@ -88,12 +86,16 @@
       this.meta.appendChild(container)
     }
 
-    container.innerHTML = 'Next wave in: ' + Math.ceil(Math.abs(+new Date() - this.nextWaveStartsAt) / 1000) + 's'
+    var nextStart = Math.ceil(Math.abs(+new Date() - this.nextWaveStartsAt) / 1000)
+      , message   = 'Wave #' + (this.wave + 2) + ' starts in ' + nextStart + 's'
+
+    container.innerHTML = message
   }
 
   var generateMonsters = function() {
-    var self  = this
-      , speed = Math.max(250, ~~(Math.random() * 1000))
+    var self     = this
+      , speed    = Math.max(250, ~~(Math.random() * 1000))
+      , monsters = []
 
     for(var i = 0; i < 10; i++) {
       var monster = new Monster(this.grid.path, {
@@ -111,8 +113,10 @@
         self.player.earn(monster.options.revenue)
       })
 
-      self.monsters.push(monster)
+      monsters.push(monster)
     }
+
+    return monsters
   }
 
   var observeGridCellClicks = function() {
@@ -180,7 +184,7 @@
   }
 
   var moveMonsters = function() {
-    this.monsters.forEach(function(monster, i) {
+    this.monsters[this.wave].forEach(function(monster, i) {
       setTimeout(function() {
         monster.initMoving()
       }, i * 2 * monster.options.speed)

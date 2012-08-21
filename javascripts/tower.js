@@ -113,7 +113,6 @@
       if(steps === 10) {
         clearInterval(intervalId)
         body.removeChild(bullet)
-        console.log(monster)
         monster.hurt(self.getDamage())
       }
 

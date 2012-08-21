@@ -67,7 +67,7 @@
   var waitUntilNextWaveStart = function(callback) {
     var self = this
 
-    this.nextWaveStartsAt = this.nextWaveStartsAt || (+new Date() + 10000)
+    this.nextWaveStartsAt = this.nextWaveStartsAt || (+new Date() + 5000)
 
     setTimeout(function() {
       callback()
@@ -97,7 +97,7 @@
       , speed    = Math.max(250, ~~(Math.random() * 1000))
       , monsters = []
 
-    for(var i = 0; i < 10; i++) {
+    for(var i = 0; i < ((this.wave + 1) * 10); i++) {
       var monster = new Monster(this.grid.path, {
         speed: speed
       })
@@ -132,6 +132,10 @@
               break
             case GridCell.TOWER:
               removeTowerRanges.call(self)
+              if(self.menu) {
+                self.menu.remove()
+                self.menu = null
+              }
               self.getTowerByGridCell(this).renderRange()
               break
           }

@@ -54,7 +54,7 @@
 
       monster.on('goal:reached', this.player.hurt.bind(this.player))
       monster.on('move', function() {
-        checkTowerDistances.call(self, monster)
+        checkTowerDistances.call(self, this)
       })
       monster.on('die', function() {
         self.monsters = self.monsters.filter(function(_monster) {

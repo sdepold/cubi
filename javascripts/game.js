@@ -42,14 +42,18 @@
   }
 
   Game.prototype.pause = function() {
-    this.monsters.forEach(function(monster) {
-      monster.stop()
+    this.monsters.forEach(function(wave) {
+      wave.forEach(function(monster) {
+        monster.stop()
+      })
     })
   }
 
   Game.prototype.continue = function() {
-    this.monsters.forEach(function(monster) {
-      monster.initMoving()
+    this.monsters.forEach(function(wave) {
+      wave.forEach(function(monster) {
+        monster.initMoving()
+      })
     })
   }
 

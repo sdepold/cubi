@@ -74,7 +74,7 @@
     var radius     = (this.getRange() - 1) * this.cell.dom.offsetHeight
       , centerX    = getCenter.call(this).x
       , centerY    = getCenter.call(this).y
-console.log(Math.pow(point.x - centerX, 2) + Math.pow(point.y - centerY, 2), Math.pow(radius, 2))
+// console.log(Math.pow(point.x - centerX, 2) + Math.pow(point.y - centerY, 2), Math.pow(radius, 2))
     return Math.pow(point.x - centerX, 2) + Math.pow(point.y - centerY, 2) < Math.pow(radius, 2)
   }
 

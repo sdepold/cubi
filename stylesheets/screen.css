@@ -102,6 +102,8 @@ table .selected:before {
 }
 
 .bullet {
+  transition: all 0.5s ease-in-out;
+  -webkit-transition: all 0.5s ease-in-out;
   position: absolute;
   height: 5px;
   width: 5px;

@@ -57,23 +57,25 @@
   }
 
   Tower.prototype.checkDistanceTo = function(monster) {
-    var towerCoordinates   = this.cell.getCoordinates()
-      , monsterCoordinates = monster.getPosition()
-
-    if(monsterCoordinates) {
-      var xDistance = Math.abs(towerCoordinates.x - monsterCoordinates.x)
-        , yDistance = Math.abs(towerCoordinates.y - monsterCoordinates.y)
-        , distance  = xDistance + yDistance
-
-      if((xDistance !== 0) && (yDistance !== 0)) {
-        distance = distance / 2
+    if(monster.cell.dom) {
+      var isInRangeData = {
+        x: monster.cell.dom.offsetLeft,
+        y: monster.cell.dom.offsetTop
       }
 
-      if((distance <= this.getRange()) && this.canShoot()) {
+      if(this.pointIsInRange(isInRangeData) && this.canShoot()) {
         this.shoot(monster)
         this.lastShot = +new Date()
       }
     }
+  }
+
+  Tower.prototype.pointIsInRange = function(point) {
+    var radius     = (this.getRange() - 1) * this.cell.dom.offsetHeight
+      , centerX    = getCenter.call(this).x
+      , centerY    = getCenter.call(this).y
+console.log(Math.pow(point.x - centerX, 2) + Math.pow(point.y - centerY, 2), Math.pow(radius, 2))
+    return Math.pow(point.x - centerX, 2) + Math.pow(point.y - centerY, 2) < Math.pow(radius, 2)
   }
 
   Tower.prototype.canShoot = function() {
@@ -88,36 +90,20 @@
       , self    = this
 
     bullet.className      = 'bullet'
-    bullet.style.left     = this.cell.dom.offsetLeft + 'px'
-    bullet.style.top      = this.cell.dom.offsetTop + 'px'
+    bullet.style.left     = (this.cell.dom.offsetLeft + this.cell.dom.offsetWidth / 2) + 'px'
+    bullet.style.top      = (this.cell.dom.offsetTop + this.cell.dom.offsetHeight / 2) + 'px'
 
     body.appendChild(bullet)
 
-    var xStep = Math.abs(bullet.offsetLeft - xTarget) / 10
-      , yStep = Math.abs(bullet.offsetTop  - yTarget) / 10
-      , steps = 0
+    setTimeout(function() {
+      bullet.style.left = monster.cell.dom.offsetLeft +  monster.cell.dom.offsetWidth / 2 + 'px'
+      bullet.style.top  = monster.cell.dom.offsetTop + monster.cell.dom.offsetHeight / 2 + 'px'
+    }.bind(this), 10)
 
-    var intervalId = setInterval(function() {
-      if(xTarget < bullet.offsetLeft) {
-        bullet.style.left = (parseInt(bullet.style.left, 10) - xStep) + 'px'
-      } else {
-        bullet.style.left = (parseInt(bullet.style.left, 10) + xStep) + 'px'
-      }
-
-      if(yTarget < bullet.offsetTop) {
-        bullet.style.top  = (parseInt(bullet.style.top, 10) - yStep) + 'px'
-      } else {
-        bullet.style.top  = (parseInt(bullet.style.top, 10) + yStep) + 'px'
-      }
-
-      if(steps === 10) {
-        clearInterval(intervalId)
-        body.removeChild(bullet)
-        monster.hurt(self.getDamage())
-      }
-
-      steps++
-    }, 20)
+    setTimeout(function() {
+      body.removeChild(bullet)
+      monster.hurt(this.getDamage())
+    }.bind(this), 500)
   }
 
   Tower.prototype.renderRange = function() {
@@ -127,11 +113,11 @@
       , self   = this
 
     circle.className    = 'range'
-    circle.style.width  = this.getRange() * dom.offsetWidth + 'px'
+    circle.style.width  = this.getRange() * dom.offsetHeight + 'px'
     circle.style.height = this.getRange() * dom.offsetHeight + 'px'
 
-    var x = getCenter.call(this).x - parseInt(circle.style.width) / 2 - 4
-      , y = getCenter.call(this).y - parseInt(circle.style.height) / 2 - 4
+    var x = getCenter.call(this).x - parseInt(circle.style.width, 10) / 2 - 4
+      , y = getCenter.call(this).y - parseInt(circle.style.height, 10) / 2 - 4
 
     circle.style.left   = x + 'px'
     circle.style.top    = y + 'px'

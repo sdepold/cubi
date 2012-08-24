@@ -6,10 +6,15 @@
       waveDuration: 20 * 1000
     }, options || {})
 
-    this.canvas   = document.querySelectorAll(canvasSelector)[0]
+    this.canvas   = document.querySelector(canvasSelector)
     this.grid     = new Grid(this.options.rows, this.options.cols, this.canvas)
     this.meta     = document.createElement('div')
     this.player   = new Player(canvasSelector, this.meta)
+
+    this.player.on('died', function() {
+      alert('Hmm... there you go :(')
+      this.pause()
+    }.bind(this))
 
     this.monsters = []
     this.towers   = []

@@ -74,15 +74,15 @@
   // private
 
   var waitUntilNextWaveStart = function(callback) {
-    var self = this
-
     this.nextWaveStartsAt = this.nextWaveStartsAt || (+new Date() + 5000)
 
     setTimeout(function() {
-      callback()
-      self.nextWaveStartsAt = (+new Date() + self.options.waveDuration)
-      waitUntilNextWaveStart.call(self, callback)
-    }, Math.abs(+new Date() - this.nextWaveStartsAt))
+      if(!this.player.isDead()) {
+        callback()
+        this.nextWaveStartsAt = (+new Date() + this.options.waveDuration)
+        waitUntilNextWaveStart.call(this, callback)
+      }
+    }.bind(this), Math.abs(+new Date() - this.nextWaveStartsAt))
   }
 
   var updateWaveDuration = function() {

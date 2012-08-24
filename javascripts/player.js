@@ -4,6 +4,12 @@
     this.cash   = 1000
     this.dom    = metaDataContainer
     this.canvas = document.querySelectorAll(canvasSelector)[0]
+
+    Utils.addObserverMethods(this)
+  }
+
+  Player.prototype.isDead = function() {
+    return this.life === 0
   }
 
   Player.prototype.render = function() {
@@ -40,6 +46,10 @@
   Player.prototype.hurt = function() {
     this.life--
     this.render()
+
+    if(this.life === 0) {
+      this.fire('died')
+    }
   }
 
   Player.prototype.heal = function() {

@@ -129,6 +129,7 @@
     this.range = circle
     this.range.onclick = function() {
       self.removeRange()
+
       document.querySelectorAll('.menu').forEach(function(menu) {
         document.body.removeChild(menu)
       })

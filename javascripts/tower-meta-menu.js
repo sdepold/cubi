@@ -33,9 +33,11 @@
     upgrade.onclick = function() {
       if(this.player.canBuy(this.tower.type, level)) {
         this.player.buy(this.tower.type, level)
+
         this.tower.upgrade()
         this.tower.removeRange()
         this.tower.renderRange()
+
         this.clear()
 
         new TowerMetaMenu(this.tower, this.player).render()
@@ -49,7 +51,7 @@
 
   var appendSell = function() {
     var sell        = document.createElement('li')
-      , level       = (this.tower.level + 1)
+      , level       = this.tower.level
       , costs       = window.Tower.TYPES[this.tower.type].costs[level] / 2
       , sellMessage = window.Utils.interpolate('Sell (%{costs})', { costs: costs })
 

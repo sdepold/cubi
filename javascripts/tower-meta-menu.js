@@ -57,6 +57,10 @@
 
     sell.appendChild(document.createTextNode(sellMessage))
 
+    sell.onclick = function() {
+      // this.tower.
+    }.bind(this)
+
     this.dom.appendChild(sell)
   }
 

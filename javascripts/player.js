@@ -1,11 +1,13 @@
 (function() {
-  Player = function(canvasSelector, metaDataContainer) {
+  "use strict"
+
+  var Player = function(canvasSelector, metaDataContainer) {
     this.life   = 20
     this.cash   = 1000
     this.dom    = metaDataContainer
     this.canvas = document.querySelectorAll(canvasSelector)[0]
 
-    Utils.addObserverMethods(this)
+    window.Utils.addObserverMethods(this)
   }
 
   Player.prototype.isDead = function() {
@@ -23,13 +25,13 @@
 
   Player.prototype.canBuy = function(towerType, level) {
     level = (typeof level === 'undefined') ? 0 : level
-    return (this.cash >= Tower.TYPES[towerType].costs[level])
+    return (this.cash >= window.Tower.TYPES[towerType].costs[level])
   }
 
   Player.prototype.buy = function(towerType, level) {
     level = (typeof level === 'undefined') ? 0 : level
 
-    this.cash -= Tower.TYPES[towerType].costs[level]
+    this.cash -= window.Tower.TYPES[towerType].costs[level]
     this.render()
   }
 
@@ -40,7 +42,7 @@
 
   Player.prototype.sell = function(tower) {
     this.cash += tower.getPrice()
-    render()
+    this.render()
   }
 
   Player.prototype.hurt = function() {
@@ -82,4 +84,6 @@
 
     cashContainer.innerHTML = 'Cash: ' + this.cash
   }
+
+  window.Player = Player
 })()

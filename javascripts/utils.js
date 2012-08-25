@@ -28,5 +28,13 @@ Utils = {
         callback.apply(instance, data)
       })
     }
+  },
+
+  interpolate: function(s, replacements) {
+    for(var key in replacements) {
+      s = s.replace(new RegExp('%{' + key + '}', 'g'), replacements[key])
+    }
+
+    return s
   }
 }

@@ -141,12 +141,18 @@
               break
             case GridCell.TOWER:
               removeTowerRanges.call(self)
+
               if(self.menu) {
                 self.menu.remove()
                 self.menu = null
               }
-              self.getTowerByGridCell(this).renderRange()
-              break
+
+              var tower = self.getTowerByGridCell(this);
+
+              tower.renderRange();
+              new TowerMetaMenu(tower, this.player).render();
+
+              break;
           }
         })
       })
@@ -178,15 +184,10 @@
         self.player.buy(towerType)
         self.towers.push(tower)
 
-        tower.on('click', tower.renderRange.bind(tower))
-
-        tower.renderRange()
+        cell.fire('click')
       } else {
         alert('too expensive!')
       }
-
-      self.menu.remove()
-      self.menu = null
     })
   }
 

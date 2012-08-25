@@ -25,30 +25,30 @@ table td {
   height: 28px;
   width: 24px;
   padding: 0;
+  position: relative;
 }
 
-table .inaccessable {
+table .inaccessable, table .tower {
   background: url('../images/surfaces/ice.gif');
 }
 
-table .path {
+table .path, table .monster {
   background: url('../images/surfaces/path.gif') no-repeat;
-
 }
 
-table .monster {
-  background: yellow;
-}
-
-table .tower {
-  background: url('../images/surfaces/ice.gif') no-repeat;
-}
-
-table .tower:after {
+table .tower:after, table .monster:after {
   content: '';
   height: 28px;
-  width: 24px;
+  width: 22px;
   display: block;
+  position: absolute;
+  top: -4px;
+  left: -1px;
+
+}
+
+table .monster:after {
+  background: url('../images/monsters/tank-lite.gif') no-repeat;
 }
 
 table .freezer:after {
@@ -69,6 +69,9 @@ table .selected:before {
   width: 20px;
   display: block;
   border: 2px solid yellow;
+  position: absolute;
+  top: 0px;
+  left: -1px;
 }
 
 .menu {
@@ -103,12 +106,17 @@ table .selected:before {
 }
 
 .bullet {
-  transition: all 0.5s ease-in-out;
-  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.25s linear;
+  -webkit-transition: all 0.25s linear;
   position: absolute;
   height: 5px;
   width: 5px;
   background: black;
   opacity: 0.9;
   border-radius: 50%;
+}
+
+.bullet.rocket {
+  transition: all 0.5s linear;
+  -webkit-transition: all 0.5s linear;
 }

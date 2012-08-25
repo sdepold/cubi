@@ -75,7 +75,7 @@
   }
 
   Tower.prototype.pointIsInRange = function(point) {
-    var radius     = (this.getRange() - 1) * this.cell.dom.offsetHeight
+    var radius     = this.getRange() * this.cell.dom.offsetHeight
       , centerX    = getCenter.call(this).x
       , centerY    = getCenter.call(this).y
 
@@ -107,7 +107,7 @@
     setTimeout(function() {
       body.removeChild(bullet)
       monster.hurt(this.getDamage())
-    }.bind(this), 500)
+    }.bind(this), 250)
   }
 
   Tower.prototype.renderRange = function() {
@@ -120,8 +120,9 @@
     circle.style.width  = this.getRange() * dom.offsetHeight + 'px'
     circle.style.height = this.getRange() * dom.offsetHeight + 'px'
 
-    var x = getCenter.call(this).x - parseInt(circle.style.width, 10) / 2 - 4
-      , y = getCenter.call(this).y - parseInt(circle.style.height, 10) / 2 - 4
+    // 2 === border width
+    var x = getCenter.call(this).x - parseInt(circle.style.width, 10) / 2 - 2
+      , y = getCenter.call(this).y - parseInt(circle.style.height, 10) / 2 - 2
 
     circle.style.left   = x + 'px'
     circle.style.top    = y + 'px'
@@ -158,8 +159,8 @@
 
   var getCenter = function() {
     return {
-      x: this.cell.dom.offsetLeft + this.cell.dom.offsetWidth,
-      y: this.cell.dom.offsetTop  + this.cell.dom.offsetHeight
+      x: this.cell.dom.offsetLeft + (this.cell.dom.offsetWidth / 2),
+      y: this.cell.dom.offsetTop  + (this.cell.dom.offsetHeight / 2)
     }
   }
 

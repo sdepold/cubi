@@ -148,6 +148,12 @@
     this.range = null
   }
 
+  Tower.prototype.destroy = function() {
+    toClassNames.call(this).forEach(function(klass) {
+      this.cell.removeClassName(klass)
+    }.bind(this))
+  }
+
   // private
 
   var getCenter = function() {

@@ -5,6 +5,8 @@
     this.tower  = tower
     this.player = player
     this.dom    = document.createElement('ul')
+
+    Utils.addObserverMethods(this)
   }
 
   TowerMetaMenu.prototype.render = function() {
@@ -58,7 +60,9 @@
     sell.appendChild(document.createTextNode(sellMessage))
 
     sell.onclick = function() {
-      // this.tower.
+      this.player.sell(this.tower)
+      this.tower.destroy()
+      this.fire('tower:sold', this.tower)
     }.bind(this)
 
     this.dom.appendChild(sell)

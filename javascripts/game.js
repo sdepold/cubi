@@ -147,12 +147,20 @@
                 self.menu = null
               }
 
-              var tower = self.getTowerByGridCell(this);
+              var tower = self.getTowerByGridCell(this)
+                , menu  = new TowerMetaMenu(tower, self.player)
 
               tower.renderRange();
-              new TowerMetaMenu(tower, self.player).render();
+              menu.render()
+              menu.on('tower:sold', function(tower) {
+                removeTowerRanges.call(self)
+                self.towers = self.towers.filter(function(_tower) {
+                  return _tower !== tower
+                })
+                clearMenus.call(this)
+              })
 
-              break;
+              break
           }
         })
       })
@@ -165,9 +173,7 @@
     })
   }
 
-  var initTowerMenu = function(cell) {
-    var self = this
-
+  var clearMenus = function() {
     if(this.menu) {
       this.menu.remove()
     }
@@ -175,6 +181,12 @@
     document.querySelectorAll('.menu').forEach(function(menu) {
       document.body.removeChild(menu)
     })
+  }
+
+  var initTowerMenu = function(cell) {
+    var self = this
+
+    clearMenus.call(this)
 
     if(cell.hasClassName('tower')) {
       return

@@ -43,8 +43,7 @@
   }
 
   Player.prototype.sell = function(tower) {
-    this.cash += (tower.getPrice() / 2)
-    this.render()
+    this.earn(tower.getPrice() / 2)
   }
 
   Player.prototype.hurt = function() {

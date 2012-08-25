@@ -31,7 +31,9 @@
   Player.prototype.buy = function(towerType, level) {
     level = (typeof level === 'undefined') ? 0 : level
 
-    this.cash -= window.Tower.TYPES[towerType].costs[level]
+    var costs = window.Tower.TYPES[towerType].costs[level]
+
+    this.cash -= costs
     this.render()
   }
 
@@ -41,7 +43,7 @@
   }
 
   Player.prototype.sell = function(tower) {
-    this.cash += tower.getPrice()
+    this.cash += (tower.getPrice() / 2)
     this.render()
   }
 

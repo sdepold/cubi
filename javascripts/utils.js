@@ -38,3 +38,5 @@ Utils = {
     return s
   }
 }
+
+NodeList.prototype.forEach = Array.prototype.forEach

@@ -150,7 +150,7 @@
               var tower = self.getTowerByGridCell(this);
 
               tower.renderRange();
-              new TowerMetaMenu(tower, this.player).render();
+              new TowerMetaMenu(tower, self.player).render();
 
               break;
           }
@@ -171,6 +171,10 @@
     if(this.menu) {
       this.menu.remove()
     }
+
+    document.querySelectorAll('.menu').forEach(function(menu) {
+      document.body.removeChild(menu)
+    })
 
     if(cell.hasClassName('tower')) {
       return

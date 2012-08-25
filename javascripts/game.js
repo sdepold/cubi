@@ -108,7 +108,8 @@
 
     for(var i = 0; i < ((this.wave + 1) * 10); i++) {
       var monster = new Monster(this.grid.path, {
-        speed: speed
+        speed: speed,
+        health: (this.wave + 1) * 10
       })
 
       monster.on('goal:reached', this.player.hurt.bind(this.player))

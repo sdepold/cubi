@@ -28,25 +28,33 @@
     var upgrade        = document.createElement('li')
       , level          = (this.tower.level + 1)
       , costs          = window.Tower.TYPES[this.tower.type].costs[level]
-      , upgradeMessage = window.Utils.interpolate('Upgrade to Level %{level} (%{costs})', { level: level + 1, costs: costs })
+      , upgradeMessage = 'Upgrade to Level %{level} (%{costs})'
 
-    upgrade.appendChild(document.createTextNode(upgradeMessage))
+    if(level === 3) {
+      upgradeMessage = 'Max level %{level} reached.'
+      upgradeMessage = window.Utils.interpolate(upgradeMessage, { level: level, costs: costs })
+    } else {
+      upgrade.onclick = function() {
+        if(this.player.canBuy(this.tower.type, level)) {
+          this.player.buy(this.tower.type, level)
 
-    upgrade.onclick = function() {
-      if(this.player.canBuy(this.tower.type, level)) {
-        this.player.buy(this.tower.type, level)
+          this.tower.upgrade()
+          this.tower.removeRange()
+          this.tower.renderRange()
 
-        this.tower.upgrade()
-        this.tower.removeRange()
-        this.tower.renderRange()
+          this.clear()
 
-        this.clear()
+          new TowerMetaMenu(this.tower, this.player).render()
+        } else {
+          alert('too expensive!')
+        }
+        upgradeMessage = window.Utils.interpolate(upgradeMessage, { level: level + 1, costs: costs })
+      }.bind(this)
+    }
 
-        new TowerMetaMenu(this.tower, this.player).render()
-      } else {
-        alert('too expensive!')
-      }
-    }.bind(this)
+    upgrade.appendChild(
+      document.createTextNode(window.Utils.interpolate(upgradeMessage, { level: level + 1, costs: costs }))
+    )
 
     this.dom.appendChild(upgrade)
   }

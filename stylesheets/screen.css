@@ -63,6 +63,13 @@ table .rocket:after {
   background: transparent url('../images/towers/rocket.gif') no-repeat;
 }
 
+table .level-1 {
+  background: url('../images/surfaces/ice_level-1.gif');
+}
+table .level-2 {
+  background: url('../images/surfaces/ice_level-2.gif');
+}
+
 table .selected:before {
   content: '';
   height: 24px;

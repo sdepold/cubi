@@ -116,14 +116,13 @@
       , dom    = this.cell.dom
       , size   = dom.offsetHeight
       , self   = this
-      , x      = null
-      , y      = null
 
     circle.className   = 'range'
     circle.style.width = circle.style.height = this.getRange() * 2 * dom.offsetHeight + 'px'
 
     // 2 === border width
-    x = y = getCenter.call(this).x - parseInt(circle.style.width, 10) / 2 - 2
+    var x = getCenter.call(this).x - parseInt(circle.style.width, 10) / 2 - 2
+      , y = getCenter.call(this).y - parseInt(circle.style.height, 10) / 2 - 2
 
     circle.style.left   = x + 'px'
     circle.style.top    = y + 'px'

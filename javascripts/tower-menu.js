@@ -52,6 +52,7 @@
 
     li.appendChild(textNode)
     li.setAttribute('data-tower-type', type)
+    li.className = type.toLowerCase()
 
     li.onclick = function() {
       self.fire('select', this.getAttribute('data-tower-type'))

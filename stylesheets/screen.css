@@ -91,10 +91,33 @@ table .selected:before {
 
 .menu li {
   font-family: 'Lucida Console', Monaco, monospace;
-  font-size: 12px;
+  font-size: 16px;
   color: white;
-  line-height: 16px;
+  line-height: 24px;
+  height: 32px;
+  vertical-align: top;
   cursor: pointer;
+}
+.menu li:before {
+  content: '';
+  display: inline-block;
+  height: 28px;
+  width: 24px;
+}
+.menu li.laser:before {
+  background: transparent url('../images/towers/laser.gif') no-repeat;
+}
+.menu li.rocket:before {
+  background: transparent url('../images/towers/rocket.gif') no-repeat;
+}
+.menu li.freezer:before {
+  background: transparent url('../images/towers/freezer.gif') no-repeat;
+}
+.menu li.upgrade:before {
+  background: transparent url('../images/menu/upgrade.gif') no-repeat;
+}
+.menu li.sell:before {
+  background: transparent url('../images/menu/sell.gif') no-repeat;
 }
 
 .range {

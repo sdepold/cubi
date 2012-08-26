@@ -55,6 +55,7 @@
     upgrade.appendChild(
       document.createTextNode(window.Utils.interpolate(upgradeMessage, { level: level + 1, costs: costs }))
     )
+    upgrade.className = 'upgrade'
 
     this.dom.appendChild(upgrade)
   }
@@ -72,6 +73,7 @@
       this.tower.destroy()
       this.fire('tower:sold', this.tower)
     }.bind(this)
+    sell.className = 'sell'
 
     this.dom.appendChild(sell)
   }

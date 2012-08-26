@@ -37,6 +37,7 @@
 
   Tower.prototype.upgrade = function() {
     this.level++
+    this.cell.setType(GridCell.TOWER, toClassNames.call(this))
   }
 
   Tower.prototype.render = function() {

@@ -78,8 +78,9 @@
     var radius     = this.getRange() * this.cell.dom.offsetHeight
       , centerX    = getCenter.call(this).x
       , centerY    = getCenter.call(this).y
+      , distance   = Math.pow(Math.pow(point.x - centerX, 2) + Math.pow(point.y - centerY, 2), 0.5)
 
-    return Math.pow(point.x - centerX, 2) + Math.pow(point.y - centerY, 2) < Math.pow(radius, 2)
+    return distance <= radius
   }
 
   Tower.prototype.canShoot = function() {
@@ -115,14 +116,14 @@
       , dom    = this.cell.dom
       , size   = dom.offsetHeight
       , self   = this
+      , x      = null
+      , y      = null
 
-    circle.className    = 'range'
-    circle.style.width  = this.getRange() * dom.offsetHeight + 'px'
-    circle.style.height = this.getRange() * dom.offsetHeight + 'px'
+    circle.className   = 'range'
+    circle.style.width = circle.style.height = this.getRange() * 2 * dom.offsetHeight + 'px'
 
     // 2 === border width
-    var x = getCenter.call(this).x - parseInt(circle.style.width, 10) / 2 - 2
-      , y = getCenter.call(this).y - parseInt(circle.style.height, 10) / 2 - 2
+    x = y = getCenter.call(this).x - parseInt(circle.style.width, 10) / 2 - 2
 
     circle.style.left   = x + 'px'
     circle.style.top    = y + 'px'

@@ -98,26 +98,31 @@ table .selected:before {
   vertical-align: top;
   cursor: pointer;
 }
+.menu li:hover {
+  background: #151515;
+  border-radius: 10px;
+}
 .menu li:before {
   content: '';
   display: inline-block;
-  height: 28px;
+  height: 32px;
   width: 24px;
+  margin-left: 4px;
 }
 .menu li.laser:before {
-  background: transparent url('../images/towers/laser.gif') no-repeat;
+  background: transparent url('../images/towers/laser.gif') center right no-repeat;
 }
 .menu li.rocket:before {
-  background: transparent url('../images/towers/rocket.gif') no-repeat;
+  background: transparent url('../images/towers/rocket.gif') center right no-repeat;
 }
 .menu li.freezer:before {
-  background: transparent url('../images/towers/freezer.gif') no-repeat;
+  background: transparent url('../images/towers/freezer.gif') center right no-repeat;
 }
 .menu li.upgrade:before {
-  background: transparent url('../images/menu/upgrade.gif') no-repeat;
+  background: transparent url('../images/menu/upgrade.gif') center right no-repeat;
 }
 .menu li.sell:before {
-  background: transparent url('../images/menu/sell.gif') no-repeat;
+  background: transparent url('../images/menu/sell.gif') center right no-repeat;
 }
 
 .range {

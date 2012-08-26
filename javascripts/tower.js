@@ -62,12 +62,12 @@
 
   Tower.prototype.checkDistanceTo = function(monster) {
     if(monster.cell.dom) {
-      var isInRangeData = {
-        x: monster.cell.dom.offsetLeft,
-        y: monster.cell.dom.offsetTop
-      }
+      var isInRange = this.pointIsInRange({
+        x: monster.cell.dom.offsetLeft + (monster.cell.dom.offsetWidth / 2),
+        y: monster.cell.dom.offsetTop + (monster.cell.dom.offsetHeight / 2)
+      })
 
-      if(this.pointIsInRange(isInRangeData) && this.canShoot()) {
+      if(isInRange && this.canShoot()) {
         this.shoot(monster)
         this.lastShot = +new Date()
       }

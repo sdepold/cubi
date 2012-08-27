@@ -21,7 +21,6 @@
     this.wave     = -1
 
     this.nextWaveStartsAt = null
-    this.towerMenu        = null
   }
 
   Game.prototype.render = function(options) {
@@ -143,11 +142,6 @@
             case GridCell.TOWER:
               removeTowerRanges.call(self)
 
-              if(self.menu) {
-                self.menu.remove()
-                self.menu = null
-              }
-
               var tower = self.getTowerByGridCell(this)
                 , menu  = new TowerMetaMenu(tower, self.player)
 
@@ -175,37 +169,28 @@
   }
 
   var clearMenus = function() {
-    if(this.menu) {
-      this.menu.remove()
-    }
-
-    document.querySelectorAll('.menu').forEach(function(menu) {
-      document.body.removeChild(menu)
-    })
+    window.currentPopUp && window.currentPopUp.close()
   }
 
   var initTowerMenu = function(cell) {
-    var self = this
-
     clearMenus.call(this)
 
     if(cell.hasClassName('tower')) {
       return
     }
 
-    this.menu = new TowerMenu(cell).render()
-    this.menu.on('select', function(towerType) {
-      if(self.player.canBuy(towerType)) {
+    new TowerMenu(cell).render().on('select', function(towerType) {
+      if(this.player.canBuy(towerType)) {
         var tower = new Tower(towerType, cell).render()
 
-        self.player.buy(towerType)
-        self.towers.push(tower)
+        this.player.buy(towerType)
+        this.towers.push(tower)
 
         cell.fire('click')
       } else {
         alert('too expensive!')
       }
-    })
+    }.bind(this))
   }
 
   var checkTowerDistances = function(monster) {

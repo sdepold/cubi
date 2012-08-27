@@ -93,7 +93,6 @@
       , body    = document.body
       , xTarget = monster.cell.dom.offsetLeft
       , yTarget = monster.cell.dom.offsetTop
-      , self    = this
 
     bullet.className      = 'bullet'
     bullet.style.left     = (this.cell.dom.offsetLeft + this.cell.dom.offsetWidth / 2) + 'px'
@@ -116,7 +115,6 @@
     var circle = document.createElement('div')
       , dom    = this.cell.dom
       , size   = dom.offsetHeight
-      , self   = this
 
     circle.className   = 'range'
     circle.style.width = circle.style.height = this.getRange() * 2 * dom.offsetHeight + 'px'
@@ -130,12 +128,9 @@
 
     this.range = circle
     this.range.onclick = function() {
-      self.removeRange()
-
-      document.querySelectorAll('.menu').forEach(function(menu) {
-        document.body.removeChild(menu)
-      })
-    }
+      this.removeRange()
+      window.currentPopUp && window.currentPopUp.close()
+    }.bind(this)
 
     document.body.appendChild(circle)
   }

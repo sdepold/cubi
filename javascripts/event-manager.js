@@ -21,6 +21,8 @@
     this.game.grid.cells.forEach(function(cellGroup) {
       cellGroup.forEach(function(cell) {
         cell.on('click', function() {
+          unselectGridCell.call(this)
+
           switch(cell.type) {
             case GridCell.INACCESSABLE:
               onAccessibleCellClick.call(this, cell)
@@ -63,6 +65,15 @@
     this.game.towers.forEach(function(tower) {
       tower.removeRange()
     })
+  }
+
+  var unselectGridCell = function() {
+    var selected = document.querySelector('.selected')
+    if(selected) {
+      selected.className = selected.className.split(' ').filter(function(klass) {
+        return klass != 'selected'
+      })
+    }
   }
 
   var clearMenus = function() {

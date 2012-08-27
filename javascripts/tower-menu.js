@@ -1,31 +1,25 @@
 (function() {
   var TowerMenu = function(cell) {
-    this.cell = cell
+    this.cell  = cell
+    this.popUp = new PopUp()
 
     Utils.addObserverMethods(this)
   }
 
   TowerMenu.prototype.render = function() {
-    var self      = this
-      , container = document.getElementById('tower-menu')
+    var container = document.getElementById('tower-menu')
 
     this.cell.addClassName('selected')
 
-    if(!container) {
-      container = buildContainer.call(this)
-      document.body.appendChild(container)
-    }
+    this.popUp.setContent(buildContainer.call(this))
+    this.popUp.render()
 
     return this
   }
 
   TowerMenu.prototype.remove = function() {
-    var menu = document.getElementById('tower-menu')
-      , body = document.body
-
+    this.popUp.close()
     this.cell.removeClassName('selected')
-
-    body.removeChild(menu)
   }
 
   // private

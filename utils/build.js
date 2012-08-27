@@ -24,15 +24,20 @@ exec('cp -rf ' + __dirname + '/../stylesheets ' + __dirname + '/dist/stylesheets
 exec('cp -rf ' + __dirname + '/../index.html ' + __dirname + '/dist/index.html')
 
 var indexHTML = exec('cat ' + __dirname + '/dist/index.html')
+  , scripts   = []
 
 indexHTML = indexHTML.split('\n').filter(function(row) {
-  return row.indexOf('<script') === -1
+  if(row.indexOf('<script') === -1) {
+    return true
+  } else {
+    scripts.push(row.match(/src="(.*)"/)[1])
+    return false
+  }
 }).join('\n').replace('</head>', '  <script src="cubi.js"></script>\n  </head>')
 
 fs.writeFileSync(__dirname + '/dist/index.html', indexHTML)
 
-var files    = ['utils', 'grid', 'grid-cell', 'monster', 'player', 'tower', 'tower-menu', 'tower-meta-menu', 'game', 'boot']
-  , paths    = files.map(function(file) { return __dirname + '/../javascripts/' + file + '.js' })
+var paths    = scripts.map(function(file) { return __dirname + '/../' + file })
   , contents = paths.map(function(path) { return exec('cat ' + path) + ';' })
   , code     = contents.join('')
   , source   = __dirname + '/dist/cubi.js'

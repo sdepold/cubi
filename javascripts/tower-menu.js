@@ -8,11 +8,13 @@
 
   TowerMenu.prototype.render = function() {
     var container = document.getElementById('tower-menu')
+      , x = this.cell.dom.offsetLeft + 40
+      , y = this.cell.dom.offsetTop - 30
 
     this.cell.addClassName('selected')
 
     this.popUp.setContent(buildContainer.call(this))
-    this.popUp.render()
+    this.popUp.render({ left: x, top: y })
 
     return this
   }

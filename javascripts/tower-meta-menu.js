@@ -9,6 +9,8 @@
 
   TowerMetaMenu.prototype.render = function() {
     var ul = document.createElement('ul')
+      , x  = this.tower.cell.dom.offsetLeft + 40
+      , y  = this.tower.cell.dom.offsetTop - 30
 
     ul.className = 'menu'
 
@@ -16,7 +18,7 @@
     ul.appendChild(buildSellMenu.call(this))
 
     this.popUp.setContent(ul)
-    this.popUp.render()
+    this.popUp.render({ left: x, top: y })
   }
 
   TowerMetaMenu.prototype.clear = function() {

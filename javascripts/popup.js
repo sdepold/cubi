@@ -43,6 +43,15 @@
       window.currentPopUp.close()
     }
 
+    this.setPosition(options)
+
+    document.body.appendChild(this.dom)
+    window.currentPopUp = this
+  }
+
+  PopUp.prototype.setPosition = function(options) {
+    options = options || {}
+
     if(options.left) {
       this.dom.style.left = options.left + 'px'
     }
@@ -50,9 +59,6 @@
     if(options.top) {
       this.dom.style.top = options.top + 'px'
     }
-
-    document.body.appendChild(this.dom)
-    window.currentPopUp = this
   }
 
   PopUp.prototype.close = function() {

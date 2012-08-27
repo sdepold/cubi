@@ -11,10 +11,18 @@
       , x = this.cell.dom.offsetLeft + 40
       , y = this.cell.dom.offsetTop - 30
 
+    if(y < 0) {
+      y = 0
+    }
+
     this.cell.addClassName('selected')
 
     this.popUp.setContent(buildContainer.call(this))
     this.popUp.render({ left: x, top: y })
+
+    if(x + this.popUp.dom.offsetWidth > document.querySelector('table').offsetWidth) {
+      this.popUp.setPosition({ left: (x - 270) })
+    }
 
     return this
   }

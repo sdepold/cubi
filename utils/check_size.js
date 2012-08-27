@@ -24,6 +24,6 @@ var size = exec('ls -ila ' + __dirname + '/tmp.zip').split(/ /g).filter(function
 })[5]
 
 exec('rm -rf ' + __dirname + '/dist')
-// exec('rm -rf ' + __dirname + '/tmp.zip')
+exec('rm -rf ' + __dirname + '/tmp.zip')
 
 console.log('Size of zipfile: ', size)

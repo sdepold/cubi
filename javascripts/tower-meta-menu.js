@@ -1,30 +1,31 @@
 (function() {
-  "use strict";
-
   var TowerMetaMenu = function(tower, player) {
     this.tower  = tower
     this.player = player
-    this.dom    = document.createElement('ul')
+    this.popUp  = new PopUp()
 
     Utils.addObserverMethods(this)
   }
 
   TowerMetaMenu.prototype.render = function() {
-    this.dom.className = 'menu'
+    var ul = document.createElement('ul')
 
-    appendUpgrade.call(this)
-    appendSell.call(this)
+    ul.className = 'menu'
 
-    document.body.appendChild(this.dom)
+    ul.appendChild(buildUpgradeMenu.call(this))
+    ul.appendChild(buildSellMenu.call(this))
+
+    this.popUp.setContent(ul)
+    this.popUp.render()
   }
 
   TowerMetaMenu.prototype.clear = function() {
-    document.body.removeChild(this.dom)
+    this.popUp.close()
   }
 
   // private
 
-  var appendUpgrade = function() {
+  var buildUpgradeMenu = function() {
     var upgrade        = document.createElement('li')
       , level          = (this.tower.level + 1)
       , costs          = window.Tower.TYPES[this.tower.type].costs[level]
@@ -42,7 +43,7 @@
           this.tower.removeRange()
           this.tower.renderRange()
 
-          this.clear()
+          this.clear();
 
           new TowerMetaMenu(this.tower, this.player).render()
         } else {
@@ -57,10 +58,10 @@
     )
     upgrade.className = 'upgrade'
 
-    this.dom.appendChild(upgrade)
+    return upgrade
   }
 
-  var appendSell = function() {
+  var buildSellMenu = function() {
     var sell        = document.createElement('li')
       , level       = this.tower.level
       , costs       = window.Tower.TYPES[this.tower.type].costs[level] / 2
@@ -74,9 +75,10 @@
       this.tower.destroy()
       this.fire('tower:sold', this.tower)
     }.bind(this)
+
     sell.className = 'sell'
 
-    this.dom.appendChild(sell)
+    return sell
   }
 
   window.TowerMetaMenu = TowerMetaMenu

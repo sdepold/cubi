@@ -6,21 +6,19 @@
       waveDuration: 20 * 1000
     }, options || {})
 
-    this.canvas   = document.querySelector(canvasSelector)
-    this.grid     = new Grid(this.options.rows, this.options.cols, this.canvas)
-    this.meta     = document.createElement('div')
-    this.player   = new Player(canvasSelector, this.meta)
-
-    this.player.on('died', function() {
-      PopUp.notify('Oh my gosh, you died!', { sticky: true })
-      this.pause()
-    }.bind(this))
+    this.canvas       = document.querySelector(canvasSelector)
+    this.meta         = document.createElement('div')
+    this.grid         = new Grid(this.options.rows, this.options.cols, this.canvas)
+    this.player       = new Player(canvasSelector, this.meta)
+    this.eventManager = new EventManager(this)
 
     this.monsters = []
     this.towers   = []
     this.wave     = -1
 
     this.nextWaveStartsAt = null
+
+    this.eventManager.init()
   }
 
   Game.prototype.render = function(options) {

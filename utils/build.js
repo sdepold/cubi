@@ -23,15 +23,23 @@ exec('cp -rf ' + __dirname + '/../images ' + __dirname + '/dist/images')
 exec('cp -rf ' + __dirname + '/../stylesheets ' + __dirname + '/dist/stylesheets')
 exec('cp -rf ' + __dirname + '/../index.html ' + __dirname + '/dist/index.html')
 
+var indexHTML = exec('cat ' + __dirname + '/dist/index.html')
+
+indexHTML = indexHTML.split('\n').filter(function(row) {
+  return row.indexOf('<script') === -1
+}).join('\n').replace('</head>', '  <script src="cubi.js"></script>\n  </head>')
+
+fs.writeFileSync(__dirname + '/dist/index.html', indexHTML)
+
 var files    = ['utils', 'grid', 'grid-cell', 'monster', 'player', 'tower', 'tower-menu', 'tower-meta-menu', 'game', 'boot']
   , paths    = files.map(function(file) { return __dirname + '/../javascripts/' + file + '.js' })
   , contents = paths.map(function(path) { return exec('cat ' + path) + ';' })
   , code     = contents.join('')
   , source   = __dirname + '/dist/cubi.js'
 
-var ast = jsp.parse(code); // parse code and get the initial AST
-ast = jsu.ast_mangle(ast); // get a new AST with mangled names
-ast = jsu.ast_squeeze(ast); // get an AST with compression optimizations
+var ast = jsp.parse(code)
+ast = jsu.ast_mangle(ast)
+ast = jsu.ast_squeeze(ast)
 
 var finalCode = jsu.gen_code(ast); // compressed code here
 

@@ -12,7 +12,7 @@
     this.player   = new Player(canvasSelector, this.meta)
 
     this.player.on('died', function() {
-      alert('Hmm... there you go :(')
+      PopUp.notify('Oh my gosh, you died!', { sticky: true })
       this.pause()
     }.bind(this))
 
@@ -188,7 +188,7 @@
 
         cell.fire('click')
       } else {
-        alert('too expensive!')
+        PopUp.notify('Too expensive!')
       }
     }.bind(this))
   }

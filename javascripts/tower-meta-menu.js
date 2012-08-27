@@ -47,7 +47,7 @@
 
           new TowerMetaMenu(this.tower, this.player).render()
         } else {
-          alert('too expensive!')
+          PopUp.notify('Too expensive!')
         }
         upgradeMessage = window.Utils.interpolate(upgradeMessage, { level: level + 1, costs: costs })
       }.bind(this)

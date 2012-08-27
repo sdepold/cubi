@@ -12,6 +12,10 @@
     window.Utils.addObserverMethods(this)
   }
 
+  PopUp.prototype.setContent = function(content) {
+    this.content = content
+  }
+
   PopUp.prototype.render = function() {
     if (typeof this.content === 'string') {
       this.content = document.createTextNode(this.content)

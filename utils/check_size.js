@@ -17,7 +17,7 @@ exec('rm -rf ' + __dirname + '/tmp.zip')
 
 exec('node ' + __dirname + '/build.js')
 
-exec('zip -r -9 ' + __dirname + '/tmp.zip ' + __dirname + '/dist')
+exec('cd ' + __dirname + '; zip -r -9 tmp.zip dist')
 
 var size = exec('ls -ila ' + __dirname + '/tmp.zip').split(/ /g).filter(function(i) {
   return i !== ''

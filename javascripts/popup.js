@@ -1,6 +1,4 @@
 (function() {
-  "use strict";
-
   window.currentPopUp = null
 
   var PopUp = function(content) {
@@ -9,7 +7,7 @@
 
     this.dom.className = 'pop-up'
 
-    window.Utils.addObserverMethods(this)
+    Utils.addObserverMethods(this)
   }
 
   PopUp.prototype.setContent = function(content) {

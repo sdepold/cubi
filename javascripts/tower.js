@@ -1,5 +1,5 @@
 (function() {
-  Tower = function(type, cell) {
+  var Tower = function(type, cell) {
     this.type     = type
     this.level    = 0
     this.cell     = cell
@@ -171,4 +171,6 @@
 
     return [towerName, levelName]
   }
+
+  window.Tower = Tower
 })()

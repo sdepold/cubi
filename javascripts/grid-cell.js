@@ -1,5 +1,5 @@
 (function() {
-  GridCell = function(grid, options) {
+  var GridCell = function(grid, options) {
     var self = this
 
     this.grid        = grid
@@ -60,4 +60,6 @@
 
     return result
   }
+
+  window.GridCell = GridCell
 })()

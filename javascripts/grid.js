@@ -1,5 +1,5 @@
 (function() {
-  Grid = function(rows, cols, canvas) {
+  var Grid = function(rows, cols, canvas) {
     this.rows      = rows
     this.cols      = cols
     this.canvas    = canvas
@@ -93,4 +93,6 @@
 
     return row.querySelectorAll('td')[x].cell
   }
+
+  window.Grid = Grid
 })()

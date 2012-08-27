@@ -1,5 +1,5 @@
 (function() {
-  TowerMenu = function(cell) {
+  var TowerMenu = function(cell) {
     this.cell = cell
 
     Utils.addObserverMethods(this)
@@ -60,4 +60,6 @@
 
     container.appendChild(li)
   }
+
+  window.TowerMenu = TowerMenu
 })()

@@ -1,5 +1,5 @@
 (function() {
-  Monster = function(path, options) {
+  var Monster = function(path, options) {
     this.options = Utils.merge({
       speed: 100,
       health: 10,
@@ -72,4 +72,6 @@
 
     this.cell = cell
   }
+
+  window.Monster = Monster
 })()

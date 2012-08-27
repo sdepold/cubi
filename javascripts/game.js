@@ -1,5 +1,5 @@
 (function() {
-  Game = function(canvasSelector, options) {
+  var Game = function(canvasSelector, options) {
     this.options = Utils.merge({
       rows:         10,
       cols:         10,
@@ -221,4 +221,6 @@
       }, i * 2 * monster.options.speed)
     })
   }
+
+  window.Game = Game
 })()

@@ -30,7 +30,9 @@
     this.content = content
   }
 
-  PopUp.prototype.render = function() {
+  PopUp.prototype.render = function(options) {
+    options = options || {}
+
     if (typeof this.content === 'string') {
       this.content = document.createTextNode(this.content)
     }
@@ -39,6 +41,14 @@
 
     if(window.currentPopUp) {
       window.currentPopUp.close()
+    }
+
+    if(options.left) {
+      this.dom.style.left = options.left + 'px'
+    }
+
+    if(options.top) {
+      this.dom.style.top = options.top + 'px'
     }
 
     document.body.appendChild(this.dom)

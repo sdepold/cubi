@@ -10,6 +10,22 @@
     Utils.addObserverMethods(this)
   }
 
+  PopUp.notify = function(msg, options) {
+    options = options || {}
+
+    var popUp = new PopUp(msg)
+
+    popUp.render()
+
+    if(!options.sticky) {
+      setTimeout(function() {
+        if(window.currentPopUp === popUp) {
+          popUp.close()
+        }
+      }, 2000)
+    }
+  }
+
   PopUp.prototype.setContent = function(content) {
     this.content = content
   }

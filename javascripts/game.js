@@ -17,23 +17,21 @@
     this.wave     = -1
 
     this.nextWaveStartsAt = null
-
-    this.eventManager.init()
   }
 
   Game.prototype.render = function(options) {
     this.grid.render()
     this.player.render()
-
     this.meta.id = 'meta-data'
+
+    this.eventManager.init()
+
     document.body.appendChild(this.meta)
 
     waitUntilNextWaveStart.call(this, this.spawnNextWave.bind(this))
 
     updateWaveDuration.call(this)
     setInterval(updateWaveDuration.bind(this), 1000)
-
-    observeGridCellClicks.call(this)
 
     return this
   }
@@ -124,71 +122,6 @@
     }
 
     return monsters
-  }
-
-  var observeGridCellClicks = function() {
-    var self = this
-
-    this.grid.cells.forEach(function(cellGroup) {
-      cellGroup.forEach(function(cell) {
-        cell.on('click', function() {
-          switch(this.type) {
-            case GridCell.INACCESSABLE:
-              initTowerMenu.call(self, this)
-              removeTowerRanges.call(self)
-              break
-            case GridCell.TOWER:
-              removeTowerRanges.call(self)
-
-              var tower = self.getTowerByGridCell(this)
-                , menu  = new TowerMetaMenu(tower, self.player)
-
-              tower.renderRange();
-              menu.render()
-              menu.on('tower:sold', function(tower) {
-                removeTowerRanges.call(self)
-                self.towers = self.towers.filter(function(_tower) {
-                  return _tower !== tower
-                })
-                clearMenus.call(this)
-              })
-
-              break
-          }
-        })
-      })
-    })
-  }
-
-  var removeTowerRanges = function() {
-    this.towers.forEach(function(tower) {
-      tower.removeRange()
-    })
-  }
-
-  var clearMenus = function() {
-    window.currentPopUp && window.currentPopUp.close()
-  }
-
-  var initTowerMenu = function(cell) {
-    clearMenus.call(this)
-
-    if(cell.hasClassName('tower')) {
-      return
-    }
-
-    new TowerMenu(cell).render().on('select', function(towerType) {
-      if(this.player.canBuy(towerType)) {
-        var tower = new Tower(towerType, cell).render()
-
-        this.player.buy(towerType)
-        this.towers.push(tower)
-
-        cell.fire('click')
-      } else {
-        PopUp.notify('Too expensive!')
-      }
-    }.bind(this))
   }
 
   var checkTowerDistances = function(monster) {

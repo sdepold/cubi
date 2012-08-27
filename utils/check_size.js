@@ -1,40 +1,41 @@
-const fs   = require('fs')
-    , file = require('file')
+var execSync = require('exec-sync')
 
-var sizeMap = {}
-  , ignore  = ['..', '.git', 'node_modules', 'utils']
+var exec = function(cmd, showStdOut) {
+  console.log(cmd)
 
-var ignoreFolder = function(path) {
-  var result = false
+  var result = execSync(cmd)
 
-  ignore.forEach(function(pattern) {
-    result = result || (path.indexOf(pattern) !== -1)
-  })
+  if(showStdOut) {
+    console.log(result)
+  }
 
   return result
 }
 
+exec('rm -rf ' + __dirname + '/tmp')
+exec('rm -rf ' + __dirname + '/tmp.zip')
 
-file.walkSync(__dirname + '/..', function(path) {
-  if(!ignoreFolder(path)) {
-    fs.readdirSync(path).forEach(function(file) {
-      var _path = path + '/' + file
-      sizeMap[_path] = fs.statSync(_path).size
-    })
-  }
+exec('mkdir -p ' + __dirname + '/tmp')
+exec('cp -rf ' + __dirname + '/../images ' + __dirname + '/tmp/images')
+exec('cp -rf ' + __dirname + '/../javascripts ' + __dirname + '/tmp/javascripts')
+exec('cp -rf ' + __dirname + '/../stylesheets ' + __dirname + '/tmp/stylesheets')
+exec('cp -rf ' + __dirname + '/../index.html ' + __dirname + '/tmp/index.html')
+
+exec('ls -l ' + __dirname + '/tmp/javascripts/*').split(/\n/).forEach(function(row) {
+  var source = __dirname + '/' + row.match(/(tmp.*)/)[1]
+    , target = source + '.2'
+    , cmd    = __dirname + '/node_modules/.bin/uglifyjs -mt --unsafe -o ' + source + ' ' + source
+
+  exec(cmd)
 })
 
-var groupedSizeMap = {}
+exec('zip -r -9 ' + __dirname + '/tmp.zip ' + __dirname + '/tmp')
 
-for(var path in sizeMap) {
-  var type = path.match(/\/cubi\/([^\/]*)/)[1]
+var size = exec('ls -ila ' + __dirname + '/tmp.zip').split(/ /g).filter(function(i) {
+  return i !== ''
+})[5]
 
-  groupedSizeMap[type] = groupedSizeMap[type] || 0
-  groupedSizeMap[type] += sizeMap[path]
+exec('rm -rf ' + __dirname + '/tmp')
+exec('rm -rf ' + __dirname + '/tmp.zip')
 
-  groupedSizeMap.total = groupedSizeMap.total || 0
-  groupedSizeMap.total += sizeMap[path]
-}
-
-
-console.log(groupedSizeMap)
+console.log('Size of zipfile: ', size)

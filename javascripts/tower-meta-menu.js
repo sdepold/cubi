@@ -19,6 +19,10 @@
 
     this.popUp.setContent(ul)
     this.popUp.render({ left: x, top: y })
+
+    if(x + this.popUp.dom.offsetWidth > document.querySelector('table').offsetWidth) {
+      this.popUp.setPosition({ left: (x - 300) })
+    }
   }
 
   TowerMetaMenu.prototype.clear = function() {

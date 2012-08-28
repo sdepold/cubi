@@ -61,6 +61,9 @@
   }
 
   Game.prototype.spawnNextWave = function() {
+    console.log(this.monsters.reduce(function(result, wave) {
+      return result += wave.length
+    }, 0))
     this.wave++
     this.monsters[this.wave] = generateMonsters.call(this)
     moveMonsters.call(this)
@@ -112,9 +115,17 @@
         checkTowerDistances.call(self, this)
       })
       monster.on('die', function() {
-        self.monsters = self.monsters.filter(function(_monster) {
-          return _monster !== monster
+        var _monsters = []
+          , monster   = this
+
+        self.monsters.forEach(function(wave) {
+          _monsters.push(wave.filter(function(_monster) {
+            return _monster !== monster
+          }))
         })
+
+        self.monsters = _monsters
+
         self.player.earn(monster.options.revenue)
       })
 

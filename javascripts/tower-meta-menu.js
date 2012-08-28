@@ -16,6 +16,7 @@
 
     ul.appendChild(buildUpgradeMenu.call(this))
     ul.appendChild(buildSellMenu.call(this))
+    buildStatsMenu.call(this, ul)
 
     this.popUp.setContent(ul)
     this.popUp.render({ left: x, top: y })
@@ -65,6 +66,17 @@
     upgrade.className = 'upgrade'
 
     return upgrade
+  }
+
+  var buildStatsMenu = function(ul) {
+    var fields = ['Range: %{range}', 'Damage: %{damage}', 'Frequency: %{frequency}/min']
+      , stats  = this.tower.getStats()
+
+    for(var i = 0, j = fields.length; i < j; ++i) {
+      var li = document.createElement('li')
+      li.innerHTML = window.Utils.interpolate(fields[i], stats)
+      ul.appendChild(li)
+    }
   }
 
   var buildSellMenu = function() {

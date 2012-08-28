@@ -35,6 +35,10 @@
     }
   }
 
+  Tower.prototype.getStats = function() {
+    return {damage: this.getDamage(), range: this.getRange(), frequency: Math.round(600000 / this.getFrequency()) / 10}
+  }
+
   Tower.prototype.upgrade = function() {
     this.level++
     this.cell.setType(GridCell.TOWER, toClassNames.call(this))

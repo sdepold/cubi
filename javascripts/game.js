@@ -61,9 +61,6 @@
   }
 
   Game.prototype.spawnNextWave = function() {
-    console.log(this.monsters.reduce(function(result, wave) {
-      return result += wave.length
-    }, 0))
     this.wave++
     this.monsters[this.wave] = generateMonsters.call(this)
     moveMonsters.call(this)

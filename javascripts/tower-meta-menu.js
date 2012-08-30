@@ -16,7 +16,7 @@
 
     ul.appendChild(buildUpgradeMenu.call(this))
     ul.appendChild(buildSellMenu.call(this))
-    buildStatsMenu.call(this, ul)
+    ul.appendChild(buildStatsMenu.call(this))
 
     this.popUp.setContent(ul)
     this.popUp.render({ left: x, top: y })
@@ -68,15 +68,21 @@
     return upgrade
   }
 
-  var buildStatsMenu = function(ul) {
+  var buildStatsMenu = function() {
     var fields = ['Range: %{range}', 'Damage: %{damage}', 'Frequency: %{frequency}/min']
       , stats  = this.tower.getStats()
+      , result = document.createElement('li')
+      , ul     = document.createElement('ul')
 
     for(var i = 0, j = fields.length; i < j; ++i) {
       var li = document.createElement('li')
       li.innerHTML = window.Utils.interpolate(fields[i], stats)
       ul.appendChild(li)
     }
+
+    result.appendChild(ul)
+
+    return result
   }
 
   var buildSellMenu = function() {

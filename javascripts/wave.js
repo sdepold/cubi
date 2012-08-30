@@ -26,12 +26,6 @@
     return this
   }
 
-  Wave.prototype.move = function() {
-    this.monsters.forEach(function(monster) {
-      monster.move()
-    })
-  }
-
   Wave.prototype.stop = function() {
     this.spawnTimeoutIds.forEach(function(id) {
       clearTimeout(id)
@@ -41,6 +35,12 @@
   }
 
   // private
+
+  var move = function() {
+    this.monsters.forEach(function(monster) {
+      monster.move()
+    })
+  }
 
   var drawTimer = function(countDownFrom) {
     var container = document.getElementById('wave-duration')
@@ -77,9 +77,7 @@
       )
     }
 
-    this.on('monster:spawned', function() {
-      this.move()
-    }.bind(this))
+    this.on('monster:spawned', move.bind(this))
 
     this.on('spawned', function() {
       this.moveIntervalId = setInterval(this.move.bind(this), this.speed)

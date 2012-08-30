@@ -59,6 +59,10 @@
     this.fire('die')
   }
 
+  Monster.prototype.isDead = function() {
+    return this.options.health === 0
+  }
+
   // private
 
   var setPosition = function(cell) {

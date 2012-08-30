@@ -31,11 +31,13 @@ Utils = {
   },
 
   interpolate: function(s, replacements) {
+    var result = s
+
     for(var key in replacements) {
-      s = s.replace(new RegExp('%{' + key + '}', 'g'), replacements[key])
+      result = result.replace(new RegExp('%{' + key + '}', 'g'), replacements[key])
     }
 
-    return s
+    return result
   }
 }
 

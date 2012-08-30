@@ -80,7 +80,7 @@
     this.on('monster:spawned', move.bind(this))
 
     this.on('spawned', function() {
-      this.moveIntervalId = setInterval(this.move.bind(this), this.speed)
+      this.moveIntervalId = setInterval(move.bind(this), this.speed)
     }.bind(this))
   }
 

@@ -25,6 +25,12 @@
 
     document.body.appendChild(this.meta)
 
+    var spawnNewWave = function() {
+      new Wave(this.round + 1, this.path).spawn(20).on('spawned', spawnNewWave)
+    }
+
+    new Wave(1, this.grid.path).spawn(5).on('spawned', spawnNewWave)
+
     // waitUntilNextWaveStart.call(this, this.spawnNextWave.bind(this))
 
     // updateWaveDuration.call(this)

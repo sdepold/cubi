@@ -20,10 +20,24 @@
   }
 
   var observeWave = function(wave) {
-    wave.on('monster:moved', function(wave, monster) {
-      this.game.towers.forEach(function(tower) {
-        tower.checkDistanceTo(monster)
-      })
+    wave.on('spawned', function() {
+      spawnNewWave.call(this, wave)
+    }.bind(this))
+
+    wave.on('monster:spawned', function(wave, monster) {
+      monster.on('die', function() {
+        this.game.player.earn(monster.options.revenue)
+      }.bind(this))
+
+      monster.on('goal:reached', function() {
+        this.game.player.hurt()
+      }.bind(this))
+
+      monster.on('move', function() {
+        this.game.towers.forEach(function(tower) {
+          tower.checkDistanceTo(monster)
+        })
+      }.bind(this))
     }.bind(this))
   }
 
@@ -133,14 +147,7 @@
       delay = 20
     }
 
-    var wave = new Wave(round, this.game.grid.path).spawn(delay)
-    wave.on('spawned', function() {
-      spawnNewWave.call(this, wave)
-    }.bind(this))
-    wave.on('monster:killed', function(wave, monster) {
-      this.game.player.earn(monster.options.revenue)
-    }.bind(this))
-    observeWave.call(this, wave)
+    observeWave.call(this, new Wave(round, this.game.grid.path).spawn(delay))
   }
 
   window.EventManager = EventManager

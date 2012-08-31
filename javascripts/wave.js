@@ -90,16 +90,10 @@
       health: this.round * 10
     })
 
-    monster.on('move', function() {
-      this.fire('monster:moved', [monster])
-    }.bind(this))
-
     monster.on('die', function() {
       this.monsters = this.monsters.filter(function(_monster) {
         return _monster !== monster
       })
-
-      this.fire('monster:killed', [ monster ])
 
       if(this.monsters.length === 0) {
         this.fire('cleared')
@@ -108,14 +102,13 @@
 
     this.monsters.push(monster)
 
-    this.fire('monster:spawned')
+    this.fire('monster:spawned', [monster])
 
     this.spawnedMonsters = this.spawnedMonsters + 1
 
     if(this.spawnedMonsters === this.monstersToSpawn) {
       this.fire('spawned')
     }
-
   }
 
   window.Wave = Wave

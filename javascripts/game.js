@@ -31,11 +31,6 @@
 
     new Wave(1, this.grid.path).spawn(5).on('spawned', spawnNewWave)
 
-    // waitUntilNextWaveStart.call(this, this.spawnNextWave.bind(this))
-
-    // updateWaveDuration.call(this)
-    // setInterval(updateWaveDuration.bind(this), 1000)
-
     return this
   }
 

@@ -9,7 +9,9 @@
     observeGameRendering.call(this)
   }
 
-  // private - observers
+  /////////////////////////
+  // private - observers //
+  /////////////////////////
 
   var observeGameRendering = function() {
     this.game.on('rendered', function() {
@@ -51,7 +53,9 @@
     }.bind(this))
   }
 
-  // private - event reactions
+  ///////////////////////////////
+  // private - event reactions //
+  ///////////////////////////////
 
   var onAccessibleCellClick = function(cell) {
     initTowerMenu.call(this, cell)
@@ -76,7 +80,9 @@
     }.bind(this))
   }
 
-  // private - logic
+  /////////////////////
+  // private - logic //
+  /////////////////////
 
   var removeTowerRanges = function() {
     this.game.towers.forEach(function(tower) {

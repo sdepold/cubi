@@ -90,7 +90,7 @@
       health: this.round * 10
     })
 
-    monster.on('die', function() {
+    var removeMonster = function() {
       this.monsters = this.monsters.filter(function(_monster) {
         return _monster !== monster
       })
@@ -98,7 +98,10 @@
       if(this.monsters.length === 0) {
         this.fire('cleared')
       }
-    }.bind(this))
+    }
+
+    monster.on('die', removeMonster.bind(this))
+    monster.on('goal:reached', removeMonster.bind(this))
 
     this.monsters.push(monster)
 

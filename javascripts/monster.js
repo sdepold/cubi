@@ -14,20 +14,6 @@
     Utils.addObserverMethods(this)
   }
 
-  Monster.prototype.initMoving = function() {
-    var self = this
-
-    this.intervalId = setInterval(function() {
-      if(self.pathIndex < self.path.length) {
-        self.move()
-      } else {
-        setPosition.call(self, null)
-        self.fire('goal:reached')
-        clearInterval(self.intervalId)
-      }
-    }, this.options.speed)
-  }
-
   Monster.prototype.stop = function() {
     clearInterval(this.intervalId)
   }
@@ -38,6 +24,8 @@
 
     if(this.cell) {
       this.fire('move')
+    } else {
+      this.fire('goal:reached')
     }
   }
 

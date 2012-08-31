@@ -91,7 +91,7 @@
     })
 
     monster.on('move', function() {
-      // checkTowerDistances.call(this, monster)
+      this.fire('monster:moved', [monster])
     }.bind(this))
 
     monster.on('die', function() {

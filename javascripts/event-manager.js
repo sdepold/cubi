@@ -6,9 +6,24 @@
   EventManager.prototype.init = function() {
     observePlayer.call(this)
     observeGridCellClicks.call(this)
+    observeGameRendering.call(this)
   }
 
-  // private
+  // private - observers
+
+  var observeGameRendering = function() {
+    this.game.on('rendered', function() {
+      spawnNewWave.call(this)
+    }.bind(this))
+  }
+
+  var observeWave = function(wave) {
+    wave.on('monster:moved', function(wave, monster) {
+      this.game.towers.forEach(function(tower) {
+        tower.checkDistanceTo(monster)
+      })
+    }.bind(this))
+  }
 
   var observePlayer = function() {
     this.game.player.on('died', function() {
@@ -36,6 +51,8 @@
     }.bind(this))
   }
 
+  // private - event reactions
+
   var onAccessibleCellClick = function(cell) {
     initTowerMenu.call(this, cell)
     removeTowerRanges.call(this)
@@ -59,7 +76,7 @@
     }.bind(this))
   }
 
-  // logic
+  // private - logic
 
   var removeTowerRanges = function() {
     this.game.towers.forEach(function(tower) {
@@ -87,7 +104,7 @@
       return
     }
 
-    new TowerMenu(cell).render().on('select', function(towerType) {
+    new TowerMenu(cell).render().on('select', function(menu, towerType) {
       if(this.game.player.canBuy(towerType)) {
         var tower = new Tower(towerType, cell).render()
 
@@ -99,6 +116,25 @@
         PopUp.notify('Too expensive!')
       }
     }.bind(this))
+  }
+
+  var spawnNewWave = function(prevWave) {
+    var round = 1
+      , delay = 5
+
+    if(typeof prevWave !== 'undefined') {
+      round = prevWave.round + 1
+      delay = 20
+    }
+
+    var wave = new Wave(round, this.game.grid.path).spawn(delay)
+    wave.on('spawned', function() {
+      spawnNewWave.call(this, wave)
+    }.bind(this))
+    wave.on('monster:killed', function(wave, monster) {
+      this.game.player.earn(monster.options.revenue)
+    }.bind(this))
+    observeWave.call(this, wave)
   }
 
   window.EventManager = EventManager

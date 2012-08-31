@@ -22,9 +22,10 @@ Utils = {
     }
     instance.fire = function(eventName, data) {
       data = data || []
-      data = (Array.isArray(data) ? data : [data]);
+      data = (Array.isArray(data) ? data : [data])
+      data.unshift(instance)
 
-      (instance.listeners[eventName] || []).forEach(function(callback) {
+      ;(instance.listeners[eventName] || []).forEach(function(callback) {
         callback.apply(instance, data)
       })
     }

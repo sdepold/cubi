@@ -51,7 +51,7 @@
     this.render()
 
     if(this.life === 0) {
-      this.fire('died')
+      this.fire('killed')
     }
   }
 

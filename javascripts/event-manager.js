@@ -43,6 +43,10 @@
     this.game.player.on('killed', function() {
       wave.stop()
     }.bind(this))
+
+    this.game.on('wave:spawn', function() {
+      wave.forceSpawn()
+    })
   }
 
   var observePlayer = function() {
@@ -143,11 +147,10 @@
 
   var spawnNewWave = function(prevWave) {
     var round = 1
-      , delay = 5
+      , delay = 20
 
     if(typeof prevWave !== 'undefined') {
       round = prevWave.round + 1
-      delay = 20
     }
 
     observeWave.call(this, new Wave(round, this.game.grid.path).spawn(delay))

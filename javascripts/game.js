@@ -21,9 +21,11 @@
   Game.prototype.render = function(options) {
     this.grid.render()
     this.player.render()
+
     this.meta.id = 'meta-data'
 
     document.body.appendChild(this.meta)
+    drawForceSpawnMenu.call(this)
 
     this.eventManager.init()
 
@@ -38,6 +40,26 @@
     })
 
     return (towers.length === 1) ? towers[0] : null
+  }
+
+  // private
+
+  var drawForceSpawnMenu = function() {
+    var container = document.getElementById('force-next-wave')
+
+    if(!container) {
+      container = document.createElement('span')
+      container.id = 'force-next-wave'
+
+      this.meta.appendChild(container)
+    }
+
+    var message = "Force next wave"
+    container.innerHTML = message
+
+    container.onclick = function() {
+      this.fire('wave:spawn')
+    }.bind(this)
   }
 
   window.Game = Game

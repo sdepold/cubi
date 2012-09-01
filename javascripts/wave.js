@@ -10,7 +10,8 @@
 
     this.meta            = document.getElementById('meta-data')
     this.moveIntervalId  = null
-    this.timerIntervalId = null
+    this.updateTimerIntervalId = null
+    this.spawnTimeoutId  = null
     this.spawnTimeoutIds = []
 
     Utils.addObserverMethods(this)
@@ -19,7 +20,7 @@
   Wave.prototype.spawn = function(delay) {
     drawTimer.call(this, delay)
 
-    setTimeout(function() {
+    this.spawnTimeoutId = setTimeout(function() {
       spawnMonsters.call(this)
     }.bind(this), delay * 1000)
 
@@ -34,6 +35,13 @@
     clearInterval(this.moveIntervalId)
   }
 
+  Wave.prototype.forceSpawn = function() {
+    clearTimeout(this.spawnTimeout)
+    clearInterval(this.updateTimerIntervalId)
+    setTimerContainerText.call(this, 0)
+    spawnMonsters.call(this)
+  }
+
   // private
 
   var move = function() {
@@ -43,7 +51,23 @@
   }
 
   var drawTimer = function(countDownFrom) {
+    var then = +new Date
+
+    this.updateTimerIntervalId = setInterval(function() {
+      var now  = +new Date
+        , diff = Math.ceil(Math.abs(then - now) / 1000)
+
+      if(diff > countDownFrom) {
+        clearInterval(this.updateTimerIntervalId)
+      } else {
+        setTimerContainerText.call(this, countDownFrom - diff)
+      }
+    }.bind(this), 100)
+  }
+
+  var setTimerContainerText = function(seconds) {
     var container = document.getElementById('wave-duration')
+      , message   = "Wave #%{wave} starts in %{seconds}s"
 
     if(!container) {
       container = document.createElement('span')
@@ -52,22 +76,10 @@
       this.meta.appendChild(container)
     }
 
-    var message = "Wave #%{wave} starts in %{seconds}s"
-      , then    = +new Date
-
-    this.timerIntervalId = setInterval(function() {
-      var now  = +new Date
-        , diff = Math.ceil(Math.abs(then - now) / 1000)
-
-      if(diff > countDownFrom) {
-        clearInterval(this.timerIntervalId)
-      } else {
-        container.innerHTML = Utils.interpolate(message, {
-          wave: this.round,
-          seconds: countDownFrom - diff
-        })
-      }
-    }.bind(this), 100)
+    container.innerHTML = Utils.interpolate(message, {
+      wave: this.round,
+      seconds: seconds
+    })
   }
 
   var spawnMonsters = function() {

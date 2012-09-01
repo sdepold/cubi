@@ -39,12 +39,15 @@
         })
       }.bind(this))
     }.bind(this))
+
+    this.game.player.on('killed', function() {
+      wave.stop()
+    }.bind(this))
   }
 
   var observePlayer = function() {
-    this.game.player.on('died', function() {
+    this.game.player.on('killed', function() {
       PopUp.notify('Oh my gosh, you died!', { sticky: true })
-      this.game.pause()
     }.bind(this))
   }
 

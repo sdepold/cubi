@@ -1,14 +1,12 @@
 (function() {
-  "use strict"
-
   var Player = function(canvasSelector, metaDataContainer) {
     this.life   = 20
     this.cash   = 1000
     this.dom    = metaDataContainer
     this.canvas = document.querySelectorAll(canvasSelector)[0]
-
-    window.Utils.addObserverMethods(this)
   }
+
+  Utils.addObserverMethodsToClass(Player)
 
   Player.prototype.isDead = function() {
     return this.life === 0

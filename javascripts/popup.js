@@ -6,9 +6,9 @@
     this.content = content
 
     this.dom.className = 'pop-up'
-
-    Utils.addObserverMethods(this)
   }
+
+  Utils.addObserverMethodsToClass(PopUp)
 
   PopUp.notify = function(msg, options) {
     options = options || {}

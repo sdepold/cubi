@@ -2,9 +2,9 @@
   var TowerMenu = function(cell) {
     this.cell  = cell
     this.popUp = new PopUp()
-
-    Utils.addObserverMethods(this)
   }
+
+  Utils.addObserverMethodsToClass(TowerMenu)
 
   TowerMenu.prototype.render = function() {
     var container = document.getElementById('tower-menu')

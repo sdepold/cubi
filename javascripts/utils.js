@@ -9,25 +9,33 @@ Utils = {
     return obj3
   },
 
-  addObserverMethods: function(instance) {
-    instance.listeners = {}
-    instance.on = function(eventName, callback) {
-      instance.listeners[eventName] = instance.listeners[eventName] || []
-      instance.listeners[eventName].push(callback)
+  addObserverMethodsToClass: function(klass) {
+    klass.prototype.__defineGetter__('listeners', function() {
+      if(typeof this._listeners === 'undefined') {
+        this._listeners = {}
+      }
+      return this._listeners
+    })
+
+    klass.prototype.on = function(eventName, callback) {
+      this.listeners[eventName] = this.listeners[eventName] || []
+      this.listeners[eventName].push(callback)
     }
-    instance.off = function(eventName, callback) {
-      instance.listeners[eventName] = instance.listeners[eventName].filter(function(cb) {
+
+    klass.prototype.off = function(eventName, callback) {
+      this.listeners[eventName] = this.listeners[eventName].filter(function(cb) {
         return cb != callback
       })
     }
-    instance.fire = function(eventName, data) {
+
+    klass.prototype.fire = function(eventName, data) {
       data = data || []
       data = (Array.isArray(data) ? data : [data])
-      data.unshift(instance)
+      data.unshift(this)
 
-      ;(instance.listeners[eventName] || []).forEach(function(callback) {
-        callback.apply(instance, data)
-      })
+      ;(this.listeners[eventName] || []).forEach(function(callback) {
+        callback.apply(this, data)
+      }.bind(this))
     }
   },
 

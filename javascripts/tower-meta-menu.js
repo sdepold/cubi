@@ -3,9 +3,9 @@
     this.tower  = tower
     this.player = player
     this.popUp  = new PopUp()
-
-    Utils.addObserverMethods(this)
   }
+
+  Utils.addObserverMethodsToClass(TowerMetaMenu)
 
   TowerMetaMenu.prototype.render = function() {
     var ul = document.createElement('ul')

@@ -5,9 +5,9 @@
     this.cell     = cell
     this.lastShot = null
     this.range    = null
-
-    Utils.addObserverMethods(this)
   }
+
+  Utils.addObserverMethodsToClass(Tower)
 
   Tower.TYPES = {
     LASER: {

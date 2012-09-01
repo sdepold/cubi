@@ -13,9 +13,9 @@
     this.updateTimerIntervalId = null
     this.spawnTimeoutId  = null
     this.spawnTimeoutIds = []
-
-    Utils.addObserverMethods(this)
   }
+
+  Utils.addObserverMethodsToClass(Wave)
 
   Wave.prototype.spawn = function(delay) {
     drawTimer.call(this, delay)

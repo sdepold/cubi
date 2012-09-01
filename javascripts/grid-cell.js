@@ -11,9 +11,9 @@
     }
 
     this.setType(this.type)
-
-    Utils.addObserverMethods(this)
   }
+
+  Utils.addObserverMethodsToClass(GridCell)
 
   GridCell.INACCESSABLE = 'inaccessable'
   GridCell.ACCESSABLE   = 'accessable'

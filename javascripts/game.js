@@ -14,9 +14,9 @@
 
     this.monsters = []
     this.towers   = []
-
-    Utils.addObserverMethods(this)
   }
+
+  Utils.addObserverMethodsToClass(Game)
 
   Game.prototype.render = function(options) {
     this.grid.render()

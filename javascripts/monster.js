@@ -10,9 +10,9 @@
     this.pathIndex  = 0
     this.cell       = null
     this.intervalId = null
-
-    Utils.addObserverMethods(this)
   }
+
+  Utils.addObserverMethodsToClass(Monster)
 
   Monster.prototype.stop = function() {
     clearInterval(this.intervalId)

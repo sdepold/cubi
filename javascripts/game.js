@@ -27,26 +27,9 @@
 
     this.eventManager.init()
 
-
     this.fire('rendered')
 
     return this
-  }
-
-  Game.prototype.pause = function() {
-    this.monsters.forEach(function(wave) {
-      wave.forEach(function(monster) {
-        monster.stop()
-      })
-    })
-  }
-
-  Game.prototype.continue = function() {
-    this.monsters.forEach(function(wave) {
-      wave.forEach(function(monster) {
-        monster.initMoving()
-      })
-    })
   }
 
   Game.prototype.getTowerByGridCell = function(cell) {

@@ -7,7 +7,7 @@
     }, options || {})
 
     this.canvas       = document.querySelector(canvasSelector)
-    this.meta         = document.createElement('div')
+    this.meta         = Utils.createDomNode('div', undefined, {id: 'meta-data'})
     this.grid         = new Grid(this.options.rows, this.options.cols, this.canvas)
     this.player       = new Player(canvasSelector, this.meta)
     this.eventManager = new EventManager(this)
@@ -20,8 +20,6 @@
   Game.prototype.render = function(options) {
     this.grid.render()
     this.player.render()
-
-    this.meta.id = 'meta-data'
 
     document.body.appendChild(this.meta)
     drawForceSpawnMenu.call(this)
@@ -55,10 +53,9 @@
     var container = document.getElementById('force-next-wave')
 
     if(!container) {
-      container = document.createElement('span')
-      container.id = 'force-next-wave'
-
-      this.meta.appendChild(container)
+      container = this.meta.appendChild(
+        Utils.createDomNode('span', undefined, {id: 'force-next-wave'})
+      )
     }
 
     return container

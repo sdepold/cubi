@@ -71,7 +71,7 @@ table .rocket:after, .menu li.rocket:before {
   background: transparent url('../images/towers/rocket.gif') no-repeat;
 }
 
-table .level-1:before, table .level-2:before {
+table .level-1:before, table .level-2:before, table .level-3:before {
   content: 'I';
   display: block;
   position: absolute;
@@ -82,6 +82,9 @@ table .level-1:before, table .level-2:before {
 }
 table .level-2:before {
   content: 'II';
+}
+table .level-3:before {
+  content: 'III';
 }
 
 table .selected:before {

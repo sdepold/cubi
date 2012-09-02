@@ -167,7 +167,7 @@
 
   var toClassNames = function() {
     var towerName = this.type.toLowerCase().replace(/ /, '-')
-      , levelName = 'level-' + this.level
+      , levelName = 'level-' + (this.level + 1)
 
     return [towerName, levelName]
   }

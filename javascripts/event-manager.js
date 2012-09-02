@@ -70,7 +70,7 @@
 
   var observePlayer = function() {
     this.game.player.on('killed', function() {
-      var ul = Utils.createDomNode('ul')
+      var ul = Utils.createDomNode('ul', { className: 'game-over' })
 
       ul.appendChild(Utils.createDomNode('li', { value: 'Oh my gosh, you died!' }))
       ul.appendChild(Utils.createDomNode('li'))

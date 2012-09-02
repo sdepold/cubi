@@ -8,4 +8,6 @@ window.addEventListener('load', function() {
     cols: ~~(x / cellWidth),
     rows: ~~((y - 30) / cellHeight)
   }).render()
+
+  document.getElementById('meta-data').style.width = (document.querySelector('table').offsetWidth - 10) + 'px'
 }, false);

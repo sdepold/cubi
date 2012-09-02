@@ -33,6 +33,8 @@
     })
 
     clearInterval(this.moveIntervalId)
+    clearInterval(this.spawnTimeoutId)
+    clearInterval(this.updateTimerIntervalId)
   }
 
   Wave.prototype.forceSpawn = function() {

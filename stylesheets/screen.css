@@ -124,6 +124,7 @@ table .selected:before {
 .menu .nested {
   height: auto;
   line-height: 0;
+  border-top: 1px dashed #888;
 }
 
 .menu > li {

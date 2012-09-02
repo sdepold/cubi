@@ -117,10 +117,10 @@
 
     body.appendChild(bullet)
 
-    Utils.requestAnimationFrame(function() {
+    setTimeout(function() {
       bullet.style.left = monster.cell.dom.offsetLeft +  monster.cell.dom.offsetWidth / 2 + 'px'
       bullet.style.top  = monster.cell.dom.offsetTop + monster.cell.dom.offsetHeight / 2 + 'px'
-    }.bind(this))
+    }.bind(this), 10)
 
     setTimeout(function() {
       body.removeChild(bullet)

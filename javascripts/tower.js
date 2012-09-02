@@ -14,16 +14,8 @@
       name:         'Turret',
       costs:        [100, 200, 500],
       damages:      [2, 5, 10],
-      ranges:       [1, 2, 4],
-      frequencies:  [500, 400, 100]
-    },
-
-    LASER: {
-      name:         'Laser Tower',
-      costs:        [100, 200, 1000],
-      damages:      [2, 5, 10],
-      ranges:       [3, 5, 7],
-      frequencies:  [500, 450, 400]
+      ranges:       [1, 2, 3],
+      frequencies:  [500, 400, 300]
     },
 
     ROCKET: {
@@ -32,14 +24,6 @@
       damages:      [10, 15, 25],
       ranges:       [7, 9, 12],
       frequencies:  [3000, 2700, 2200]
-    },
-
-    FREEZER: {
-      name:         'Freezer',
-      costs:        [200, 500, 750],
-      damages:      [5, 7, 9],
-      ranges:       [3, 4, 5],
-      frequencies:  [5000, 4000, 3000]
     }
   }
 

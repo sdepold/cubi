@@ -59,15 +59,15 @@ table .monster:after {
   background: url('../images/monsters/tank-lite.gif') no-repeat;
 }
 
-table .freezer:after, .menu li.freezer:before {
+table .freezer:after, .menu .freezer:before {
   background: transparent url('../images/towers/freezer.gif') no-repeat;
 }
 
-table .laser:after, .menu li.laser:before {
-  background: transparent url('../images/towers/laser.gif') no-repeat;
+table .turret:after, .menu .turret:before {
+  background: transparent url('../images/towers/turret.gif') no-repeat;
 }
 
-table .rocket:after, .menu li.rocket:before {
+table .rocket:after, .menu .rocket:before {
   background: transparent url('../images/towers/rocket.gif') no-repeat;
 }
 
@@ -151,11 +151,10 @@ table .selected:before {
   height: 32px;
   width: 24px;
   margin-left: 4px;
-}
-.menu .laser:before, .menu .rocket:before, .menu .freezer:before, .menu .upgrade:before, .menu .sell:before, .menu .stats-range:before, .menu .stats-damage:before, .menu .stats-frequency:before {
   position: relative;
   left: -10px;
 }
+
 .menu .upgrade:before {
   background: transparent url('../images/menu/upgrade.gif') center right no-repeat;
 }
@@ -164,15 +163,15 @@ table .selected:before {
 }
 .menu .stats-range:before {
   background: transparent url('../images/interface/range.gif') center right no-repeat;
-  left: -12px;
+  left: -12px !important;
 }
 .menu .stats-damage:before {
   background: transparent url('../images/interface/damage.gif') center right no-repeat;
-  left: -18px;
+  left: -18px !important;
 }
 .menu .stats-frequency:before {
   background: transparent url('../images/interface/frequency.gif') center right no-repeat;
-  left: -20px;
+  left: -20px !important;
 }
 
 

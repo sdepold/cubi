@@ -117,7 +117,7 @@
 
     this.monsters.push(monster)
 
-    this.fire('monster:spawned', [monster])
+    this.fire('monster:spawned', [ monster ])
 
     this.spawnedMonsters = this.spawnedMonsters + 1
 

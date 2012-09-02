@@ -35,12 +35,12 @@
   var buildUpgradeMenu = function() {
     var upgrade        = document.createElement('li')
       , level          = (this.tower.level + 1)
-      , costs          = window.Tower.TYPES[this.tower.type].costs[level]
+      , costs          = Tower.TYPES[this.tower.type].costs[level]
       , upgradeMessage = 'Upgrade to Level %{level} (%{costs})'
 
     if(level === 3) {
       upgradeMessage = 'Max level %{level} reached.'
-      upgradeMessage = window.Utils.interpolate(upgradeMessage, { level: level, costs: costs })
+      upgradeMessage = Utils.interpolate(upgradeMessage, { level: level, costs: costs })
     } else {
       upgrade.onclick = function() {
         if(this.player.canBuy(this.tower.type, level)) {
@@ -56,12 +56,12 @@
         } else {
           PopUp.notify('Too expensive!')
         }
-        upgradeMessage = window.Utils.interpolate(upgradeMessage, { level: level + 1, costs: costs })
+        upgradeMessage = Utils.interpolate(upgradeMessage, { level: level + 1, costs: costs })
       }.bind(this)
     }
 
     upgrade.appendChild(
-      document.createTextNode(window.Utils.interpolate(upgradeMessage, { level: level + 1, costs: costs }))
+      document.createTextNode(Utils.interpolate(upgradeMessage, { level: level + 1, costs: costs }))
     )
     upgrade.className = 'upgrade'
 
@@ -76,7 +76,7 @@
 
     for(var i = 0, j = fields.length; i < j; ++i) {
       var li = document.createElement('li')
-      li.innerHTML = window.Utils.interpolate(fields[i], stats)
+      li.innerHTML = Utils.interpolate(fields[i], stats)
       ul.appendChild(li)
     }
 
@@ -88,8 +88,8 @@
   var buildSellMenu = function() {
     var sell        = document.createElement('li')
       , level       = this.tower.level
-      , costs       = window.Tower.TYPES[this.tower.type].costs[level] / 2
-      , sellMessage = window.Utils.interpolate('Sell (%{costs})', { costs: costs })
+      , costs       = Tower.TYPES[this.tower.type].costs[level] / 2
+      , sellMessage = Utils.interpolate('Sell (%{costs})', { costs: costs })
 
     sell.appendChild(document.createTextNode(sellMessage))
 

@@ -79,7 +79,6 @@ table .level-1:before, table .level-2:before {
   font-family: Arial;
   font-size: 10px;
   color: yellow;
-  /*padding-top: 20px;*/
 }
 table .level-2:before {
   content: 'II';

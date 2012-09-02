@@ -27,3 +27,4 @@ exec('rm -rf ' + __dirname + '/dist')
 exec('rm -rf ' + __dirname + '/tmp.zip')
 
 console.log('Size of zipfile: ', size)
+console.log('Left: ', 13312 - size)

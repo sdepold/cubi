@@ -36,7 +36,7 @@
   }
 
   Wave.prototype.forceSpawn = function() {
-    clearTimeout(this.spawnTimeout)
+    clearTimeout(this.spawnTimeoutId)
     clearInterval(this.updateTimerIntervalId)
     setTimerContainerText.call(this, 0)
     spawnMonsters.call(this)

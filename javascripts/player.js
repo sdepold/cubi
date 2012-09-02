@@ -93,7 +93,7 @@
       this.dom.appendChild(cashContainer)
     }
 
-    cashContainer.innerHTML = 'Cash: ' + this.cash
+    cashContainer.innerHTML = 'Cash: ' + this.cash + '$'
   }
 
   window.Player = Player

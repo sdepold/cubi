@@ -47,7 +47,7 @@
   var renderTower = function(type, container) {
     var self     = this
       , tower    = Tower.TYPES[type]
-      , text     = Utils.interpolate("%{name} (%{costs})", { name: tower.name, costs: tower.costs[0] })
+      , text     = Utils.interpolate("%{name} (%{costs}$)", { name: tower.name, costs: tower.costs[0] })
 
     container.appendChild(Utils.createDomNode('li', {
       value: text,

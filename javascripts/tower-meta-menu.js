@@ -36,7 +36,7 @@
     var upgrade        = document.createElement('li')
       , level          = (this.tower.level + 1)
       , costs          = Tower.TYPES[this.tower.type].costs[level]
-      , upgradeMessage = 'Upgrade to Level %{level} (%{costs})'
+      , upgradeMessage = 'Upgrade to Level %{level} (%{costs}$)'
 
     if(level === 3) {
       upgradeMessage = 'Max level %{level} reached.'
@@ -77,10 +77,12 @@
     for(var i = 0, j = fields.length; i < j; ++i) {
       var li = document.createElement('li')
       li.innerHTML = Utils.interpolate(fields[i], stats)
+      li.className = "stats-" + fields[i].match(/%\{(.*)\}/)[1]
       ul.appendChild(li)
     }
 
     result.appendChild(ul)
+    result.className = "nested"
 
     return result
   }
@@ -89,7 +91,7 @@
     var sell        = document.createElement('li')
       , level       = this.tower.level
       , costs       = Tower.TYPES[this.tower.type].costs[level] / 2
-      , sellMessage = Utils.interpolate('Sell (%{costs})', { costs: costs })
+      , sellMessage = Utils.interpolate('Sell (%{costs}$)', { costs: costs })
 
     sell.appendChild(document.createTextNode(sellMessage))
 

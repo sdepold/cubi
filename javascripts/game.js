@@ -12,7 +12,6 @@
     this.player       = new Player(canvasSelector, this.meta)
     this.eventManager = new EventManager(this)
 
-    this.monsters = []
     this.towers   = []
   }
 

@@ -4,6 +4,12 @@
     this.cash   = 1000
     this.dom    = metaDataContainer
     this.canvas = document.querySelectorAll(canvasSelector)[0]
+    this.stats  = {
+      spentMoney:     0,
+      earnedMoney:    0,
+      killedMonsters: 0,
+      upgradedTowers: 0
+    }
   }
 
   Utils.addObserverMethodsToClass(Player)
@@ -21,6 +27,10 @@
     renderCash.call(this)
   }
 
+  Player.prototype.recordStat = function(stat, value) {
+    this.stats[stat] += value
+  }
+
   Player.prototype.canBuy = function(towerType, level) {
     level = (typeof level === 'undefined') ? 0 : level
     return (this.cash >= window.Tower.TYPES[towerType].costs[level])
@@ -32,11 +42,13 @@
     var costs = window.Tower.TYPES[towerType].costs[level]
 
     this.cash -= costs
+    this.recordStat('spentMoney', costs)
     this.render()
   }
 
   Player.prototype.earn = function(money) {
     this.cash += money
+    this.recordStat('earnedMoney', money)
     this.render()
   }
 

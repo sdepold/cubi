@@ -47,6 +47,26 @@ Utils = {
     }
 
     return result
+  },
+
+  createDomNode: function(elementType, content, attributes) {
+    var node = document.createElement(elementType)
+
+    if(typeof content !== 'undefined') {
+      if(typeof content === 'string') {
+        node.appendChild(document.createTextNode(content))
+      } else {
+        node.appendChild(content)
+      }
+    }
+
+    if(typeof attributes !== 'undefined') {
+      for(var name in attributes) {
+        node[name] = attributes[name]
+      }
+    }
+
+    return node
   }
 }
 

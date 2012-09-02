@@ -27,6 +27,7 @@
     wave.on('monster:spawned', function(wave, monster) {
       monster.on('die', function() {
         this.game.player.earn(monster.options.revenue)
+        this.game.player.recordStat('killedMonsters', 1)
       }.bind(this))
 
       monster.on('goal:reached', function() {
@@ -69,7 +70,21 @@
 
   var observePlayer = function() {
     this.game.player.on('killed', function() {
-      PopUp.notify('Oh my gosh, you died!', { sticky: true })
+      var ul = Utils.createDomNode('ul')
+
+      ul.appendChild(Utils.createDomNode('li', 'Oh my gosh, you died!'))
+      ul.appendChild(Utils.createDomNode('li'))
+      ul.appendChild(Utils.createDomNode('li', "Spent money: " + this.game.player.stats.spentMoney + '$'))
+      ul.appendChild(Utils.createDomNode('li', "Earned money: " + this.game.player.stats.earnedMoney + '$'))
+      ul.appendChild(Utils.createDomNode('li', "Killed monsters: " + this.game.player.stats.killedMonsters))
+      ul.appendChild(Utils.createDomNode('li', "Upgraded towers: " + this.game.player.stats.upgradedTowers))
+      ul.appendChild(Utils.createDomNode('li'))
+      ul.appendChild(Utils.createDomNode('a', 'Restart the game!', {
+        href: '#',
+        onclick: function() { window.location.reload() }
+      }))
+
+      PopUp.notify(ul, { sticky: true })
     }.bind(this))
   }
 
@@ -152,6 +167,10 @@
     new TowerMenu(cell).render().on('select', function(menu, towerType) {
       if(this.game.player.canBuy(towerType)) {
         var tower = new Tower(towerType, cell).render()
+
+        tower.on('upgraded', function() {
+          this.game.player.recordStat('upgradedTowers', 1)
+        }.bind(this))
 
         this.game.player.buy(towerType)
         this.game.towers.push(tower)

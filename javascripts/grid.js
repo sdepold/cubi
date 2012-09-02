@@ -14,7 +14,7 @@
     this.path = createPath.call(this)
 
     this.path.forEach(function(cell) {
-      cell.setType(GridCell.PATH)
+      cell.setType(GridCell.TYPES.PATH)
     })
   }
 

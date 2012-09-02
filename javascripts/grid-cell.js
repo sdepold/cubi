@@ -3,7 +3,7 @@
     var self = this
 
     this.grid        = grid
-    this.type        = GridCell.INACCESSABLE
+    this.type        = GridCell.TYPES.INACCESSABLE
     this.dom         = document.createElement('td')
     this.dom.cell    = this
     this.dom.onclick = function() {
@@ -15,11 +15,13 @@
 
   Utils.addObserverMethodsToClass(GridCell)
 
-  GridCell.INACCESSABLE = 'inaccessable'
-  GridCell.ACCESSABLE   = 'accessable'
-  GridCell.PATH         = 'path'
-  GridCell.MONSTER      = 'monster'
-  GridCell.TOWER        = 'tower'
+  GridCell.TYPES = {
+    INACCESSABLE: 'inaccessable',
+    ACCESSABLE: 'accessable',
+    PATH: 'path',
+    MONSTER: 'monster',
+    TOWER: 'tower'
+  }
 
   GridCell.prototype.getElement = function() {
     return this.dom

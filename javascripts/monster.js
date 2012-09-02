@@ -43,7 +43,7 @@
 
   Monster.prototype.die = function() {
     this.stop()
-    this.cell.setType(GridCell.PATH)
+    this.cell.setType(GridCell.TYPES.PATH)
     this.fire('die')
   }
 
@@ -55,11 +55,11 @@
 
   var setPosition = function(cell) {
     if(this.cell) {
-      this.cell.setType(GridCell.PATH)
+      this.cell.setType(GridCell.TYPES.PATH)
     }
 
     if(cell) {
-      cell.setType(GridCell.MONSTER)
+      cell.setType(GridCell.TYPES.MONSTER)
     }
 
     this.cell = cell

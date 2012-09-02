@@ -97,7 +97,7 @@
 
     sell.onclick = function() {
       this.player.sell(this.tower)
-      this.tower.cell.setType(GridCell.INACCESSABLE)
+      this.tower.cell.setType(GridCell.TYPES.INACCESSABLE)
       this.tower.destroy()
       this.fire('tower:sold', this.tower)
     }.bind(this)

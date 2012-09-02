@@ -41,12 +41,12 @@
 
   Tower.prototype.upgrade = function() {
     this.level++
-    this.cell.setType(GridCell.TOWER, toClassNames.call(this))
+    this.cell.setType(GridCell.TYPES.TOWER, toClassNames.call(this))
     this.fire('upgraded')
   }
 
   Tower.prototype.render = function() {
-    this.cell.setType(GridCell.TOWER, toClassNames.call(this))
+    this.cell.setType(GridCell.TYPES.TOWER, toClassNames.call(this))
     return this
   }
 

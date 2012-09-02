@@ -126,7 +126,7 @@
     tower.renderRange()
 
     menu.render()
-    menu.on('tower:sold', function(tower) {
+    menu.on('tower:sold', function(menu, tower) {
       removeTowerRanges.call(this)
       this.game.towers = this.game.towers.filter(function(_tower) {
         return _tower !== tower

@@ -44,13 +44,19 @@
       wave.stop()
     }.bind(this))
 
-    this.game.on('wave:spawn', function() {
+    var spawnWave = function() {
       if(document.getElementById('wave-duration').innerHTML.indexOf('0s') === -1) {
         wave.forceSpawn()
       } else {
         console.log('nope')
       }
-    })
+    }
+
+    this.game.on('wave:spawn', spawnWave)
+
+    wave.on('spawned', function() {
+      this.game.off('wave:spawn', spawnWave)
+    }.bind(this))
   }
 
   var observePlayer = function() {

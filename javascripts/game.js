@@ -7,7 +7,7 @@
     }, options || {})
 
     this.canvas       = document.querySelector(canvasSelector)
-    this.meta         = Utils.createDomNode('div', undefined, {id: 'meta-data'})
+    this.meta         = Utils.createDomNode('div', {id: 'meta-data'})
     this.grid         = new Grid(this.options.rows, this.options.cols, this.canvas)
     this.player       = new Player(canvasSelector, this.meta)
     this.eventManager = new EventManager(this)
@@ -54,7 +54,7 @@
 
     if(!container) {
       container = this.meta.appendChild(
-        Utils.createDomNode('span', undefined, {id: 'force-next-wave'})
+        Utils.createDomNode('span', {id: 'force-next-wave'})
       )
     }
 

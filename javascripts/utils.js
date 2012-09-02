@@ -49,20 +49,26 @@ Utils = {
     return result
   },
 
-  createDomNode: function(elementType, content, attributes) {
-    var node = document.createElement(elementType)
+  createDomNode: function(elementType, attributes) {
+    var node    = document.createElement(elementType)
+      , content = null
 
-    if(typeof content !== 'undefined') {
-      if(typeof content === 'string') {
-        node.appendChild(document.createTextNode(content))
-      } else {
-        node.appendChild(content)
-      }
+    if((attributes || {}).hasOwnProperty('value')) {
+      content = attributes.value;
+      delete attributes.value;
+    }
+
+    if(content !== null) {
+      node.appendChild(document.createTextNode(content))
     }
 
     if(typeof attributes !== 'undefined') {
       for(var name in attributes) {
-        node[name] = attributes[name]
+        if(name.indexOf('-') !== -1) {
+          node.setAttribute(name, attributes[name])
+        } else {
+          node[name] = attributes[name]
+        }
       }
     }
 

@@ -35,10 +35,7 @@
   // private
 
   var buildContainer = function() {
-    var container = document.createElement('ul')
-
-    container.id = 'tower-menu'
-    container.className = 'menu'
+    var container = Utils.createDomNode('ul', {id: 'tower-menu', className: 'menu'})
 
     for(var type in Tower.TYPES) {
       renderTower.call(this, type, container)
@@ -49,20 +46,17 @@
 
   var renderTower = function(type, container) {
     var self     = this
-      , li       = document.createElement('li')
       , tower    = Tower.TYPES[type]
       , text     = Utils.interpolate("%{name} (%{costs})", { name: tower.name, costs: tower.costs[0] })
-      , textNode = document.createTextNode(text)
 
-    li.appendChild(textNode)
-    li.setAttribute('data-tower-type', type)
-    li.className = type.toLowerCase()
-
-    li.onclick = function() {
-      self.fire('select', this.getAttribute('data-tower-type'))
-    }
-
-    container.appendChild(li)
+    container.appendChild(Utils.createDomNode('li', {
+      value: text,
+      'data-tower-type': type,
+      className: type.toLowerCase(),
+      onclick: function() {
+        self.fire('select', this.getAttribute('data-tower-type'))
+      }
+    }))
   }
 
   window.TowerMenu = TowerMenu

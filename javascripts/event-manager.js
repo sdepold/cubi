@@ -72,14 +72,15 @@
     this.game.player.on('killed', function() {
       var ul = Utils.createDomNode('ul')
 
-      ul.appendChild(Utils.createDomNode('li', 'Oh my gosh, you died!'))
+      ul.appendChild(Utils.createDomNode('li', { value: 'Oh my gosh, you died!' }))
       ul.appendChild(Utils.createDomNode('li'))
-      ul.appendChild(Utils.createDomNode('li', "Spent money: " + this.game.player.stats.spentMoney + '$'))
-      ul.appendChild(Utils.createDomNode('li', "Earned money: " + this.game.player.stats.earnedMoney + '$'))
-      ul.appendChild(Utils.createDomNode('li', "Killed monsters: " + this.game.player.stats.killedMonsters))
-      ul.appendChild(Utils.createDomNode('li', "Upgraded towers: " + this.game.player.stats.upgradedTowers))
+      ul.appendChild(Utils.createDomNode('li', { value: "Spent money: " + this.game.player.stats.spentMoney + '$' }))
+      ul.appendChild(Utils.createDomNode('li', { value: "Earned money: " + this.game.player.stats.earnedMoney + '$' }))
+      ul.appendChild(Utils.createDomNode('li', { value: "Killed monsters: " + this.game.player.stats.killedMonsters }))
+      ul.appendChild(Utils.createDomNode('li', { value: "Upgraded towers: " + this.game.player.stats.upgradedTowers }))
       ul.appendChild(Utils.createDomNode('li'))
-      ul.appendChild(Utils.createDomNode('a', 'Restart the game!', {
+      ul.appendChild(Utils.createDomNode('a', {
+        value: 'Restart the game!',
         href: '#',
         onclick: function() { window.location.reload() }
       }))

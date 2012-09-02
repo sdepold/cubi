@@ -69,7 +69,7 @@
   }
 
   var buildStatsMenu = function() {
-    var fields = ['Range: %{range}', 'Damage: %{damage}', 'Frequency: %{frequency}/min']
+    var fields = ['Range: %{range}', 'Damage: %{damage}', 'Frequency: 1 shot / %{frequency}s']
       , stats  = this.tower.getStats()
       , result = document.createElement('li')
       , ul     = document.createElement('ul')

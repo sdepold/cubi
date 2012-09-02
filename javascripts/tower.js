@@ -36,7 +36,11 @@
   }
 
   Tower.prototype.getStats = function() {
-    return {damage: this.getDamage(), range: this.getRange(), frequency: Math.round(600000 / this.getFrequency()) / 10}
+    return {
+      damage: this.getDamage(),
+      range: this.getRange(),
+      frequency: this.getFrequency() / 1000
+    }
   }
 
   Tower.prototype.upgrade = function() {

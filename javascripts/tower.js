@@ -10,6 +10,14 @@
   Utils.addObserverMethodsToClass(Tower)
 
   Tower.TYPES = {
+    TURRET: {
+      name:         'Turret',
+      costs:        [100, 200, 500],
+      damages:      [2, 5, 10],
+      ranges:       [1, 2, 4],
+      frequencies:  [500, 400, 100]
+    },
+
     LASER: {
       name:         'Laser Tower',
       costs:        [100, 200, 1000],
@@ -109,10 +117,10 @@
 
     body.appendChild(bullet)
 
-    setTimeout(function() {
+    Utils.requestAnimationFrame(function() {
       bullet.style.left = monster.cell.dom.offsetLeft +  monster.cell.dom.offsetWidth / 2 + 'px'
       bullet.style.top  = monster.cell.dom.offsetTop + monster.cell.dom.offsetHeight / 2 + 'px'
-    }.bind(this), 10)
+    }.bind(this))
 
     setTimeout(function() {
       body.removeChild(bullet)

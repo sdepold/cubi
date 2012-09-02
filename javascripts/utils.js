@@ -1,4 +1,17 @@
 Utils = {
+  requestAnimationFrame: function(callback) {
+    var rAF = window.requestAnimationFrame ||
+      window.webkitRequestAnimationFrame   ||
+      window.mozRequestAnimationFrame      ||
+      window.oRequestAnimationFrame        ||
+      window.msRequestAnimationFrame       ||
+      function(callback) {
+        window.setTimeout(callback, 1000 / 60);
+      }
+
+    rAF(callback)
+  },
+
   merge: function(obj1, obj2) {
     var obj3 = {}
       , attr = null

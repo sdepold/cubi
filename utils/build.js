@@ -30,6 +30,10 @@ indexHTML = indexHTML.split('\n').filter(function(row) {
   if(row.indexOf('<script') === -1) {
     return true
   } else {
+    if(row.indexOf('prefixfree') !== -1) {
+      console.log('REMOVED PREFIXFREE FOR TEST REASONS... FIX ME')
+      return false
+    }
     scripts.push(row.match(/src="(.*)"/)[1])
     return false
   }

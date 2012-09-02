@@ -53,9 +53,6 @@ table .tower:after, table .monster:after {
   height: 28px;
   width: 22px;
   display: block;
-  position: absolute;
-  top: -4px;
-  left: -1px;
 }
 
 table .monster:after {
@@ -75,15 +72,17 @@ table .rocket:after, .menu li.rocket:before {
 }
 
 table .level-1:before, table .level-2:before {
-  content: '_';
-  height: 28px;
-  width: 22px;
+  content: 'I';
   display: block;
   position: absolute;
   font-weight: bold;
+  font-family: Arial;
+  font-size: 10px;
+  color: yellow;
+  /*padding-top: 20px;*/
 }
 table .level-2:before {
-  content: '__'
+  content: 'II';
 }
 
 table .selected:before {
@@ -92,9 +91,6 @@ table .selected:before {
   width: 20px;
   display: block;
   border: 2px solid yellow;
-  position: absolute;
-  top: 0;
-  left: -1px;
 }
 
 .pop-up {

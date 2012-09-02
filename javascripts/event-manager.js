@@ -45,7 +45,11 @@
     }.bind(this))
 
     this.game.on('wave:spawn', function() {
-      wave.forceSpawn()
+      if(document.getElementById('wave-duration').innerHTML.indexOf('0s') === -1) {
+        wave.forceSpawn()
+      } else {
+        console.log('nope')
+      }
     })
   }
 

@@ -65,9 +65,8 @@
     }.bind(this), 100)
   }
 
-  var setTimerContainerText = function(seconds) {
+  var getTimerContainer = function() {
     var container = document.getElementById('wave-duration')
-      , message   = "Wave #%{wave} starts in %{seconds}s"
 
     if(!container) {
       container = document.createElement('span')
@@ -76,10 +75,30 @@
       this.meta.appendChild(container)
     }
 
+    return container
+  }
+
+  var setTimerContainerText = function(seconds) {
+    var container = getTimerContainer.call(this)
+      , message   = "Wave #%{wave} starts in %{seconds}s"
+
+    if(seconds === 0) {
+      setTimerContainerClass.call(this, 'disabled')
+      this.fire('timer:disabled')
+    } else {
+      setTimerContainerClass.call(this, '')
+      this.fire('timer:enabled')
+    }
+
     container.innerHTML = Utils.interpolate(message, {
       wave: this.round,
       seconds: seconds
     })
+  }
+
+  var setTimerContainerClass = function(classes) {
+    classes = Array.isArray(classes) ? classes : [classes]
+    getTimerContainer.call(this).className = classes.join(' ')
   }
 
   var spawnMonsters = function() {

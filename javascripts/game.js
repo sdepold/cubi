@@ -42,9 +42,17 @@
     return (towers.length === 1) ? towers[0] : null
   }
 
+  Game.prototype.disableForcedSpawn = function() {
+    getForceSpawnMenu.call(this).className = 'disabled'
+  }
+
+  Game.prototype.enableForcedSpawn = function() {
+    getForceSpawnMenu.call(this).className = ''
+  }
+
   // private
 
-  var drawForceSpawnMenu = function() {
+  var getForceSpawnMenu = function() {
     var container = document.getElementById('force-next-wave')
 
     if(!container) {
@@ -54,9 +62,14 @@
       this.meta.appendChild(container)
     }
 
-    var message = "Force next wave"
-    container.innerHTML = message
+    return container
+  }
 
+  var drawForceSpawnMenu = function() {
+    var container = getForceSpawnMenu.call(this)
+      , message   = "Force next wave"
+
+    container.innerHTML = message
     container.onclick = function() {
       this.fire('wave:spawn')
     }.bind(this)

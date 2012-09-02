@@ -45,10 +45,10 @@
     }.bind(this))
 
     var spawnWave = function() {
-      if(document.getElementById('wave-duration').innerHTML.indexOf('0s') === -1) {
+      var spawnIsAllowed = (document.getElementById('wave-duration').className || "").indexOf('disabled') === -1
+
+      if(spawnIsAllowed) {
         wave.forceSpawn()
-      } else {
-        console.log('nope')
       }
     }
 
@@ -56,6 +56,14 @@
 
     wave.on('spawned', function() {
       this.game.off('wave:spawn', spawnWave)
+    }.bind(this))
+
+    wave.on('timer:disabled', function() {
+      this.game.disableForcedSpawn()
+    }.bind(this))
+
+    wave.on('timer:enabled', function() {
+      this.game.enableForcedSpawn()
     }.bind(this))
   }
 

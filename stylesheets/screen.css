@@ -21,6 +21,15 @@ table {
   border-right: 1px solid white;
 }
 
+#force-next-wave {
+  cursor: pointer;
+}
+
+#force-next-wave.disabled {
+  cursor: not-allowed;
+  color: #aaa;
+}
+
 table td {
   height: 28px;
   width: 24px;

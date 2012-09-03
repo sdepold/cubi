@@ -34,10 +34,13 @@ table {
 }
 
 table td {
-  height: 28px;
-  width: 24px;
   padding: 0;
   position: relative;
+}
+
+table td, table .tower:after, table .monster:after {
+  height: 28px;
+  width: 24px;
 }
 
 table .inaccessable, table .tower {
@@ -50,8 +53,6 @@ table .path, table .monster {
 
 table .tower:after, table .monster:after {
   content: '';
-  height: 28px;
-  width: 22px;
   display: block;
 }
 

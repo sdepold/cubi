@@ -13,17 +13,17 @@
     TURRET: {
       name:         'Turret',
       costs:        [100, 200, 500],
-      damages:      [3, 6, 10],
-      ranges:       [1, 2, 3],
+      damages:      [3, 5, 7],
+      ranges:       [1, 1.5, 2],
       frequencies:  [300, 225, 150]
     },
 
     ROCKET: {
       name:         'Rocket Tower',
-      costs:        [300, 750, 1500],
+      costs:        [200, 500, 800],
       damages:      [200, 300, 400],
-      ranges:       [7, 9, 12],
-      frequencies:  [2000, 1500, 900]
+      ranges:       [5, 7, 9],
+      frequencies:  [1500, 1200, 900]
     }
   }
 

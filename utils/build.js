@@ -15,15 +15,17 @@ var exec = function(cmd, showStdOut) {
   return result
 }
 
-exec('rm -rf ' + __dirname + '/dist')
+var targetFolder = __dirname + '/../dist'
 
-exec('mkdir -p ' + __dirname + '/dist')
+exec('rm -rf ' + targetFolder)
 
-exec('cp -rf ' + __dirname + '/../images ' + __dirname + '/dist/images')
-exec('cp -rf ' + __dirname + '/../stylesheets ' + __dirname + '/dist/stylesheets')
-exec('cp -rf ' + __dirname + '/../index.html ' + __dirname + '/dist/index.html')
+exec('mkdir -p ' + targetFolder)
 
-var indexHTML = exec('cat ' + __dirname + '/dist/index.html')
+exec('cp -rf ' + __dirname + '/../images ' + targetFolder + '/images')
+exec('cp -rf ' + __dirname + '/../stylesheets ' + targetFolder + '/stylesheets')
+exec('cp -rf ' + __dirname + '/../index.html ' + targetFolder + '/index.html')
+
+var indexHTML = exec('cat ' + targetFolder + '/index.html')
   , scripts   = []
 
 indexHTML = indexHTML.split('\n').filter(function(row) {
@@ -38,12 +40,12 @@ indexHTML = indexHTML.split('\n').filter(function(row) {
   }
 }).join('\n').replace('</head>', '  <script src="cubi.js"></script>\n  </head>')
 
-fs.writeFileSync(__dirname + '/dist/index.html', indexHTML)
+fs.writeFileSync(targetFolder + '/index.html', indexHTML)
 
 var paths    = scripts.map(function(file) { return __dirname + '/../' + file })
   , contents = paths.map(function(path) { return exec('cat ' + path) + ';' })
   , code     = contents.join('')
-  , source   = __dirname + '/dist/cubi.js'
+  , source   = targetFolder + '/cubi.js'
 
 var ast = jsp.parse(code)
 ast = jsu.ast_mangle(ast)
@@ -53,9 +55,9 @@ var finalCode = jsu.gen_code(ast); // compressed code here
 
 fs.writeFileSync(source, finalCode);
 
-exec('ls -l ' + __dirname + '/dist/stylesheets/*').split(/\n/).forEach(function(row) {
-  var path = __dirname + '/' + row.match(/(dist.*)/)[1]
-    , cmd    = 'node ' + __dirname + '/node_modules/yuicompressor/nodejs/cli.js --type css -o ' + path + ' ' + path
+exec('ls -l ' + targetFolder + '/stylesheets/*').split(/\n/).forEach(function(row) {
+  var path = __dirname + '/../' + row.match(/(dist.*)/)[1]
+    , cmd    = 'node ' + __dirname + '/../node_modules/yuicompressor/nodejs/cli.js --type css -o ' + path + ' ' + path
 
   exec(cmd)
 })

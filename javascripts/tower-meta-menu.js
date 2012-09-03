@@ -69,7 +69,7 @@
   }
 
   var buildStatsMenu = function() {
-    var fields = ['Range: %{range}', 'Damage: %{damage}', 'Frequency: 1 shot / %{frequency}s']
+    var fields = ['Range: %{range}', 'Damage: %{damage} (%{damagePerSecond}dmg/s)', 'Frequency: 1 shot / %{frequency}s']
       , stats  = this.tower.getStats()
       , result = document.createElement('li')
       , ul     = document.createElement('ul')
@@ -77,7 +77,7 @@
     for(var i = 0, j = fields.length; i < j; ++i) {
       var li = document.createElement('li')
       li.innerHTML = Utils.interpolate(fields[i], stats)
-      li.className = "stats-" + fields[i].match(/%\{(.*)\}/)[1]
+      li.className = "stats-" + fields[i].match(/%\{(.*?)\}/)[1]
       ul.appendChild(li)
     }
 

@@ -28,11 +28,15 @@
   }
 
   Tower.prototype.getStats = function() {
-    return {
+    var stats = {
       damage: this.getDamage(),
       range: this.getRange(),
       frequency: this.getFrequency() / 1000
     }
+
+    stats.damagePerSecond = Math.ceil((1 / stats.frequency) * (1 / stats.frequency) * stats.damage)
+
+    return stats
   }
 
   Tower.prototype.upgrade = function() {

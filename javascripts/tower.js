@@ -20,7 +20,7 @@
 
     ROCKET: {
       name:         'Rocket Tower',
-      costs:        [200, 500, 800],
+      costs:        [200, 400, 600],
       damages:      [200, 300, 400],
       ranges:       [5, 7, 9],
       frequencies:  [1500, 1200, 900]

@@ -2,8 +2,7 @@
   var Game = function(canvasSelector, options) {
     this.options = Utils.merge({
       rows:         10,
-      cols:         10,
-      waveDuration: 20 * 1000
+      cols:         10
     }, options || {})
 
     this.canvas       = document.querySelector(canvasSelector)

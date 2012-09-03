@@ -62,7 +62,7 @@
 
   var drawForceSpawnMenu = function() {
     var container = getForceSpawnMenu.call(this)
-      , message   = "Force next wave"
+      , message   = Utils.needsReducedLayout() ? 'Next wave' : "Force next wave"
 
     container.innerHTML = message
     container.onclick = function() {

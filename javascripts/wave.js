@@ -82,7 +82,7 @@
 
   var setTimerContainerText = function(seconds) {
     var container = getTimerContainer.call(this)
-      , message   = "Wave #%{wave} starts in %{seconds}s"
+      , message   = Utils.needsReducedLayout() ? "%{seconds}s" : "Wave #%{wave} starts in %{seconds}s"
 
     if(seconds === 0) {
       setTimerContainerClass.call(this, 'disabled')

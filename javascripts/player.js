@@ -81,11 +81,12 @@
       this.dom.appendChild(lifeContainer)
     }
 
-    lifeContainer.innerHTML = 'HP: ' + this.life.toString() + ' / 20'
+    lifeContainer.innerHTML = 'HP: ' + this.life.toString() + '|20'
   }
 
   var renderCash = function() {
     var cashContainer = document.getElementById('cash')
+      , template      = Utils.needsReducedLayout() ? '$%{cash}' : "Cash: %{cash}$"
 
     if(!cashContainer) {
       cashContainer = document.createElement('span')
@@ -93,7 +94,7 @@
       this.dom.appendChild(cashContainer)
     }
 
-    cashContainer.innerHTML = 'Cash: ' + this.cash + '$'
+    cashContainer.innerHTML = Utils.interpolate(template, { cash: this.cash })
   }
 
   window.Player = Player

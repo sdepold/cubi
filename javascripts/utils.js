@@ -1,4 +1,8 @@
 Utils = {
+  needsReducedLayout: function() {
+    return document.body.className.indexOf('reduced') !== -1
+  },
+
   merge: function(obj1, obj2) {
     var obj3 = {}
       , attr = null

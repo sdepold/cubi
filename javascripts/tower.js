@@ -134,10 +134,12 @@
     this.range = circle
     this.range.onclick = function() {
       this.removeRange()
+      this.cell.removeClassName('with-range')
       window.currentPopUp && window.currentPopUp.close()
     }.bind(this)
 
     document.body.appendChild(circle)
+    this.cell.addClassName('with-range')
   }
 
   Tower.prototype.removeRange = function() {

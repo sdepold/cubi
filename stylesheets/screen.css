@@ -60,10 +60,6 @@ table .monster:after {
   background: url('../images/monsters/tank-lite.gif') no-repeat;
 }
 
-table .freezer:after, .menu .freezer:before {
-  background: transparent url('../images/towers/freezer.gif') no-repeat;
-}
-
 table .turret:after, .menu .turret:before {
   background: transparent url('../images/towers/turret.gif') no-repeat;
 }

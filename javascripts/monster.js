@@ -3,7 +3,7 @@
     this.options = Utils.merge({
       speed: 100,
       health: 10,
-      revenue: 100
+      revenue: 30
     }, options || {})
 
     this.path       = path

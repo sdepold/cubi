@@ -54,6 +54,7 @@
 
           new TowerMetaMenu(this.tower, this.player).render()
         } else {
+          this.tower.removeRange()
           PopUp.notify('Too expensive!')
         }
         upgradeMessage = Utils.interpolate(upgradeMessage, { level: level + 1, costs: costs })

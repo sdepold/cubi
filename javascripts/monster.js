@@ -6,6 +6,7 @@
       revenue: 30
     }, options || {})
 
+    this.health     = this.options.health
     this.path       = path
     this.pathIndex  = 0
     this.cell       = null
@@ -34,9 +35,9 @@
   }
 
   Monster.prototype.hurt = function(damage) {
-    this.options.health -= damage
+    this.health -= damage
 
-    if(this.options.health <= 0) {
+    if(this.health <= 0) {
       this.die()
     }
   }
@@ -48,7 +49,7 @@
   }
 
   Monster.prototype.isDead = function() {
-    return this.options.health === 0
+    return this.health === 0
   }
 
   // private

@@ -22,22 +22,27 @@ exec('rm -rf ' + targetFolder)
 exec('mkdir -p ' + targetFolder)
 
 exec('cp -rf ' + __dirname + '/../images ' + targetFolder + '/images')
-exec('cp -rf ' + __dirname + '/../stylesheets ' + targetFolder + '/stylesheets')
+exec('cp ' + __dirname + '/../stylesheets/screen.css ' + targetFolder + '/cubi.css')
 exec('cp -rf ' + __dirname + '/../index.html ' + targetFolder + '/index.html')
 
 var indexHTML = exec('cat ' + targetFolder + '/index.html')
   , scripts   = []
 
-indexHTML = indexHTML.split('\n').filter(function(row) {
-  if(row.indexOf('<script') === -1) {
-    return true
+indexHTML = indexHTML.split('\n').map(function(row) {
+  if(row.indexOf('<link') !== -1) {
+    return row.replace('stylesheets/screen.css', 'cubi.css')
+  } else if(row.indexOf('<script') === -1) {
+    return row
   } else {
     if(process.env.SKIP_PREFIXFREE && (row.indexOf('prefixfree') !== -1)) {
-      return false
+      return null
+    } else {
+      scripts.push(row.match(/src="(.*)"/)[1])
+      return null
     }
-    scripts.push(row.match(/src="(.*)"/)[1])
-    return false
   }
+}).filter(function(row) {
+  return row !== null
 }).join('\n').replace('</head>', '  <script src="cubi.js"></script>\n  </head>')
 
 fs.writeFileSync(targetFolder + '/index.html', indexHTML)
@@ -55,9 +60,7 @@ var finalCode = jsu.gen_code(ast); // compressed code here
 
 fs.writeFileSync(source, finalCode);
 
-exec('ls -l ' + targetFolder + '/stylesheets/*').split(/\n/).forEach(function(row) {
-  var path = __dirname + '/../' + row.match(/(dist.*)/)[1]
-    , cmd    = 'node ' + __dirname + '/../node_modules/yuicompressor/nodejs/cli.js --type css -o ' + path + ' ' + path
+var yuiCall = 'node ' + __dirname + '/../node_modules/yuicompressor/nodejs/cli.js'
+  , cssPath = targetFolder + '/cubi.css'
 
-  exec(cmd)
-})
+exec(yuiCall + ' --type css -o ' + cssPath + ' ' + cssPath)

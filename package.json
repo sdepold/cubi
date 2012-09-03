@@ -4,7 +4,9 @@
   "main": "check_size.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "node_modules/.bin/static"
+    "server": "node_modules/.bin/static",
+    "check": "node utils/check_size.js",
+    "build": "node utils/build.js"
   },
   "license": "BSD",
   "dependencies": {

@@ -1,13 +1,13 @@
 ## Build the dist:
 ```js
 npm install
-node utils/build.js
+npm run build
 ```
 
 ## Check dist size:
 
 ```js
-node utils/check_size.js
+npm run check
 ```
 
 ## Full featured game start

@@ -75,22 +75,31 @@
 
       if(isInRange && this.canShoot()) {
         this.shoot(monster)
-        this.lastShot = +new Date()
+        this.lastShot = +new Date
       }
     }
   }
 
   Tower.prototype.pointIsInRange = function(point) {
     var radius     = this.getRange() * this.cell.dom.offsetHeight
-      , centerX    = getCenter.call(this).x
-      , centerY    = getCenter.call(this).y
-      , distance   = Math.pow(Math.pow(point.x - centerX, 2) + Math.pow(point.y - centerY, 2), 0.5)
+      , circleX    = getCenter.call(this).x
+      , circleY    = getCenter.call(this).y
 
-    return distance <= radius
+    if (Math.abs(circleX - point.x) < radius && Math.abs(circleY - point.y) < radius) {
+      var distanceSquared = Math.pow(circleX - point.x, 2) + Math.pow(circleY - point.y, 2)
+      return distanceSquared <= (radius * radius)
+    } else {
+      return false
+    }
   }
 
   Tower.prototype.canShoot = function() {
-    return !this.lastShot || (((+new Date()) - this.lastShot) >= this.getFrequency())
+    if(!this.lastShot) {
+      return true
+    } else {
+      var diff = +new Date - this.lastShot
+      return diff >= this.getFrequency()
+    }
   }
 
   Tower.prototype.shoot = function(monster) {

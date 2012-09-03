@@ -36,7 +36,7 @@
     var upgrade        = document.createElement('li')
       , level          = (this.tower.level + 1)
       , costs          = Tower.TYPES[this.tower.type].costs[level]
-      , upgradeMessage = 'Upgrade to Level %{level} (%{costs}$)'
+      , upgradeMessage = Utils.needsReducedLayout() ? "Level %{level}: %{costs}$" : 'Upgrade to Level %{level} (%{costs}$)'
 
     if(level === 3) {
       upgradeMessage = 'Max level %{level} reached.'
@@ -70,7 +70,7 @@
   }
 
   var buildStatsMenu = function() {
-    var fields = ['Range: %{range}', 'Damage: %{damage} (%{damagePerSecond}dmg/s)', 'Frequency: 1 shot / %{frequency}s']
+    var fields = ['%{range}', '%{damage} (%{damagePerSecond}dmg/s)', '1 shot/%{frequency}s']
       , stats  = this.tower.getStats()
       , result = document.createElement('li')
       , ul     = document.createElement('ul')
@@ -92,7 +92,7 @@
     var sell        = document.createElement('li')
       , level       = this.tower.level
       , costs       = Tower.TYPES[this.tower.type].costs[level] / 2
-      , sellMessage = Utils.interpolate('Sell (%{costs}$)', { costs: costs })
+      , sellMessage = Utils.interpolate('Sell: %{costs}$', { costs: costs })
 
     sell.appendChild(document.createTextNode(sellMessage))
 

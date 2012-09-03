@@ -44,11 +44,11 @@ table td, table .tower:after, table .monster:after {
 }
 
 table .inaccessable, table .tower {
-  background: url('../images/surfaces/ice.gif');
+  background-image: url('data:image/gif;base64,R0lGODdhGAAcAKIAAFB/kleMnmOYpnSntHSntIu7xgAAAAAAACwAAAAAGAAcAAADkjhapSrQwRCdtVDQOsT9WXZ53fdw40OBpUlqlfi4AbXN1ypFMjrVIVKHB3hpAkVeSoHEHV9LlXAAlCxaqhtTSGqMqjtPxTsFN3jgTsBiHmY36bQzzZExWs+UEiOGgbh8Q3JuJxgnG1yAgXlhYjV8IX8hcRMAA3eFjUEiDVqBhDign1NOU154H48cp1ipYiZhkEIJADs=');
 }
 
 table .path, table .monster {
-  background: url('../images/surfaces/path.gif') no-repeat;
+  background-image: url('data:image/gif;base64,R0lGODdhGAAcAMQAADNYdlpaWlpaWmhsaHh4eD9jgkNzilZ7m1eMnmOYpnWotHWotIyMjIiMlKCkn7i4uIu7xprHzabQ1czMzAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACwAAAAAGAAcAAAF/6AiQsFABA5RGEZBDAxBMGItJuWZru0by7ZaIBeIFY4AnyyACA5NJxksNihKi4qE4gnNyV6l1DKQwJWgr0F1+PyBmefvlxFzOB7oqzovV0r7AX1faDByeTBsaE9+g2xDVIo+JmpfgRN2Yn6UDAMOVDEBD24FJlYydA6FSigyAEegaXuUslViAAcFoJ50vAy7BJ6qt0m1cm1Sn60uaw+Vk7FUfVWdPzmcvdGOqG6ByYO7npmCyN/Y5nSOZ2q75wwNvIEPdnSn2A0OCDO9ARNuS9gJIog4oA+duCXsGEiIgCDBAQgzSrACQDFJEToNIkhQ0EQBBAQmGLAqcACXDlQebxdoQUBkBwsXrHw1zGKjpYqXJ2L40iIiBAA7');
 }
 
 table .tower:after, table .monster:after {

@@ -14,7 +14,7 @@ var exec = function(cmd, showStdOut) {
 
 exec('rm -rf ' + __dirname + '/tmp')
 exec('rm -rf ' + __dirname + '/tmp.zip')
-exec('node ' + __dirname + '/build.js')
+exec('SKIP_PREFIXFREE=true node ' + __dirname + '/build.js')
 exec('cd ' + __dirname + '; zip -r -9 tmp.zip dist')
 
 var size = exec('ls -ila ' + __dirname + '/tmp.zip').split(/ /g).filter(function(i) {
@@ -26,6 +26,3 @@ exec('rm -rf ' + __dirname + '/tmp.zip')
 
 console.log('Size of zipfile: ', size)
 console.log('Left: ', 13312 - size)
-
-
-console.log('IS PREFIXFREE STILL REMOVED FROM BUILD SCRIPT ???')

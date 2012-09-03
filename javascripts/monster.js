@@ -53,13 +53,31 @@
 
   // private
 
+  var getClassName = function() {
+    if(this.options.health < 20) {
+      return 'beast'
+    } else if(this.options.health < 40) {
+      return 'scout-lite'
+    } else if(this.options.health < 60) {
+      return 'scout-mid'
+    } else if(this.options.health < 80) {
+      return 'amphibian-lite'
+    } else if(this.options.health < 100) {
+      return 'tank-lite'
+    } else if(this.options.health < 120) {
+      return 'tank-mid'
+    } else {
+      return 'tank-heavy'
+    }
+  }
+
   var setPosition = function(cell) {
     if(this.cell) {
       this.cell.setType(GridCell.TYPES.PATH)
     }
 
     if(cell) {
-      cell.setType(GridCell.TYPES.MONSTER)
+      cell.setType(GridCell.TYPES.MONSTER, [getClassName.call(this)])
     }
 
     this.cell = cell

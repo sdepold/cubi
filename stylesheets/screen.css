@@ -57,7 +57,31 @@ table .tower:after, table .monster:after {
 }
 
 table .monster:after {
-  background: url('../images/monsters/tank-lite.gif') no-repeat;
+  background: url('../images/monsters/tank-heavy.gif') no-repeat 4px 6px;
+}
+
+table .beast:after {
+  background: url('../images/monsters/beast.gif') no-repeat 4px 9px;
+}
+
+table .scout-lite:after {
+  background: url('../images/monsters/scout-lite.gif') no-repeat 4px 9px;
+}
+
+table .scout-mid:after {
+  background: url('../images/monsters/scout-mid.gif') no-repeat 4px 9px;
+}
+
+table .amphibian-lite:after {
+  background: url('../images/monsters/amphibian-lite.gif') no-repeat;
+}
+
+table .tank-lite:after {
+  background: url('../images/monsters/tank-lite.gif') no-repeat 3px 8px;
+}
+
+table .tank-mid:after {
+  background: url('../images/monsters/tank-mid.gif') no-repeat 3px 7px;
 }
 
 table .turret:after, .menu .turret:before {

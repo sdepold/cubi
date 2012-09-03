@@ -153,6 +153,7 @@ table .selected:before {
   margin-left: 4px;
   position: relative;
   left: -10px;
+  float: left;
 }
 
 .menu .upgrade:before {

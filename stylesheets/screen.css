@@ -101,7 +101,7 @@ table .selected:before {
   background-size: 16px 16px;
   position: absolute;
   top: 20px;
-  left: 50px;
+  left: 20px;
   border-radius: 5px;
   padding: 10px;
   box-shadow:  0 0 10px 0 rgba(0, 0, 0, 1);

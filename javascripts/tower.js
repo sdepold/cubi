@@ -15,7 +15,7 @@
       costs:        [100, 200, 500],
       damages:      [3, 6, 10],
       ranges:       [1, 2, 3],
-      frequencies:  [500, 400, 300]
+      frequencies:  [300, 225, 150]
     },
 
     ROCKET: {
@@ -23,7 +23,7 @@
       costs:        [300, 750, 1500],
       damages:      [200, 300, 400],
       ranges:       [7, 9, 12],
-      frequencies:  [2000, 1700, 1200]
+      frequencies:  [2000, 1500, 900]
     }
   }
 

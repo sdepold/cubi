@@ -78,12 +78,14 @@
       ul.appendChild(Utils.createDomNode('li', { value: "Earned money: " + this.game.player.stats.earnedMoney + '$' }))
       ul.appendChild(Utils.createDomNode('li', { value: "Killed monsters: " + this.game.player.stats.killedMonsters }))
       ul.appendChild(Utils.createDomNode('li', { value: "Upgraded towers: " + this.game.player.stats.upgradedTowers }))
-      ul.appendChild(Utils.createDomNode('li'))
-      ul.appendChild(Utils.createDomNode('a', {
+
+      var link = Utils.createDomNode('li')
+      link.appendChild(Utils.createDomNode('a', {
         value: 'Restart the game!',
         href: '#',
         onclick: function() { window.location.reload() }
       }))
+      ul.appendChild(link)
 
       PopUp.notify(ul, { sticky: true })
     }.bind(this))

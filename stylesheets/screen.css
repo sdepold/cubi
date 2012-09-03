@@ -196,3 +196,28 @@ table .selected:before {
 .bullet.rocket {
   transition: all 0.5s linear;
 }
+
+ul.game-over {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul.game-over li:first-child {
+  font-size: 18px;
+  border-bottom: 1px dashed #888;
+}
+
+ul.game-over li {
+  line-height: 28px;
+}
+
+ul.game-over li:last-child {
+  border-top: 1px dashed #888;
+}
+
+ul.game-over a {
+  color: white;
+  margin-top: 5px;
+  display: block;
+}

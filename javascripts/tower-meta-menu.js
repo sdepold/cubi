@@ -35,7 +35,7 @@
       , upgradeMessage = Utils.needsReducedLayout() ? "Level %{level}: %{costs}$" : 'Upgrade to Level %{level} (%{costs}$)'
 
     if(level === 3) {
-      upgradeMessage = 'Max level %{level} reached.'
+      upgradeMessage = Utils.needsReducedLayout() ? 'Level %{level}: reached' : 'Max level %{level} reached'
       upgradeMessage = Utils.interpolate(upgradeMessage, { level: level, costs: costs })
     } else {
       upgrade.onclick = function() {

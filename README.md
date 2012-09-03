@@ -1,8 +1,6 @@
 ## Build the dist:
 ```js
-cd utils
 npm install
-cd ..
 node utils/build.js
 ```
 

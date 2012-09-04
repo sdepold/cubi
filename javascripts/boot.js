@@ -3,7 +3,7 @@ window.addEventListener('load', function() {
 
   var cellWidth  = 24
     , cellHeight = 28
-    , cols       = ~~(x / cellWidth)
+    , cols       = ~~((x - 10) / cellWidth)
     , rows       = ~~((y - 30) / cellHeight)
 
   if(cols < 20) {

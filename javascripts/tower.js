@@ -67,7 +67,7 @@
   }
 
   Tower.prototype.checkDistanceTo = function(monster) {
-    var monsterCell = monster.cell.dom
+    var monsterCell = monster.cell && monster.cell.dom
 
     if(monsterCell) {
       var isInRange = this.pointIsInRange({

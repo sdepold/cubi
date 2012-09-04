@@ -5,7 +5,7 @@
     this.path            = path
     this.speed           = Math.max(250, ~~(Math.random() * 1000))
 
-    this.monstersToSpawn = this.round * 10
+    this.monstersToSpawn = Math.min(this.round * 5, 30)
     this.spawnedMonsters = 0
 
     this.meta            = document.getElementById('meta-data')
@@ -56,7 +56,7 @@
     var then = +new Date
 
     this.updateTimerIntervalId = setInterval(function() {
-      var now  = +new Date
+      var now  = +new Date()
         , diff = Math.ceil(Math.abs(then - now) / 1000)
 
       if(diff > countDownFrom) {

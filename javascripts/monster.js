@@ -55,20 +55,34 @@
   // private
 
   var getClassName = function() {
-    if(this.options.health < 20) {
+    var health = this.options.health
+
+    if(health < 20) {
       return 'beast'
-    } else if(this.options.health < 40) {
+    } else if(health < 40) {
       return 'scout-lite'
-    } else if(this.options.health < 60) {
+    } else if(health < 60) {
       return 'scout-mid'
-    } else if(this.options.health < 80) {
+    } else if(health < 80) {
+      return 'scout-heavy'
+    } else if(health < 100) {
       return 'amphibian-lite'
-    } else if(this.options.health < 100) {
+    } else if(health < 120) {
       return 'tank-lite'
-    } else if(this.options.health < 120) {
+    } else if(health < 140) {
+      return 'tank-lite-2'
+    } else if(health < 160) {
       return 'tank-mid'
-    } else {
+    } else if(health < 180) {
+      return 'tank-laser'
+    } else if(health < 200) {
       return 'tank-heavy'
+    } else if(health < 220) {
+      return 'mech-lite'
+    } else if(health < 240) {
+      return 'mech-mid'
+    } else {
+      return 'mech-heavy'
     }
   }
 

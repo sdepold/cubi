@@ -57,7 +57,7 @@ table .tower:after, table .monster:after {
 }
 
 table .monster:after {
-  background: url('../images/monsters/tank-heavy.gif') no-repeat 4px 6px;
+  background: url('../images/monsters/mech-heavy.gif') no-repeat 4px 5px;
 }
 
 table .beast:after {
@@ -72,6 +72,10 @@ table .scout-mid:after {
   background: url('../images/monsters/scout-mid.gif') no-repeat 4px 9px;
 }
 
+table .scout-heavy:after {
+  background: url('../images/monsters/scout-heavy.gif') no-repeat 4px 7px;
+}
+
 table .amphibian-lite:after {
   background: url('../images/monsters/amphibian-lite.gif') no-repeat;
 }
@@ -80,8 +84,28 @@ table .tank-lite:after {
   background: url('../images/monsters/tank-lite.gif') no-repeat 3px 8px;
 }
 
+table .tank-lite-2:after {
+  background: url('../images/monsters/tank-lite-2.gif') no-repeat 3px 7 px;
+}
+
 table .tank-mid:after {
   background: url('../images/monsters/tank-mid.gif') no-repeat 3px 7px;
+}
+
+table .tank-laser:after {
+  background: url('../images/monsters/tank-laser.gif') no-repeat 3px 7px;
+}
+
+table .tank-heavy:after {
+  background: url('../images/monsters/tank-heavy.gif') no-repeat 4px 6px;
+}
+
+table .mech-lite:after {
+  background: url('../images/monsters/mech-lite.gif') no-repeat 3px 4px;
+}
+
+table .mech-mid:after {
+  background: url('../images/monsters/mech-mid.gif') no-repeat 4px 6px;
 }
 
 table .turret:after, .menu .turret:before {

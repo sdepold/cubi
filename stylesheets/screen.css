@@ -38,7 +38,7 @@ table td {
   position: relative;
 }
 
-table td, table .tower:after, table .monster:after {
+table td, table td:after {
   height: 28px;
   width: 24px;
 }

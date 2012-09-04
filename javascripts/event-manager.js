@@ -25,7 +25,14 @@
     }.bind(this))
 
     wave.on('monster:spawned', function(wave, monster) {
+      var intervalId = null
+
+      this.game.player.on('killed', function() {
+        clearInterval(intervalId)
+      })
+
       monster.on('killed', function() {
+        clearInterval(intervalId)
         this.game.player.earn(monster.options.revenue)
         this.game.player.recordStat('killedMonsters', 1)
       }.bind(this))
@@ -35,9 +42,15 @@
       }.bind(this))
 
       monster.on('move', function() {
-        this.game.towers.forEach(function(tower) {
-          tower.checkDistanceTo(monster)
-        })
+        if(intervalId) {
+          clearInterval(intervalId)
+        }
+
+        intervalId = setInterval(function() {
+          this.game.towers.forEach(function(tower) {
+            tower.checkDistanceTo(monster)
+          })
+        }.bind(this), 100)
       }.bind(this))
     }.bind(this))
 

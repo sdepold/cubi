@@ -21,13 +21,19 @@
 
   var observeWave = function(wave) {
     wave.on('spawned', function() {
-      spawnNewWave.call(this, wave)
+      if(wave.round !== 13) {
+        spawnNewWave.call(this, wave)
+      }
     }.bind(this))
 
     wave.on('monster:spawned', function(wave, monster) {
       var intervalId = null
 
       this.game.player.on('killed', function() {
+        clearInterval(intervalId)
+      })
+
+      this.game.player.on('won', function() {
         clearInterval(intervalId)
       })
 
@@ -58,6 +64,10 @@
       wave.stop()
     }.bind(this))
 
+    this.game.player.on('won', function() {
+      wave.stop()
+    }.bind(this))
+
     var spawnWave = function() {
       var spawnIsAllowed = (document.getElementById('wave-duration').className || "").indexOf('disabled') === -1
 
@@ -79,28 +89,21 @@
     wave.on('timer:enabled', function() {
       this.game.enableForcedSpawn()
     }.bind(this))
+
+    if(wave.round === 13) {
+      wave.on('cleared', function() {
+        this.game.player.fire('won')
+      }.bind(this))
+    }
   }
 
   var observePlayer = function() {
     this.game.player.on('killed', function() {
-      var ul = Utils.createDomNode('ul', { className: 'game-over' })
+      showGameEndDialog.call(this, 'Oh my gosh, you died!')
+    }.bind(this))
 
-      ul.appendChild(Utils.createDomNode('li', { value: 'Oh my gosh, you died!' }))
-      ul.appendChild(Utils.createDomNode('li'))
-      ul.appendChild(Utils.createDomNode('li', { value: "Spent money: " + this.game.player.stats.spentMoney + '$' }))
-      ul.appendChild(Utils.createDomNode('li', { value: "Earned money: " + this.game.player.stats.earnedMoney + '$' }))
-      ul.appendChild(Utils.createDomNode('li', { value: "Killed monsters: " + this.game.player.stats.killedMonsters }))
-      ul.appendChild(Utils.createDomNode('li', { value: "Upgraded towers: " + this.game.player.stats.upgradedTowers }))
-
-      var link = Utils.createDomNode('li')
-      link.appendChild(Utils.createDomNode('a', {
-        value: 'Restart the game!',
-        href: '#',
-        onclick: function() { window.location.reload() }
-      }))
-      ul.appendChild(link)
-
-      PopUp.notify(ul, { sticky: true })
+    this.game.player.on('won', function() {
+      showGameEndDialog.call(this, "Woot woot! You've won the match!")
     }.bind(this))
   }
 
@@ -148,6 +151,27 @@
       })
       clearMenus()
     }.bind(this))
+  }
+
+  var showGameEndDialog = function(headline) {
+    var ul = Utils.createDomNode('ul', { className: 'game-over' })
+
+    ul.appendChild(Utils.createDomNode('li', { value: headline }))
+    ul.appendChild(Utils.createDomNode('li'))
+    ul.appendChild(Utils.createDomNode('li', { value: "Spent money: " + this.game.player.stats.spentMoney + '$' }))
+    ul.appendChild(Utils.createDomNode('li', { value: "Earned money: " + this.game.player.stats.earnedMoney + '$' }))
+    ul.appendChild(Utils.createDomNode('li', { value: "Killed monsters: " + this.game.player.stats.killedMonsters }))
+    ul.appendChild(Utils.createDomNode('li', { value: "Upgraded towers: " + this.game.player.stats.upgradedTowers }))
+
+    var link = Utils.createDomNode('li')
+    link.appendChild(Utils.createDomNode('a', {
+      value: 'Restart the game!',
+      href: '#',
+      onclick: function() { window.location.reload() }
+    }))
+    ul.appendChild(link)
+
+    PopUp.notify(ul, { sticky: true })
   }
 
   /////////////////////

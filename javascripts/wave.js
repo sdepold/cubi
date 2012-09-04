@@ -125,7 +125,7 @@
         return _monster !== monster
       })
 
-      if(this.monsters.length === 0) {
+      if((this.monsters.length === 0) && (this.spawnedMonsters === this.monstersToSpawn)) {
         this.fire('cleared')
       }
     }

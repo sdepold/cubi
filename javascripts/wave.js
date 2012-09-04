@@ -1,12 +1,13 @@
 (function() {
   var Wave = function(round, path) {
     this.round           = round
-    this.monsters        = []
     this.path            = path
-    this.speed           = Math.max(250, ~~(Math.random() * 1000))
 
-    this.monstersToSpawn = Math.min(this.round * 5, 30)
+    this.speed           = Monster.TYPES[this.round - 1].speed
+    this.health          = Monster.TYPES[this.round - 1].health
+    this.monstersToSpawn = Monster.TYPES[this.round - 1].count
     this.spawnedMonsters = 0
+    this.monsters        = []
 
     this.meta            = document.getElementById('meta-data')
     this.moveIntervalId  = null
@@ -120,7 +121,7 @@
   var spawnMonster = function() {
     var monster = new Monster(this.path, {
       speed:  this.speed,
-      health: this.round * 10
+      health: this.health
     })
 
     var removeMonster = function() {

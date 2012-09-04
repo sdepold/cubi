@@ -15,6 +15,75 @@
 
   Utils.addObserverMethodsToClass(Monster)
 
+  Monster.TYPES = [
+    {
+      name: 'beast',
+      health: 20,
+      count: 10,
+      speed: 500
+    }, {
+      name: 'scout-lite',
+      health: 30,
+      count: 15,
+      speed: 400
+    }, {
+      name: 'scout-mid',
+      health: 50,
+      count: 15,
+      speed: 350
+    }, {
+      name: 'scout-heavy',
+      health: 70,
+      count: 15,
+      speed: 300
+    }, {
+      name: 'amphibian-lite',
+      health: 90,
+      count: 20,
+      speed: 200
+    }, {
+      name: 'tank-lite',
+      health: 120,
+      count: 10,
+      speed: 100
+    }, {
+      name: 'tank-lite-2',
+      health: 150,
+      count: 15,
+      speed: 150
+    }, {
+      name: 'tank-mid',
+      health: 200,
+      count: 15,
+      speed: 200
+    }, {
+      name: 'tank-laser',
+      health: 250,
+      count: 20,
+      speed: 200
+    }, {
+      name: 'tank-heavy',
+      health: 300,
+      count: 20,
+      speed: 250
+    }, {
+      name: 'mech-lite',
+      health: 200,
+      count: 30,
+      speed: 500
+    }, {
+      name: 'mech-mid',
+      health: 250,
+      count: 25,
+      speed: 600
+    }, {
+      name: 'mech-heavy',
+      health: 300,
+      count: 20,
+      speed: 800
+    }
+  ]
+
   Monster.prototype.stop = function() {
     clearInterval(this.intervalId)
   }
@@ -55,35 +124,9 @@
   // private
 
   var getClassName = function() {
-    var health = this.options.health
-
-    if(health < 20) {
-      return 'beast'
-    } else if(health < 40) {
-      return 'scout-lite'
-    } else if(health < 60) {
-      return 'scout-mid'
-    } else if(health < 80) {
-      return 'scout-heavy'
-    } else if(health < 100) {
-      return 'amphibian-lite'
-    } else if(health < 120) {
-      return 'tank-lite'
-    } else if(health < 140) {
-      return 'tank-lite-2'
-    } else if(health < 160) {
-      return 'tank-mid'
-    } else if(health < 180) {
-      return 'tank-laser'
-    } else if(health < 200) {
-      return 'tank-heavy'
-    } else if(health < 220) {
-      return 'mech-lite'
-    } else if(health < 240) {
-      return 'mech-mid'
-    } else {
-      return 'mech-heavy'
-    }
+    return Monster.TYPES.filter(function(type) {
+      return this.options.health === type.health
+    }.bind(this))[0].name
   }
 
   var setPosition = function(cell) {

@@ -1,3 +1,12 @@
+## Cubi
+Game for [http://js13kgames.com/](js13kgames).
+
+## "13" related details
+- 13 monster types
+- 13 health points
+- 13 seconds wave delay
+- 13 waves to defeat
+
 ## Build the dist:
 ```js
 npm install

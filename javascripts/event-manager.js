@@ -200,7 +200,7 @@
 
   var spawnNewWave = function(prevWave) {
     var round = 1
-      , delay = 20
+      , delay = 13
 
     if(typeof prevWave !== 'undefined') {
       round = prevWave.round + 1

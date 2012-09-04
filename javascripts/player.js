@@ -1,6 +1,6 @@
 (function() {
   var Player = function(canvasSelector, metaDataContainer) {
-    this.life   = 20
+    this.life   = 13
     this.cash   = 1000
     this.dom    = metaDataContainer
     this.canvas = document.querySelectorAll(canvasSelector)[0]
@@ -81,7 +81,7 @@
       this.dom.appendChild(lifeContainer)
     }
 
-    lifeContainer.innerHTML = 'HP: ' + this.life.toString() + '|20'
+    lifeContainer.innerHTML = 'HP: ' + this.life.toString() + '|13'
   }
 
   var renderCash = function() {

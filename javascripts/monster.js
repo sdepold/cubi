@@ -45,7 +45,7 @@
   Monster.prototype.die = function() {
     this.stop()
     this.cell.setType(GridCell.TYPES.PATH)
-    this.fire('die')
+    this.fire('killed')
   }
 
   Monster.prototype.isDead = function() {

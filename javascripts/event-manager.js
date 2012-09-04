@@ -25,7 +25,7 @@
     }.bind(this))
 
     wave.on('monster:spawned', function(wave, monster) {
-      monster.on('die', function() {
+      monster.on('killed', function() {
         this.game.player.earn(monster.options.revenue)
         this.game.player.recordStat('killedMonsters', 1)
       }.bind(this))

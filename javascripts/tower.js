@@ -99,7 +99,7 @@
     if(!this.lastShot) {
       return true
     } else {
-      var diff = +new Date - this.lastShot
+      var diff = +new Date() - this.lastShot
       return diff >= this.getFrequency()
     }
   }

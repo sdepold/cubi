@@ -4,7 +4,6 @@
     this.path            = path
 
     this.speed           = Monster.TYPES[this.round - 1].speed
-    this.health          = Monster.TYPES[this.round - 1].health
     this.monstersToSpawn = Monster.TYPES[this.round - 1].count
     this.spawnedMonsters = 0
     this.monsters        = []
@@ -119,10 +118,7 @@
   }
 
   var spawnMonster = function() {
-    var monster = new Monster(this.path, {
-      speed:  this.speed,
-      health: this.health
-    })
+    var monster = new Monster(this.path, Monster.TYPES[this.round - 1].name)
 
     var removeMonster = function() {
       this.monsters = this.monsters.filter(function(_monster) {

@@ -23,7 +23,7 @@
       costs:        [200, 400, 600],
       damages:      [200, 300, 400],
       ranges:       [5, 7, 9],
-      frequencies:  [1500, 1200, 900]
+      frequencies:  [3000, 2000, 1000]
     }
   }
 

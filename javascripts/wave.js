@@ -133,7 +133,7 @@
       }
     }
 
-    monster.on('die', removeMonster.bind(this))
+    monster.on('killed', removeMonster.bind(this))
     monster.on('goal:reached', removeMonster.bind(this))
 
     this.monsters.push(monster)

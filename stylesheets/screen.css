@@ -65,7 +65,7 @@ table .beast:after {
 }
 
 table .scout-lite:after {
-  background: url('../images/monsters/scout-lite.gif') no-repeat 4px 9px;
+  background: url('../images/monsters/scout-lite.gif') no-repeat 6px 10px;
 }
 
 table .scout-mid:after {
@@ -85,7 +85,7 @@ table .tank-lite:after {
 }
 
 table .tank-lite-2:after {
-  background: url('../images/monsters/tank-lite-2.gif') no-repeat 3px 7 px;
+  background: url('../images/monsters/tank-lite-2.gif') no-repeat 3px 7px;
 }
 
 table .tank-mid:after {

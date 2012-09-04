@@ -139,8 +139,9 @@
   // private
 
   var getClassName = function() {
+    console.log(this.type)
     return Monster.TYPES.filter(function(type) {
-      return this.options.health === type.health
+      return this.type === type.name
     }.bind(this))[0].name
   }
 

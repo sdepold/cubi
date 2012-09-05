@@ -99,7 +99,7 @@
   }
 
   var setTimerContainerClass = function(classes) {
-    classes = (classes instanceof Array) ? classes : [classes]
+    classes = Array.isArray(classes) ? classes : [classes]
     getTimerContainer.call(this).className = classes.join(' ')
   }
 

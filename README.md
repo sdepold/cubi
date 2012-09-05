@@ -18,7 +18,7 @@ Game for [js13kgames](http://js13kgames.com/).
     - Dolphin
     - Mercury
   - Android
-    - Chrome
+    - Dolphin (a bit slow and for some reason it's not correctly detecting touched fields)
   - Windows
     - IE9 (bullet animation broken because of missing css3 transition support)
     - IE10 (bullet animation broken because of missing css3 transition support)

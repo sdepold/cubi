@@ -5,8 +5,8 @@ var readyStateCheckInterval = setInterval(function() {
     var w=window,d=document,e=d.documentElement,g=d.getElementsByTagName('body')[0],x=w.innerWidth||e.clientWidth||g.clientWidth,y=w.innerHeight||e.clientHeight||g.clientHeight
     var cellWidth  = 24
       , cellHeight = 28
-      , cols       = ~~((x - 10) / cellWidth)
-      , rows       = ~~((y - 30) / cellHeight)
+      , cols       = ~~((x - (4 * 2) - (1 * 2)) / cellWidth)
+      , rows       = ~~((y - 24 - (4 * 2) - (1 * 2)) / cellHeight)
 
     if(cols < 20) {
       document.body.className = document.body.className.split(' ').concat(['reduced']).join(' ')

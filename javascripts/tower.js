@@ -12,7 +12,7 @@
   Tower.TYPES = {
     TURRET: {
       name:         'Turret',
-      costs:        [100, 200, 500],
+      costs:        [50, 100, 200],
       damages:      [3, 5, 7],
       ranges:       [1, 1.5, 2],
       frequencies:  [300, 225, 150]

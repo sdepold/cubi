@@ -19,79 +19,79 @@
       health: 20,
       count: 10,
       speed: 500,
-      revenue: 30
+      revenue: 40
     }, {
       name: 'scout-lite',
       health: 30,
-      count: 15,
+      count: 50,
       speed: 400,
-      revenue: 30
-    }, {
-      name: 'scout-mid',
-      health: 50,
-      count: 15,
-      speed: 350,
-      revenue: 30
-    }, {
-      name: 'scout-heavy',
-      health: 70,
-      count: 15,
-      speed: 300,
-      revenue: 30
+      revenue: 100
     }, {
       name: 'amphibian-lite',
       health: 90,
       count: 20,
-      speed: 200,
-      revenue: 30
+      speed: 300,
+      revenue: 100
     }, {
-      name: 'tank-lite',
-      health: 120,
-      count: 10,
-      speed: 500,
-      revenue: 30
-    }, {
-      name: 'tank-lite-2',
-      health: 150,
-      count: 15,
-      speed: 550,
-      revenue: 30
-    }, {
-      name: 'tank-mid',
-      health: 200,
-      count: 15,
-      speed: 600,
-      revenue: 30
-    }, {
-      name: 'tank-laser',
-      health: 250,
-      count: 20,
-      speed: 600,
-      revenue: 30
-    }, {
-      name: 'tank-heavy',
-      health: 300,
-      count: 20,
-      speed: 650,
-      revenue: 30
+      name: 'scout-mid',
+      health: 70,
+      count: 50,
+      speed: 300,
+      revenue: 60
     }, {
       name: 'mech-lite',
-      health: 200,
+      health: 500,
       count: 30,
       speed: 500,
-      revenue: 30
+      revenue: 200
     }, {
       name: 'mech-mid',
-      health: 250,
+      health: 1000,
       count: 25,
       speed: 600,
-      revenue: 30
+      revenue: 300
     }, {
       name: 'mech-heavy',
-      health: 300,
+      health: 1500,
       count: 20,
       speed: 800,
-      revenue: 30
+      revenue: 400
+    }, {
+      name: 'scout-heavy',
+      health: 100,
+      count: 100,
+      speed: 200,
+      revenue: 150
+    }, {
+      name: 'tank-lite',
+      health: 5000,
+      count: 30,
+      speed: 400,
+      revenue: 1000
+    }, {
+      name: 'tank-lite-2',
+      health: 10000,
+      count: 20,
+      speed: 400,
+      revenue: 1500
+    }, {
+      name: 'tank-mid',
+      health: 15000,
+      count: 10,
+      speed: 350,
+      revenue: 2000
+    }, {
+      name: 'tank-laser',
+      health: 20000,
+      count: 10,
+      speed: 500,
+      revenue: 2000
+    }, {
+      name: 'tank-heavy',
+      health: 30000,
+      count: 5,
+      speed: 600,
+      revenue: 5000
     }
   ]
 

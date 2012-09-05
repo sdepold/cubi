@@ -20,8 +20,8 @@ Game for [js13kgames](http://js13kgames.com/).
   - Android
     - Chrome
   - Windows
-    - IE9 (bullet animation kinda broken)
-    - IE10 (bullet animation kinda broken)
+    - IE9 (bullet animation broken because of missing css3 transition support)
+    - IE10 (bullet animation broken because of missing css3 transition support)
     - Chrome 21
     - Firefox 14
 

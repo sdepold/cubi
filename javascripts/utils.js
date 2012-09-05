@@ -14,25 +14,30 @@ Utils = {
   },
 
   addObserverMethodsToClass: function(klass) {
-    klass.prototype.__defineGetter__('listeners', function() {
-      if(typeof this._listeners === 'undefined') {
-        this._listeners = {}
+    klass.prototype.initListeners = function() {
+      if(typeof this.listeners === 'undefined') {
+        this.listeners = {}
       }
-      return this._listeners
-    })
+    }
 
     klass.prototype.on = function(eventName, callback) {
+      this.initListeners()
+
       this.listeners[eventName] = this.listeners[eventName] || []
       this.listeners[eventName].push(callback)
     }
 
     klass.prototype.off = function(eventName, callback) {
+      this.initListeners()
+
       this.listeners[eventName] = this.listeners[eventName].filter(function(cb) {
         return cb != callback
       })
     }
 
     klass.prototype.fire = function(eventName, data) {
+      this.initListeners()
+
       data = data || []
       data = (Array.isArray(data) ? data : [data])
       data.unshift(this)

@@ -25,6 +25,12 @@ Game for [js13kgames](http://js13kgames.com/).
     - Chrome 21
     - Firefox 14
 
+## Sources
+
+- Graphics:
+  - [Remastered Tyrian Graphics](http://www.lostgarden.com/2007/04/free-game-graphics-tyrian-ships-and.html)
+  - [Hard Vacuum](http://www.lostgarden.com/2005/03/game-post-mortem-hard-vacuum.html)
+
 ## Build the dist:
 ```js
 npm install

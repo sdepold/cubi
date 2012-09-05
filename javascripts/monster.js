@@ -7,6 +7,8 @@
     this.pathIndex  = 0
     this.cell       = null
     this.intervalId = null
+
+    this.hasTriggeredKilledEvent = false
   }
 
   Utils.addObserverMethodsToClass(Monster)
@@ -127,13 +129,16 @@
   }
 
   Monster.prototype.die = function() {
-    this.stop()
-    this.cell.setType(GridCell.TYPES.PATH)
-    this.fire('killed')
+    if(!this.hasTriggeredKilledEvent) {
+      this.stop()
+      this.cell.setType(GridCell.TYPES.PATH)
+      this.fire('killed')
+      this.hasTriggeredKilledEvent = true
+    }
   }
 
   Monster.prototype.isDead = function() {
-    return this.health === 0
+    return this.health <= 0
   }
 
   // private

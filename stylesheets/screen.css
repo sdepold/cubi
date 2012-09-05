@@ -117,6 +117,10 @@ table .rocket:after, .menu .rocket:before {
   background: transparent url('../images/towers/rocket.gif') no-repeat;
 }
 
+table .ultra:after, .menu .ultra:before {
+  background: transparent url('../images/towers/ultra.gif') no-repeat;
+}
+
 table .level-1:before, table .level-2:before, table .level-3:before {
   content: 'I';
   display: block;

@@ -24,6 +24,14 @@
       damages:      [200, 300, 400],
       ranges:       [5, 7, 9],
       frequencies:  [3000, 2000, 1000]
+    },
+
+    ULTRA: {
+      name:         'Ultra Tower',
+      costs:        [5000, 7500, 10000],
+      damages:      [99999, 99999, 99999],
+      ranges:       [3, 8, 13],
+      frequencies:  [10000, 7500, 5000]
     }
   }
 

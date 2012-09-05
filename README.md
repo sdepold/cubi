@@ -37,6 +37,11 @@ npm install
 npm run build
 ```
 
+## Build a ZIP file
+```js
+npm run build-zip
+```
+
 ## Check dist size:
 
 ```js

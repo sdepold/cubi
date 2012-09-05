@@ -84,6 +84,10 @@
       maxX = selected.offsetLeft - width - 10
     }
 
+    if(maxX < minX) {
+      maxX = minX
+    }
+
     if(this.dom.offsetLeft < minX) {
       options.left = minX
     }

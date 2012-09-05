@@ -39,7 +39,7 @@ Utils = {
       this.initListeners()
 
       data = data || []
-      data = (Array.isArray(data) ? data : [data])
+      data = ((data instanceof Array) ? data : [data])
       data.unshift(this)
 
       ;(this.listeners[eventName] || []).forEach(function(callback) {

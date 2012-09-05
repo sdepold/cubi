@@ -6,7 +6,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "node_modules/.bin/static",
     "check": "node utils/check_size.js",
-    "build": "node utils/build.js"
+    "build": "node utils/build.js",
+    "build-zip": "npm run build; zip -r -9 dist.zip ./dist; rm -rf ./dist"
   },
   "license": "BSD",
   "dependencies": {

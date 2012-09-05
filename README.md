@@ -6,6 +6,24 @@ Game for [js13kgames](http://js13kgames.com/).
 - 13 health points
 - 13 seconds wave delay
 - 13 waves to defeat
+- 13 supported browsers (maybe more ...)
+  - OS X
+    - Chrome 21
+    - Firefox 14
+    - Safari 6
+    - Opera 12
+  - iOS
+    - Mobile Safari
+    - Chrome
+    - Dolphin
+    - Mercury
+  - Android
+    - Chrome
+  - Windows
+    - IE9 (bullet animation kinda broken)
+    - IE10 (bullet animation kinda broken)
+    - Chrome 21
+    - Firefox 14
 
 ## Build the dist:
 ```js

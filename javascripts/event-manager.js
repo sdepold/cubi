@@ -53,6 +53,11 @@
         }
 
         intervalId = setInterval(function() {
+          if(this.game.player.isDead()) {
+            clearInterval(intervalId)
+            return
+          }
+
           this.game.towers.forEach(function(tower) {
             tower.checkDistanceTo(monster)
           })

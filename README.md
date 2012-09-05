@@ -1,5 +1,5 @@
 ## Cubi
-Game for [http://js13kgames.com/](js13kgames).
+Game for [js13kgames](http://js13kgames.com/).
 
 ## "13" related details
 - 13 monster types

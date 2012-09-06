@@ -11,27 +11,33 @@
 
   Tower.TYPES = {
     TURRET: {
-      name:         'Turret',
-      costs:        [50, 100, 200],
-      damages:      [3, 5, 7],
-      ranges:       [1, 1.5, 2],
-      frequencies:  [300, 225, 150]
+      name:            'Turret',
+      explosion:       'small',
+      explosionOffset: -10,
+      costs:           [50, 100, 200],
+      damages:         [3, 5, 7],
+      ranges:          [1, 1.5, 2],
+      frequencies:     [300, 225, 150]
     },
 
     ROCKET: {
-      name:         'Rocket Tower',
-      costs:        [200, 400, 600],
-      damages:      [200, 300, 400],
-      ranges:       [5, 7, 9],
-      frequencies:  [3000, 2000, 1000]
+      name:            'Rocket Tower',
+      explosion:       'mid',
+      explosionOffset: -12,
+      costs:           [200, 400, 600],
+      damages:         [200, 300, 400],
+      ranges:          [5, 7, 9],
+      frequencies:     [3000, 2000, 1000]
     },
 
     ULTRA: {
-      name:         'Ultra Tower',
-      costs:        [5000, 7500, 10000],
-      damages:      [99999, 99999, 99999],
-      ranges:       [3, 8, 13],
-      frequencies:  [10000, 7500, 5000]
+      name:            'Ultra Tower',
+      explosion:       'heavy',
+      explosionOffset: -20,
+      costs:           [5000, 7500, 10000],
+      damages:         [99999, 99999, 99999],
+      ranges:          [3, 8, 13],
+      frequencies:     [10000, 7500, 5000]
     }
   }
 
@@ -74,6 +80,14 @@
     return Tower.TYPES[this.type].damages[this.level]
   }
 
+  Tower.prototype.getExplosion = function() {
+    return Tower.TYPES[this.type].explosion
+  }
+
+  Tower.prototype.getExplosionOffset = function() {
+    return Tower.TYPES[this.type].explosionOffset
+  }
+
   Tower.prototype.checkDistanceTo = function(monster) {
     var monsterCell = monster.cell && monster.cell.dom
 
@@ -113,14 +127,15 @@
   }
 
   Tower.prototype.shoot = function(monster) {
-    var bullet  = document.createElement('div')
-      , body    = document.body
-      , xTarget = monster.cell.dom.offsetLeft
-      , yTarget = monster.cell.dom.offsetTop
+    var bullet    = document.createElement('div')
+      , explosion = Utils.createDomNode('div', { className: 'explosion ' + this.getExplosion() })
+      , body      = document.body
+      , xTarget   = monster.cell.dom.offsetLeft
+      , yTarget   = monster.cell.dom.offsetTop
 
-    bullet.className      = 'bullet'
-    bullet.style.left     = (this.cell.dom.offsetLeft + this.cell.dom.offsetWidth / 2) + 'px'
-    bullet.style.top      = (this.cell.dom.offsetTop + this.cell.dom.offsetHeight / 2) + 'px'
+    bullet.className  = 'bullet ' + this.type
+    bullet.style.left = (this.cell.dom.offsetLeft + this.cell.dom.offsetWidth / 2) + 'px'
+    bullet.style.top  = (this.cell.dom.offsetTop + this.cell.dom.offsetHeight / 2) + 'px'
 
     body.appendChild(bullet)
 
@@ -132,7 +147,16 @@
     setTimeout(function() {
       body.removeChild(bullet)
       monster.hurt(this.getDamage())
-    }.bind(this), 250)
+
+      explosion.style.left = (parseInt(bullet.style.left, 10) + this.getExplosionOffset()) + 'px'
+      explosion.style.top = (parseInt(bullet.style.top, 10) + this.getExplosionOffset()) + 'px'
+
+      body.appendChild(explosion)
+
+      setTimeout(function() {
+        body.removeChild(explosion)
+      }, 1000)
+    }.bind(this), 240)
   }
 
   Tower.prototype.renderRange = function() {

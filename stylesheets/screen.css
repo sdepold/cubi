@@ -245,8 +245,74 @@ table .selected:before {
   border-radius: 50%;
 }
 
-.bullet.rocket {
-  transition: all 0.5s linear;
+.explosion {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 21px;
+  animation-timing-function: step-start;
+}
+
+.explosion.small {
+  background: transparent url(../images/effects/explosion-small.gif) 0 0;
+  animation-duration: 200ms;
+  animation-name: explosion-small;
+}
+
+.explosion.mid {
+  background: transparent url(../images/effects/explosion-mid.gif) -160px 0;
+  animation-name: explosion-mid;
+  animation-duration: 400ms;
+}
+
+.explosion.heavy {
+  height: 40px;
+  width: 40px;
+  background: transparent url(../images/effects/explosion-heavy.gif) -520px 0;
+  animation-name: explosion-heavy;
+  animation-duration: 1000ms;
+}
+
+@keyframes explosion-small {
+  0%    { background-position:   0   0; }
+  14.3% { background-position: -20px  0; }
+  28.6% { background-position: -40px  0; }
+  42.9% { background-position: -60px  0; }
+  57.2% { background-position: -80px  0; }
+  71.5% { background-position: -100px 0; }
+  85.8% { background-position: -120px 0; }
+  100%  { background-position:   0   0; }
+}
+
+@keyframes explosion-mid {
+  0%     { background-position:   0    0; }
+  12.5%  { background-position: -20px  0; }
+  25%    { background-position: -40px  0; }
+  37.5%  { background-position: -60px  0; }
+  50%    { background-position: -80px  0; }
+  62.5%  { background-position: -100px 0; }
+  75%    { background-position: -120px 0; }
+  87.5%  { background-position: -140px 0; }
+  100%   { background-position: -160px 0; }
+}
+
+@keyframes explosion-heavy {
+  0% { background-position: 0 0; }
+  7.14% { background-position: -40px 0; }
+  14.28% { background-position: -80px 0; }
+  21.42% { background-position: -120px 0; }
+  28.56% { background-position: -160px 0; }
+  35.7% { background-position: -200px 0; }
+  42.84% { background-position: -240px 0; }
+  49.98% { background-position: -280px 0; }
+  57.12% { background-position: -320px 0; }
+  64.26% { background-position: -360px 0; }
+  71.4% { background-position: -400px 0; }
+  78.54% { background-position: -440px 0; }
+  85.68% { background-position: -480px 0; }
+  92.82% { background-position: -520px 0; }
+  100% { background-position: -520px 0; }
 }
 
 ul.game-over {

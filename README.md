@@ -1,6 +1,10 @@
 ## Cubi
 This project is my entry for [js13kgames](http://js13kgames.com/). It's a tower defense game in less than 13kb (13,312 bytes). At the time of submitting it to the contest, it had 13 different types of monsters, 3 kind of towers and only one set of surface graphics. The major goal of that game is to kill all the monsters approaching you via choosing the right amount of towers.
 
+## Play the game!
+
+[Just click here :)](http://sdepold.github.com/cubi/index.html)
+
 ## "13" related details
 - 13 monster types
 - 13 health points
@@ -24,6 +28,10 @@ This project is my entry for [js13kgames](http://js13kgames.com/). It's a tower 
     - IE10 (bullet animation broken because of missing css3 transition support)
     - Chrome 21
     - Firefox 14
+
+## Future development
+
+The submitted entry is tagged with `v1.0.0`. Everything that followed that tag is additional content, that might break the 13KB limit. However, I will try to stay below that limit :)
 
 ## Sources
 

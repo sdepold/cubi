@@ -108,6 +108,9 @@
     }.bind(this))
 
     this.game.player.on('won', function() {
+      document.querySelectorAll('.monster').forEach(function(monster) {
+        monster.className = monster.className.replace('monster', 'path')
+      })
       showGameEndDialog.call(this, "Woot woot! You've won the match!")
     }.bind(this))
   }

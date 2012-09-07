@@ -155,7 +155,7 @@
 
       setTimeout(function() {
         body.removeChild(explosion)
-      }, 1000)
+      }, this.type === 'ultra' ? 1000 : 400)
     }.bind(this), 240)
   }
 

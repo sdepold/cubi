@@ -12,17 +12,13 @@ var exec = function(cmd, showStdOut) {
   return result.stdout
 }
 
-exec('rm -rf ' + __dirname + '/tmp')
-exec('rm -rf ' + __dirname + '/tmp.zip')
-exec('SKIP_PREFIXFREE=true node ' + __dirname + '/build.js')
-exec('cd ' + __dirname + '; zip -r -9 tmp.zip ../dist')
+exec('cd ' + __dirname + '/..; SKIP_PREFIXFREE=true npm run build-zip')
 
-var size = exec('ls -ila ' + __dirname + '/tmp.zip').split(/ /g).filter(function(i) {
+var size = exec('cd ' + __dirname + '/..; ls -ila dist.zip').split(/ /g).filter(function(i) {
   return i !== ''
 })[5]
 
-exec('rm -rf ' + __dirname + '/../dist')
-exec('rm -rf ' + __dirname + '/tmp.zip')
+exec('cd ' + __dirname + '/..; rm dist.zip')
 
 console.log('Size of zipfile: ', size)
 console.log('Left: ', 13312 - size)

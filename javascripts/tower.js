@@ -13,7 +13,7 @@
     TURRET: {
       name:            'Turret',
       explosion:       'small',
-      explosionOffset: -10,
+      explosionOffset: -6,
       costs:           [50, 100, 200],
       damages:         [3, 5, 7],
       ranges:          [1, 1.5, 2],

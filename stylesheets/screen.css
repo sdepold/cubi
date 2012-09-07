@@ -2,7 +2,7 @@ body {
   font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
   font-size: 12px;
   margin: 4px;
-  padding: 0px;
+  padding: 0;
 }
 
 table {
@@ -272,12 +272,12 @@ table .selected:before {
   animation-duration: 400ms;
 }
 
-.explosion.heavy {
+.explosion.big {
   height: 40px;
   width: 40px;
   background-position: -320px 0;
   background-size: 362px;
-  animation-name: explosion-heavy;
+  animation-name: explosion-big;
   animation-duration: 1000ms;
 }
 
@@ -305,7 +305,7 @@ table .selected:before {
   100%   { background-position: -160px 0; }
 }
 
-@keyframes explosion-heavy {
+@keyframes explosion-big {
   0%     { background-position:   0    0; }
   12.5%  { background-position: -40px  0; }
   25%    { background-position: -80px  0; }

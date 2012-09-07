@@ -32,7 +32,7 @@
 
     ULTRA: {
       name:            'Ultra Tower',
-      explosion:       'heavy',
+      explosion:       'big',
       explosionOffset: -20,
       costs:           [5000, 7500, 10000],
       damages:         [99999, 99999, 99999],

@@ -255,13 +255,13 @@ table .selected:before {
 }
 
 .explosion.small {
-  background: transparent url('../images/effects/explosion-small.gif') 0 0;
+  background: transparent url(../images/effects/explosion-small.gif) 0 0;
   animation-duration: 200ms;
   animation-name: explosion-small;
 }
 
 .explosion.mid {
-  background: transparent url('../images/effects/explosion-mid.gif') -160px 0;
+  background: transparent url(../images/effects/explosion-mid-2.gif) -160px 0;
   animation-name: explosion-mid;
   animation-duration: 400ms;
 }
@@ -269,7 +269,7 @@ table .selected:before {
 .explosion.heavy {
   height: 40px;
   width: 40px;
-  background: transparent url('../images/effects/explosion-heavy.gif') -520px 0;
+  background: transparent url(../images/effects/explosion-heavy-2.gif) -520px 0;
   animation-name: explosion-heavy;
   animation-duration: 1000ms;
 }

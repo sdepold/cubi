@@ -18,9 +18,7 @@
   Wave.ROUNDS = [
     {
       monsterType: 'beast',
-      monsterCount: 10,
-      giantType: 'airship',
-      giantCount: 10
+      monsterCount: 10
     }, {
       monsterType: 'scout-lite',
       monsterCount: 50
@@ -57,6 +55,11 @@
     }, {
       monsterType: 'tank-heavy',
       monsterCount: 5
+    }, {
+      monsterType: 'beast',
+      monsterCount: 100,
+      giantType: 'airship',
+      giantCount: 1
     }
   ]
 
@@ -105,9 +108,9 @@
         this._totalMonsterCount += this.getRoundOptions().monsterCount
       }
 
-      // if(this.getRoundOptions().giants) {
-      //   this._totalMonsterCount += this.getRoundOptions().giants.length * this.getRoundOptions().giantCount
-      // }
+      if(this.getRoundOptions().giantCount) {
+        this._totalMonsterCount += this.getRoundOptions().giantCount
+      }
 
       result = this._totalMonsterCount
     }
@@ -117,9 +120,9 @@
 
   // private
 
-  var move = function() {
+  var move = function(klass) {
     this.monsters.forEach(function(monster) {
-      if(monster instanceof Monster) {
+      if(!klass || monster instanceof klass) {
         monster.move()
       }
     })
@@ -184,7 +187,7 @@
       spawnMonsterType.call(this, roundData.monsterType, roundData.monsterCount, monsterSpeed)
 
       this.on('monster:spawned', function() {
-        move.call(this)
+        move.call(this, Monster)
       }.bind(this))
 
       this.on('spawned', function() {
@@ -193,7 +196,13 @@
     }
 
     if(roundData.giantType) {
-      spawnMonsterType.call(this, roundData.giantType, roundData.giantCount, 10 * 1000)
+      var giantSpeed = 10 * 1000
+
+      spawnMonsterType.call(this, roundData.giantType, roundData.giantCount, giantSpeed)
+
+      this.on('giant:spawned', function() {
+        move.call(this, Giant)
+      }.bind(this))
     }
   }
 

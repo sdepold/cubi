@@ -228,6 +228,8 @@
 
         cell.fire('click')
       } else {
+        var selected = document.querySelector('.selected')
+        selected.className = selected.className.replace('selected', '')
         PopUp.notify('Too expensive!')
       }
     }.bind(this))

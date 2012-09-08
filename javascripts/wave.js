@@ -1,18 +1,18 @@
 (function() {
   var Wave = function(round, path) {
-    this.round           = round
-    this.path            = path
+    this.round                 = round
+    this.path                  = path
 
-    this.speed           = Monster.TYPES[this.round - 1].speed
-    this.monstersToSpawn = Monster.TYPES[this.round - 1].count
-    this.spawnedMonsters = 0
-    this.monsters        = []
+    this.speed                 = Monster.TYPES[this.round - 1].speed
+    this.monstersToSpawn       = Monster.TYPES[this.round - 1].count
+    this.spawnedMonsters       = 0
+    this.monsters              = []
 
-    this.meta            = document.getElementById('meta-data')
-    this.moveIntervalId  = null
+    this.meta                  = document.getElementById('meta-data')
+    this.moveIntervalId        = null
     this.updateTimerIntervalId = null
-    this.spawnTimeoutId  = null
-    this.spawnTimeoutIds = []
+    this.spawnTimeoutId        = null
+    this.spawnTimeoutIds       = []
   }
 
   Utils.addObserverMethodsToClass(Wave)

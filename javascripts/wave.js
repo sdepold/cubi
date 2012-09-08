@@ -17,45 +17,45 @@
 
   Wave.ROUNDS = [
     {
-      monsters: [ 'beast' ],
+      monsterType: 'beast',
       monsterCount: 10,
-      giants: [ 'airship' ],
+      giantType: 'airship',
       giantCount: 10
     }, {
-      monsters: [ 'scout-lite' ],
+      monsterType: 'scout-lite',
       monsterCount: 50
     }, {
-      monsters: [ 'amphibian-lite' ],
+      monsterType: 'amphibian-lite',
       monsterCount: 20
     }, {
-      monsters: [ 'scout-mid' ],
+      monsterType: 'scout-mid',
       monsterCount: 50
     }, {
-      monsters: [ 'mech-lite' ],
+      monsterType: 'mech-lite',
       monsterCount: 30
     }, {
-      monsters: [ 'mech-mid' ],
+      monsterType: 'mech-mid',
       monsterCount: 25
     }, {
-      monsters: [ 'mech-heavy' ],
+      monsterType: 'mech-heavy',
       monsterCount: 20
     }, {
-      monsters: [ 'scout-heavy' ],
+      monsterType: 'scout-heavy',
       monsterCount: 100
     }, {
-      monsters: [ 'tank-lite' ],
+      monsterType: 'tank-lite',
       monsterCount: 30
     }, {
-      monsters: [ 'tank-lite-2' ],
+      monsterType: 'tank-lite-2',
       monsterCount: 20
     }, {
-      monsters: [ 'tank-mid' ],
+      monsterType: 'tank-mid',
       monsterCount: 10
     }, {
-      monsters: [ 'tank-laser' ],
+      monsterType: 'tank-laser',
       monsterCount: 10
     }, {
-      monsters: [ 'tank-heavy' ],
+      monsterType: 'tank-heavy',
       monsterCount: 5
     }
   ]
@@ -101,8 +101,8 @@
     if(!result) {
       this._totalMonsterCount = 0
 
-      if(this.getRoundOptions().monsters) {
-        this._totalMonsterCount += this.getRoundOptions().monsters.length * this.getRoundOptions().monsterCount
+      if(this.getRoundOptions().monsterCount) {
+        this._totalMonsterCount += this.getRoundOptions().monsterCount
       }
 
       // if(this.getRoundOptions().giants) {
@@ -119,7 +119,9 @@
 
   var move = function() {
     this.monsters.forEach(function(monster) {
-      monster.move()
+      if(monster instanceof Monster) {
+        monster.move()
+      }
     })
   }
 
@@ -177,17 +179,21 @@
   var spawnMonsters = function() {
     var roundData = this.getRoundOptions()
 
-    if(roundData.monsters) {
-      roundData.monsters.forEach(function(monsterType) {
-        var monsterSpeed = Monster.getTypeByName(monsterType).speed
-        spawnMonsterType.call(this, monsterType, roundData.monsterCount, monsterSpeed)
+    if(roundData.monsterType) {
+      var monsterSpeed = Monster.getTypeByName(roundData.monsterType).speed
+      spawnMonsterType.call(this, roundData.monsterType, roundData.monsterCount, monsterSpeed)
+
+      this.on('monster:spawned', function() {
+        move.call(this)
+      }.bind(this))
+
+      this.on('spawned', function() {
+        this.moveIntervalId = setInterval(move.bind(this), monsterSpeed)
       }.bind(this))
     }
 
-    if(roundData.giants) {
-      roundData.giants.forEach(function(giantType) {
-        spawnMonsterType.call(this, giantType, roundData.giantCount, 10 * 1000)
-      }.bind(this))
+    if(roundData.giantType) {
+      spawnMonsterType.call(this, roundData.giantType, roundData.giantCount, 10 * 1000)
     }
   }
 
@@ -199,16 +205,10 @@
         }.bind(this), speed * i)
       )
     }
-
-    this.on('monster:spawned', move.bind(this))
-
-    this.on('spawned', function() {
-      this.moveIntervalId = setInterval(move.bind(this), speed)
-    }.bind(this))
   }
 
   var createMonster = function(monsterType) {
-    if((this.getRoundOptions().monsters || []).indexOf(monsterType) !== -1) {
+    if((this.getRoundOptions().monsterType || '') === monsterType) {
       return new Monster(this.path, monsterType)
     } else {
       return new Giant(monsterType).render()
@@ -233,7 +233,11 @@
 
     this.monsters.push(monster)
 
-    this.fire('monster:spawned', [ monster ])
+    if(monster instanceof Monster) {
+      this.fire('monster:spawned', [ monster ])
+    } else {
+      this.fire('giant:spawned', [ monster ])
+    }
 
     this.spawnedMonsters = this.spawnedMonsters + 1
 

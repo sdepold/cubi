@@ -2,17 +2,17 @@ var readyStateCheckInterval = setInterval(function() {
   if (document.readyState === "complete") {
     clearInterval(readyStateCheckInterval)
 
-    var w=window,d=document,e=d.documentElement,g=d.getElementsByTagName('body')[0],x=w.innerWidth||e.clientWidth||g.clientWidth,y=w.innerHeight||e.clientHeight||g.clientHeight
     var cellWidth  = 24
       , cellHeight = 28
-      , cols       = ~~((x - (4 * 2) - (1 * 2)) / cellWidth)
-      , rows       = ~~((y - 24 - (4 * 2) - (1 * 2)) / cellHeight)
+      , windowDim  = Utils.getWindowDimension()
+      , cols       = ~~((windowDim.width - (4 * 2) - (1 * 2)) / cellWidth)
+      , rows       = ~~((windowDim.height - 24 - (4 * 2) - (1 * 2)) / cellHeight)
 
     if(cols < 20) {
       document.body.className = document.body.className.split(' ').concat(['reduced']).join(' ')
     }
 
-    game = new Game('body', { cols: cols, rows: rows }).render()
+    game = new Game('#game', { cols: cols, rows: rows }).render()
 
     document.getElementById('meta-data').style.width = (document.querySelector('table').offsetWidth - 10) + 'px'
   }

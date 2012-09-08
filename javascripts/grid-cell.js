@@ -47,20 +47,10 @@
   }
 
   GridCell.prototype.getCoordinates = function() {
-    var result = this.coordinates
-      , self   = this
-
-    if(!result) {
-      this.grid.cells.forEach(function(cells, x) {
-        cells.forEach(function(cell, y) {
-          if(self === cell) {
-            result = this.coordinates = { x: x, y: y }
-          }
-        })
-      })
+    return {
+      x: this.dom.offsetLeft + (this.dom.offsetWidth / 2),
+      y: this.dom.offsetTop  + (this.dom.offsetHeight / 2)
     }
-
-    return result
   }
 
   window.GridCell = GridCell

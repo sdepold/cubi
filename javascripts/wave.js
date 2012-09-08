@@ -61,9 +61,7 @@
   Wave.prototype.spawn = function(delay) {
     drawTimer.call(this, delay)
 
-    this.spawnTimeoutId = setTimeout(function() {
-      spawnMonsters.call(this)
-    }.bind(this), delay * 1000)
+    this.spawnTimeoutId = setTimeout(spawnMonsters.bind(this), delay * 1000)
 
     return this
   }
@@ -180,19 +178,23 @@
     roundData.monsters.forEach(function(monsterType) {
       var monsterSpeed = Monster.getTypeByName(monsterType).speed
 
-      for(var i = 0, j = roundData.monsterCount; i < j; i++) {
-        this.spawnTimeoutIds.push(
-          setTimeout(function() {
-            spawnMonster.call(this, monsterType)
-          }.bind(this), monsterSpeed * i)
-        )
-      }
+      spawnMonsterType.call(this, monsterType, roundData.monsterCount, monsterSpeed)
+    }.bind(this))
+  }
 
-      this.on('monster:spawned', move.bind(this))
+  var spawnMonsterType = function(type, count, speed) {
+    for(var i = 0, j = count; i < j; i++) {
+      this.spawnTimeoutIds.push(
+        setTimeout(function() {
+          spawnMonster.call(this, type)
+        }.bind(this), speed * i)
+      )
+    }
 
-      this.on('spawned', function() {
-        this.moveIntervalId = setInterval(move.bind(this), monsterSpeed)
-      }.bind(this))
+    this.on('monster:spawned', move.bind(this))
+
+    this.on('spawned', function() {
+      this.moveIntervalId = setInterval(move.bind(this), speed)
     }.bind(this))
   }
 

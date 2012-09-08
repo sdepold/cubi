@@ -18,7 +18,9 @@
   Wave.ROUNDS = [
     {
       monsters: [ 'beast' ],
-      monsterCount: 10
+      monsterCount: 10,
+      giants: [ 'airship' ],
+      giantCount: 10
     }, {
       monsters: [ 'scout-lite' ],
       monsterCount: 50
@@ -103,9 +105,9 @@
         this._totalMonsterCount += this.getRoundOptions().monsters.length * this.getRoundOptions().monsterCount
       }
 
-      if(this.getRoundOptions().giants) {
-        this._totalMonsterCount += this.getRoundOptions().giants.length * this.getRoundOptions().giantCount
-      }
+      // if(this.getRoundOptions().giants) {
+      //   this._totalMonsterCount += this.getRoundOptions().giants.length * this.getRoundOptions().giantCount
+      // }
 
       result = this._totalMonsterCount
     }
@@ -175,11 +177,18 @@
   var spawnMonsters = function() {
     var roundData = this.getRoundOptions()
 
-    roundData.monsters.forEach(function(monsterType) {
-      var monsterSpeed = Monster.getTypeByName(monsterType).speed
+    if(roundData.monsters) {
+      roundData.monsters.forEach(function(monsterType) {
+        var monsterSpeed = Monster.getTypeByName(monsterType).speed
+        spawnMonsterType.call(this, monsterType, roundData.monsterCount, monsterSpeed)
+      }.bind(this))
+    }
 
-      spawnMonsterType.call(this, monsterType, roundData.monsterCount, monsterSpeed)
-    }.bind(this))
+    if(roundData.giants) {
+      roundData.giants.forEach(function(giantType) {
+        spawnMonsterType.call(this, giantType, roundData.giantCount, 10 * 1000)
+      }.bind(this))
+    }
   }
 
   var spawnMonsterType = function(type, count, speed) {
@@ -199,8 +208,11 @@
   }
 
   var createMonster = function(monsterType) {
-    return new Monster(this.path, monsterType)
-    // return new Giant().render()
+    if((this.getRoundOptions().monsters || []).indexOf(monsterType) !== -1) {
+      return new Monster(this.path, monsterType)
+    } else {
+      return new Giant(monsterType).render()
+    }
   }
 
   var spawnMonster = function(monsterType) {

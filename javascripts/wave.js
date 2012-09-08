@@ -117,8 +117,13 @@
     }.bind(this))
   }
 
+  var createMonster = function() {
+    return new Monster(this.path, Monster.TYPES[this.round - 1].name)
+    // return new Giant().render()
+  }
+
   var spawnMonster = function() {
-    var monster = new Monster(this.path, Monster.TYPES[this.round - 1].name)
+    var monster = createMonster.call(this)
 
     var removeMonster = function() {
       this.monsters = this.monsters.filter(function(_monster) {

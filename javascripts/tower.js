@@ -89,13 +89,10 @@
   }
 
   Tower.prototype.checkDistanceTo = function(monster) {
-    var monsterCell = monster.cell && monster.cell.dom
+    var monsterPosition = monster.getPosition()
 
-    if(monsterCell) {
-      var isInRange = this.pointIsInRange({
-        x: monsterCell.offsetLeft + (monsterCell.offsetWidth / 2),
-        y: monsterCell.offsetTop + (monsterCell.offsetHeight / 2)
-      })
+    if(monsterPosition) {
+      var isInRange = this.pointIsInRange(monsterPosition)
 
       if(isInRange && this.canShoot()) {
         this.shoot(monster)
@@ -130,8 +127,8 @@
     var bullet    = document.createElement('div')
       , explosion = Utils.createDomNode('div', { className: 'explosion ' + this.getExplosion() })
       , body      = document.body
-      , xTarget   = monster.cell.dom.offsetLeft
-      , yTarget   = monster.cell.dom.offsetTop
+      , xTarget   = monster.getPosition().x
+      , yTarget   = monster.getPosition().y
 
     bullet.className  = 'bullet ' + this.type
     bullet.style.left = (this.cell.dom.offsetLeft + this.cell.dom.offsetWidth / 2) + 'px'
@@ -140,8 +137,8 @@
     body.appendChild(bullet)
 
     setTimeout(function() {
-      bullet.style.left = monster.cell.dom.offsetLeft +  monster.cell.dom.offsetWidth / 2 + 'px'
-      bullet.style.top  = monster.cell.dom.offsetTop + monster.cell.dom.offsetHeight / 2 + 'px'
+      bullet.style.left = xTarget + 'px'
+      bullet.style.top  = yTarget + 'px'
     }.bind(this), 10)
 
     setTimeout(function() {

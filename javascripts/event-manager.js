@@ -95,7 +95,7 @@
       this.game.enableForcedSpawn()
     }.bind(this))
 
-    if(wave.round === 13) {
+    if(wave.round === Wave.ROUNDS.length) {
       wave.on('cleared', function() {
         this.game.player.fire('won')
       }.bind(this))

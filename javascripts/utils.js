@@ -67,14 +67,26 @@ Utils = {
   createDomNode: function(elementType, attributes) {
     var node    = document.createElement(elementType)
       , content = null
+      , style   = null
 
     if((attributes || {}).hasOwnProperty('value')) {
       content = attributes.value;
       delete attributes.value;
     }
 
+    if((attributes || {}).hasOwnProperty('style')) {
+      style = attributes.style;
+      delete attributes.style;
+    }
+
     if(content !== null) {
       node.appendChild(document.createTextNode(content))
+    }
+
+    if(style !== null) {
+      for(var cssAttr in style) {
+        node.style[cssAttr] = style[cssAttr]
+      }
     }
 
     if(typeof attributes !== 'undefined') {

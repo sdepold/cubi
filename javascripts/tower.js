@@ -157,28 +157,28 @@
   }
 
   Tower.prototype.renderRange = function() {
-    var circle = document.createElement('div')
-      , dom    = this.cell.dom
-      , size   = dom.offsetHeight
+    var dom   = this.cell.dom
+      , size  = dom.offsetHeight
+      , width = this.getRange() * 2 * dom.offsetHeight
+      , x     = getCenter.call(this).x - width / 2 - 2 // 2 === border width
+      , y     = getCenter.call(this).y - width / 2 - 2 // 2 === border width
 
-    circle.className   = 'range'
-    circle.style.width = circle.style.height = this.getRange() * 2 * dom.offsetHeight + 'px'
-
-    // 2 === border width
-    var x = getCenter.call(this).x - parseInt(circle.style.width, 10) / 2 - 2
-      , y = getCenter.call(this).y - parseInt(circle.style.height, 10) / 2 - 2
-
-    circle.style.left   = x + 'px'
-    circle.style.top    = y + 'px'
-
-    this.range = circle
+    this.range = Utils.createDomNode('div', {
+      className: 'range',
+      style: {
+        width:  width + 'px',
+        height: width + 'px',
+        left:   x + 'px',
+        top:    y + 'px'
+      }
+    })
     this.range.onclick = function() {
       this.removeRange()
       this.cell.removeClassName('with-range')
       window.currentPopUp && window.currentPopUp.close()
     }.bind(this)
 
-    document.body.appendChild(circle)
+    document.body.appendChild(this.range)
     this.cell.addClassName('with-range')
   }
 

@@ -13,7 +13,7 @@
     TURRET: {
       name:            'Turret',
       explosion:       'small',
-      explosionOffset: -6,
+      explosionOffset: -2,
       costs:           [50, 100, 200],
       damages:         [3, 5, 7],
       ranges:          [1, 1.5, 2],
@@ -23,7 +23,7 @@
     ROCKET: {
       name:            'Rocket Tower',
       explosion:       'mid',
-      explosionOffset: -12,
+      explosionOffset: -6,
       costs:           [200, 400, 600],
       damages:         [200, 300, 400],
       ranges:          [5, 7, 9],
@@ -33,7 +33,7 @@
     ULTRA: {
       name:            'Ultra Tower',
       explosion:       'big',
-      explosionOffset: -20,
+      explosionOffset: -16,
       costs:           [5000, 7500, 10000],
       damages:         [99999, 99999, 99999],
       ranges:          [3, 8, 13],

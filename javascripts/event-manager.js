@@ -26,7 +26,7 @@
       }
     }.bind(this))
 
-    wave.on('monster:spawned', function(wave, monster) {
+    var onMonsterSpawn = function(wave, monster) {
       var intervalId = null
 
       this.game.player.on('killed', function() {
@@ -63,7 +63,10 @@
           })
         }.bind(this), 100)
       }.bind(this))
-    }.bind(this))
+    }
+
+    wave.on('monster:spawned', onMonsterSpawn.bind(this))
+    wave.on('giant:spawned', onMonsterSpawn.bind(this))
 
     this.game.player.on('killed', function() {
       wave.stop()

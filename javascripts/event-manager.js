@@ -39,7 +39,7 @@
 
       monster.on('killed', function() {
         clearInterval(intervalId)
-        this.game.player.earn(monster.options.revenue)
+        this.game.player.earn(monster.getRevenue())
         this.game.player.recordStat('killedMonsters', 1)
       }.bind(this))
 

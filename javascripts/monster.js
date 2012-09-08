@@ -120,6 +120,10 @@
     return this.cell && this.cell.getCoordinates()
   }
 
+  Monster.prototype.getRevenue = function() {
+    return this.options.revenue
+  }
+
   Monster.prototype.hurt = function(damage) {
     this.health -= damage
 
@@ -130,10 +134,10 @@
 
   Monster.prototype.die = function() {
     if(!this.hasTriggeredKilledEvent) {
+      this.hasTriggeredKilledEvent = true
       this.stop()
       this.cell.setType(GridCell.TYPES.PATH)
       this.fire('killed')
-      this.hasTriggeredKilledEvent = true
     }
   }
 

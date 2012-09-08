@@ -170,13 +170,13 @@
         height: width + 'px',
         left:   x + 'px',
         top:    y + 'px'
-      }
+      },
+      onclick: function() {
+        this.removeRange()
+        this.cell.removeClassName('with-range')
+        window.currentPopUp && window.currentPopUp.close()
+      }.bind(this)
     })
-    this.range.onclick = function() {
-      this.removeRange()
-      this.cell.removeClassName('with-range')
-      window.currentPopUp && window.currentPopUp.close()
-    }.bind(this)
 
     document.body.appendChild(this.range)
     this.cell.addClassName('with-range')

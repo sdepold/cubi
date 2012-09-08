@@ -102,12 +102,11 @@
   }
 
   Tower.prototype.pointIsInRange = function(point) {
-    var radius     = this.getRange() * this.cell.dom.offsetHeight
-      , circleX    = getCenter.call(this).x
-      , circleY    = getCenter.call(this).y
+    var radius  = this.getRange() * this.cell.dom.offsetHeight
+      , center  = getCenter.call(this)
 
-    if (Math.abs(circleX - point.x) < radius && Math.abs(circleY - point.y) < radius) {
-      var distanceSquared = Math.pow(circleX - point.x, 2) + Math.pow(circleY - point.y, 2)
+    if (Math.abs(center.x - point.x) < radius && Math.abs(center.y - point.y) < radius) {
+      var distanceSquared = Math.pow(center.x - point.x, 2) + Math.pow(center.y - point.y, 2)
       return distanceSquared <= (radius * radius)
     } else {
       return false
@@ -157,11 +156,10 @@
   }
 
   Tower.prototype.renderRange = function() {
-    var dom   = this.cell.dom
-      , size  = dom.offsetHeight
-      , width = this.getRange() * 2 * dom.offsetHeight
-      , x     = getCenter.call(this).x - width / 2 - 2 // 2 === border width
-      , y     = getCenter.call(this).y - width / 2 - 2 // 2 === border width
+    var width  = this.getRange() * 2 * this.cell.dom.offsetHeight
+      , center = getCenter.call(this)
+      , x      = center.x - width / 2 + 2 // 2 === border width
+      , y      = center.y - width / 2 + 2 // 2 === border width
 
     this.range = Utils.createDomNode('div', {
       className: 'range',
@@ -201,10 +199,7 @@
   // private
 
   var getCenter = function() {
-    return {
-      x: this.cell.dom.offsetLeft + (this.cell.dom.offsetWidth / 2),
-      y: this.cell.dom.offsetTop  + (this.cell.dom.offsetHeight / 2)
-    }
+    return this.cell.getCoordinates()
   }
 
   var toClassNames = function() {

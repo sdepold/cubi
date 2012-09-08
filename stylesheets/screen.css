@@ -5,6 +5,12 @@ body {
   padding: 0;
 }
 
+#game {
+  overflow: hidden;
+  display: inline-block;
+  position: relative;
+}
+
 table {
   border-collapse: collapse;
   border: 1px solid black;
@@ -108,6 +114,32 @@ table .mech-lite:after {
 
 table .mech-mid:after {
   background: url('../images/monsters/mech-mid.gif') no-repeat 4px 6px;
+}
+
+.giant.airship {
+  position: absolute;
+  top: 50%;
+  margin-top: -60px;
+  left: -260px;
+  transition: all 120s linear;
+
+  width: 256px;
+  height: 100px;
+  background: rgba(0, 0, 0, 0.4);
+  display: block;
+  border-radius: 281px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 1);
+}
+
+.giant.airship:after {
+  content: '';
+  background: url('/images/monsters/airship-giant.gif');
+  display: block;
+  width: 260px;
+  height: 127px;
+  position: relative;
+  top: -36px;
+  left: -16px;
 }
 
 table .turret:after, .menu .turret:before {

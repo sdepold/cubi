@@ -21,7 +21,7 @@
 
   var observeWave = function(wave) {
     wave.on('spawned', function() {
-      if(wave.round !== 13) {
+      if(wave.round !== Wave.ROUNDS.length) {
         spawnNewWave.call(this, wave)
       }
     }.bind(this))

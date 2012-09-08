@@ -3,8 +3,6 @@
     this.round                 = round
     this.path                  = path
 
-    this.speed                 = Monster.TYPES[this.round - 1].speed
-    this.monstersToSpawn       = Monster.TYPES[this.round - 1].count
     this.spawnedMonsters       = 0
     this.monsters              = []
 
@@ -16,6 +14,49 @@
   }
 
   Utils.addObserverMethodsToClass(Wave)
+
+  Wave.ROUNDS = [
+    {
+      monsters: [ 'beast' ],
+      monsterCount: 10
+    }, {
+      monsters: [ 'scout-lite' ],
+      monsterCount: 50
+    }, {
+      monsters: [ 'amphibian-lite' ],
+      monsterCount: 20
+    }, {
+      monsters: [ 'scout-mid' ],
+      monsterCount: 50
+    }, {
+      monsters: [ 'mech-lite' ],
+      monsterCount: 30
+    }, {
+      monsters: [ 'mech-mid' ],
+      monsterCount: 25
+    }, {
+      monsters: [ 'mech-heavy' ],
+      monsterCount: 20
+    }, {
+      monsters: [ 'scout-heavy' ],
+      monsterCount: 100
+    }, {
+      monsters: [ 'tank-lite' ],
+      monsterCount: 30
+    }, {
+      monsters: [ 'tank-lite-2' ],
+      monsterCount: 20
+    }, {
+      monsters: [ 'tank-mid' ],
+      monsterCount: 10
+    }, {
+      monsters: [ 'tank-laser' ],
+      monsterCount: 10
+    }, {
+      monsters: [ 'tank-heavy' ],
+      monsterCount: 5
+    }
+  ]
 
   Wave.prototype.spawn = function(delay) {
     drawTimer.call(this, delay)
@@ -42,6 +83,36 @@
     clearInterval(this.updateTimerIntervalId)
     setTimerContainerText.call(this, 0)
     spawnMonsters.call(this)
+  }
+
+  Wave.prototype.getRoundOptions = function() {
+    var result = this.roundOptions
+
+    if(!result) {
+      result = this.roundOptions = Wave.ROUNDS[this.round - 1]
+    }
+
+    return result
+  }
+
+  Wave.prototype.getTotalMonsterCount = function() {
+    var result = this._totalMonsterCount
+
+    if(!result) {
+      this._totalMonsterCount = 0
+
+      if(this.getRoundOptions().monsters) {
+        this._totalMonsterCount += this.getRoundOptions().monsters.length * this.getRoundOptions().monsterCount
+      }
+
+      if(this.getRoundOptions().giants) {
+        this._totalMonsterCount += this.getRoundOptions().giants.length * this.getRoundOptions().giantCount
+      }
+
+      result = this._totalMonsterCount
+    }
+
+    return result
   }
 
   // private
@@ -104,33 +175,41 @@
   }
 
   var spawnMonsters = function() {
-    for(var i = 0, j = this.monstersToSpawn; i < j; i++) {
-      this.spawnTimeoutIds.push(
-        setTimeout(spawnMonster.bind(this), this.speed * i)
-      )
-    }
+    var roundData = this.getRoundOptions()
 
-    this.on('monster:spawned', move.bind(this))
+    roundData.monsters.forEach(function(monsterType) {
+      var monsterSpeed = Monster.getTypeByName(monsterType).speed
 
-    this.on('spawned', function() {
-      this.moveIntervalId = setInterval(move.bind(this), this.speed)
+      for(var i = 0, j = roundData.monsterCount; i < j; i++) {
+        this.spawnTimeoutIds.push(
+          setTimeout(function() {
+            spawnMonster.call(this, monsterType)
+          }.bind(this), monsterSpeed * i)
+        )
+      }
+
+      this.on('monster:spawned', move.bind(this))
+
+      this.on('spawned', function() {
+        this.moveIntervalId = setInterval(move.bind(this), monsterSpeed)
+      }.bind(this))
     }.bind(this))
   }
 
-  var createMonster = function() {
-    return new Monster(this.path, Monster.TYPES[this.round - 1].name)
+  var createMonster = function(monsterType) {
+    return new Monster(this.path, monsterType)
     // return new Giant().render()
   }
 
-  var spawnMonster = function() {
-    var monster = createMonster.call(this)
+  var spawnMonster = function(monsterType) {
+    var monster = createMonster.call(this, monsterType)
 
     var removeMonster = function() {
       this.monsters = this.monsters.filter(function(_monster) {
         return _monster !== monster
       })
 
-      if((this.monsters.length === 0) && (this.spawnedMonsters === this.monstersToSpawn)) {
+      if((this.monsters.length === 0) && (this.spawnedMonsters === this.getTotalMonsterCount())) {
         this.fire('cleared')
       }
     }
@@ -144,7 +223,7 @@
 
     this.spawnedMonsters = this.spawnedMonsters + 1
 
-    if(this.spawnedMonsters === this.monstersToSpawn) {
+    if(this.spawnedMonsters === this.getTotalMonsterCount()) {
       this.fire('spawned')
     }
   }

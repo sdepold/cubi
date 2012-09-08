@@ -13,8 +13,6 @@
 
   Utils.addObserverMethodsToClass(Giant)
 
-  // Giant.prototype = Monster.prototype
-
   Giant.prototype.render = function() {
     document.querySelector('#game').appendChild(this.dom)
 

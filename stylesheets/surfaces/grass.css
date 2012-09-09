@@ -80,16 +80,17 @@
   background-position: -120px -160px;
 }
 
-.grass .selected > div:before {
+.grass .selected > div:after {
   content: '';
   height: 18px;
   width: 18px;
   display: block;
   background: rgba(255, 240, 80, 0.3);
   border: 1px solid rgba(255, 240, 80, 0.5);
+  position: absolute;
 }
 
-.grass td:not(.selected):hover > div:before {
+.grass td:not(.selected):not(.tower):hover > div:after {
   content: '';
   height: 18px;
   width: 18px;

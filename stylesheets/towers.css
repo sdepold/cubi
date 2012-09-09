@@ -1,12 +1,18 @@
 /* tower graphics */
 
+table td.tower > div {
+  width: 18px;
+  height: 18px;
+  border: 1px solid transparent;
+}
+
 table td.tower > div:before {
   content: "";
   display: block;
   height: 40px;
-  left: -2px;
+  left: -3px;
   position: absolute;
-  top: -10px;
+  top: -11px;
   width: 20px;
 }
 
@@ -34,6 +40,9 @@ table .tower > div:after {
   position: absolute;
   right: 0;
   top: 10px;
+  height: 18px;
+  width: 18px;
+  text-align: right
 }
 
 table .level-2 > div:after {
@@ -42,4 +51,11 @@ table .level-2 > div:after {
 
 table .level-3 > div:after {
   content: 'III';
+}
+
+table .tower:hover > div {
+  width: 18px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.5);
 }

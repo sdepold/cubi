@@ -171,13 +171,11 @@
       },
       onclick: function() {
         this.removeRange()
-        this.cell.removeClassName('with-range')
         window.currentPopUp && window.currentPopUp.close()
       }.bind(this)
     })
 
     document.body.appendChild(this.range)
-    this.cell.addClassName('with-range')
   }
 
   Tower.prototype.removeRange = function() {

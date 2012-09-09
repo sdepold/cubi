@@ -3,7 +3,7 @@
     var self = this
 
     this.grid        = grid
-    this.type        = GridCell.TYPES.ACCESSABLE
+    this.type        = GridCell.TYPES.ACCESSIBLE
     this.dom         = document.createElement('td')
     this.dom.cell    = this
     this.dom.onclick = function() {
@@ -16,8 +16,8 @@
   Utils.addObserverMethodsToClass(GridCell)
 
   GridCell.TYPES = {
-    INACCESSABLE: 'inaccessable',
-    ACCESSABLE: 'accessable',
+    INACCESSIBLE: 'inaccessible',
+    ACCESSIBLE: 'accessible',
     PATH: 'path',
     MONSTER: 'monster',
     TOWER: 'tower'

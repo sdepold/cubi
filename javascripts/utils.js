@@ -1,10 +1,12 @@
 Utils = {
   addClassName: function(dom, className) {
-    dom.className = dom.className
-      .split(' ')
-      .concat([className])
-      .filter(function(name) { return name !== '' })
-      .join(' ')
+    if(!Utils.hasClassName(dom, className)) {
+      dom.className = dom.className
+        .split(' ')
+        .concat([className])
+        .filter(function(name) { return name !== '' })
+        .join(' ')
+    }
   },
 
   hasClassName: function(dom, className) {

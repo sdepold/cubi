@@ -31,6 +31,9 @@
 
         if(!Utils.hasClassName(left.dom, 'path')) {
           Utils.addClassName(left.dom, 'left')
+          Utils.removeClassName(left.dom, GridCell.TYPES.ACCESSIBLE)
+          Utils.addClassName(left.dom, GridCell.TYPES.INACCESSIBLE)
+          left.type = GridCell.TYPES.INACCESSIBLE
         }
       }
 
@@ -39,6 +42,9 @@
 
         if(!Utils.hasClassName(right.dom, 'path')) {
           Utils.addClassName(right.dom, 'right')
+          Utils.removeClassName(right.dom, GridCell.TYPES.ACCESSIBLE)
+          Utils.addClassName(right.dom, GridCell.TYPES.INACCESSIBLE)
+          right.type = GridCell.TYPES.INACCESSIBLE
         }
       }
 
@@ -47,6 +53,9 @@
 
         if(!Utils.hasClassName(top.dom, 'path')) {
           Utils.addClassName(top.dom, 'top')
+          Utils.removeClassName(top.dom, GridCell.TYPES.ACCESSIBLE)
+          Utils.addClassName(top.dom, GridCell.TYPES.INACCESSIBLE)
+          top.type = GridCell.TYPES.INACCESSIBLE
         }
       }
 
@@ -55,6 +64,9 @@
 
         if(!Utils.hasClassName(bottom.dom, 'path')) {
           Utils.addClassName(bottom.dom, 'bottom')
+          Utils.removeClassName(bottom.dom, GridCell.TYPES.ACCESSIBLE)
+          Utils.addClassName(bottom.dom, GridCell.TYPES.INACCESSIBLE)
+          bottom.type = GridCell.TYPES.INACCESSIBLE
         }
       }
     }.bind(this))
@@ -71,10 +83,16 @@
 
             if(!Utils.hasClassName(cell.dom, 'top') && Utils.hasClassName(left.dom, 'top')) {
               Utils.addClassName(cell.dom, 'top-right')
+              Utils.removeClassName(cell.dom, GridCell.TYPES.ACCESSIBLE)
+              Utils.addClassName(cell.dom, GridCell.TYPES.INACCESSIBLE)
+              cell.type = GridCell.TYPES.INACCESSIBLE
             }
 
             if(!Utils.hasClassName(cell.dom, 'bottom') && Utils.hasClassName(left.dom, 'bottom')) {
               Utils.addClassName(cell.dom, 'bottom-right')
+              Utils.removeClassName(cell.dom, GridCell.TYPES.ACCESSIBLE)
+              Utils.addClassName(cell.dom, GridCell.TYPES.INACCESSIBLE)
+              cell.type = GridCell.TYPES.INACCESSIBLE
             }
           }
 
@@ -83,10 +101,16 @@
 
             if(!Utils.hasClassName(cell.dom, 'top') && Utils.hasClassName(right.dom, 'top')) {
               Utils.addClassName(cell.dom, 'top-left')
+              Utils.removeClassName(cell.dom, GridCell.TYPES.ACCESSIBLE)
+              Utils.addClassName(cell.dom, GridCell.TYPES.INACCESSIBLE)
+              cell.type = GridCell.TYPES.INACCESSIBLE
             }
 
             if(!Utils.hasClassName(cell.dom, 'bottom') && Utils.hasClassName(right.dom, 'bottom')) {
               Utils.addClassName(cell.dom, 'bottom-left')
+              Utils.removeClassName(cell.dom, GridCell.TYPES.ACCESSIBLE)
+              Utils.addClassName(cell.dom, GridCell.TYPES.INACCESSIBLE)
+              cell.type = GridCell.TYPES.INACCESSIBLE
             }
           }
         }
@@ -106,13 +130,19 @@
             if(Utils.hasClassName(cell.dom, 'top') && Utils.hasClassName(top.dom, 'right')) {
               Utils.removeClassName(cell.dom, 'top')
               Utils.removeClassName(cell.dom, 'right')
+              Utils.removeClassName(cell.dom, GridCell.TYPES.ACCESSIBLE)
               Utils.addClassName(cell.dom, 'top-right-inner')
+              Utils.addClassName(cell.dom, GridCell.TYPES.INACCESSIBLE)
+              cell.type = GridCell.TYPES.INACCESSIBLE
             }
 
             if(Utils.hasClassName(cell.dom, 'top') && Utils.hasClassName(top.dom, 'left')) {
               Utils.removeClassName(cell.dom, 'top')
               Utils.removeClassName(cell.dom, 'left')
+              Utils.removeClassName(cell.dom, GridCell.TYPES.ACCESSIBLE)
               Utils.addClassName(cell.dom, 'top-left-inner')
+              Utils.addClassName(cell.dom, GridCell.TYPES.INACCESSIBLE)
+              cell.type = GridCell.TYPES.INACCESSIBLE
             }
           }
 
@@ -122,13 +152,19 @@
             if(Utils.hasClassName(cell.dom, 'bottom') && Utils.hasClassName(bottom.dom, 'right')) {
               Utils.removeClassName(cell.dom, 'bottom')
               Utils.removeClassName(cell.dom, 'right')
+              Utils.removeClassName(cell.dom, GridCell.TYPES.ACCESSIBLE)
               Utils.addClassName(cell.dom, 'bottom-right-inner')
+              Utils.addClassName(cell.dom, GridCell.TYPES.INACCESSIBLE)
+              cell.type = GridCell.TYPES.INACCESSIBLE
             }
 
             if(Utils.hasClassName(cell.dom, 'bottom') && Utils.hasClassName(bottom.dom, 'left')) {
               Utils.removeClassName(cell.dom, 'bottom')
               Utils.removeClassName(cell.dom, 'left')
+              Utils.removeClassName(cell.dom, GridCell.TYPES.ACCESSIBLE)
               Utils.addClassName(cell.dom, 'bottom-left-inner')
+              Utils.addClassName(cell.dom, GridCell.TYPES.INACCESSIBLE)
+              cell.type = GridCell.TYPES.INACCESSIBLE
             }
           }
         }
@@ -149,12 +185,14 @@
               Utils.removeClassName(cell.dom, 'top')
               Utils.removeClassName(cell.dom, 'left')
               Utils.addClassName(cell.dom, 'top-left-inner')
+              cell.type = GridCell.TYPES.INACCESSIBLE
             }
 
             if(Utils.hasClassName(cell.dom, 'top') && Utils.hasClassName(top.dom, 'top-right')) {
               Utils.removeClassName(cell.dom, 'top')
               Utils.removeClassName(cell.dom, 'right')
               Utils.addClassName(cell.dom, 'top-right-inner')
+              cell.type = GridCell.TYPES.INACCESSIBLE
             }
           }
 
@@ -165,12 +203,14 @@
               Utils.removeClassName(cell.dom, 'bottom')
               Utils.removeClassName(cell.dom, 'right')
               Utils.addClassName(cell.dom, 'bottom-right-inner')
+              cell.type = GridCell.TYPES.INACCESSIBLE
             }
 
             if(Utils.hasClassName(cell.dom, 'bottom') && Utils.hasClassName(bottom.dom, 'bottom-left')) {
               Utils.removeClassName(cell.dom, 'bottom')
               Utils.removeClassName(cell.dom, 'left')
               Utils.addClassName(cell.dom, 'bottom-left-inner')
+              cell.type = GridCell.TYPES.INACCESSIBLE
             }
           }
         }

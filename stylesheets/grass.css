@@ -4,7 +4,7 @@
   background: url('../images/surfaces/grass/tiles.gif');
 }
 
-.grass .accessable {
+.grass .accessible {
   background-position: 0 -160px;
 }
 

@@ -125,11 +125,14 @@
           unselectGridCell.call(this)
 
           switch(cell.type) {
-            case GridCell.TYPES.ACCESSABLE:
+            case GridCell.TYPES.ACCESSIBLE:
               onAccessibleCellClick.call(this, cell)
               break
             case GridCell.TYPES.TOWER:
               onTowerCellClick.call(this, cell)
+              break
+            default:
+              clearMenus()
               break
           }
         }.bind(this))

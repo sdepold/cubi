@@ -94,7 +94,7 @@
 
     sell.onclick = function() {
       this.player.sell(this.tower)
-      this.tower.cell.setType(GridCell.TYPES.ACCESSABLE)
+      this.tower.cell.setType(GridCell.TYPES.ACCESSIBLE)
       this.tower.destroy()
       this.fire('tower:sold', this.tower)
     }.bind(this)

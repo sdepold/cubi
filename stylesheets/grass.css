@@ -79,3 +79,20 @@
 .grass .path.version-5 {
   background-position: -120px -160px;
 }
+
+.grass .selected:before {
+  content: '';
+  height: 16px;
+  width: 16px;
+  display: block;
+  border: 2px solid yellow;
+}
+
+.grass td:not(.selected):hover:before {
+  content: '';
+  height: 16px;
+  width: 16px;
+  display: block;
+  background: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}

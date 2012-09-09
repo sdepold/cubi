@@ -235,10 +235,9 @@
 
   var unselectGridCell = function() {
     var selected = document.querySelector('.selected')
+
     if(selected) {
-      selected.className = selected.className.split(' ').filter(function(klass) {
-        return klass != 'selected'
-      })
+      Utils.removeClassName(selected, 'selected')
     }
   }
 
@@ -266,8 +265,7 @@
 
         cell.fire('click')
       } else {
-        var selected = document.querySelector('.selected')
-        selected.className = selected.className.replace('selected', '')
+        menu.remove()
         PopUp.notify('Too expensive!')
       }
     }.bind(this))

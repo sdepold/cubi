@@ -11,7 +11,7 @@
       , x = this.cell.dom.offsetLeft + 40
       , y = this.cell.dom.offsetTop - 30
 
-    this.cell.addClassName('selected')
+    Utils.addClassName(this.cell.dom, 'selected')
 
     this.popUp.setContent(buildContainer.call(this))
     this.popUp.render({ left: x, top: y })
@@ -21,7 +21,7 @@
 
   TowerMenu.prototype.remove = function() {
     this.popUp.close()
-    this.cell.removeClassName('selected')
+    Utils.removeClassName(this.cell.dom, 'selected')
   }
 
   // private

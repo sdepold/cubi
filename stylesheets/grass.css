@@ -82,16 +82,17 @@
 
 .grass .selected:before {
   content: '';
-  height: 16px;
-  width: 16px;
+  height: 18px;
+  width: 18px;
   display: block;
-  border: 2px solid yellow;
+  background: rgba(255, 240, 80, 0.3);
+  border: 1px solid rgba(255, 240, 80, 0.5);
 }
 
 .grass td:not(.selected):hover:before {
   content: '';
-  height: 16px;
-  width: 16px;
+  height: 18px;
+  width: 18px;
   display: block;
   background: rgba(255, 255, 255, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.5);

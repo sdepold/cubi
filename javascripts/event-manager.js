@@ -125,7 +125,7 @@
           unselectGridCell.call(this)
 
           switch(cell.type) {
-            case GridCell.TYPES.INACCESSABLE:
+            case GridCell.TYPES.ACCESSABLE:
               onAccessibleCellClick.call(this, cell)
               break
             case GridCell.TYPES.TOWER:

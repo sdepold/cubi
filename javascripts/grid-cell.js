@@ -3,7 +3,7 @@
     var self = this
 
     this.grid        = grid
-    this.type        = GridCell.TYPES.INACCESSABLE
+    this.type        = GridCell.TYPES.ACCESSABLE
     this.dom         = document.createElement('td')
     this.dom.cell    = this
     this.dom.onclick = function() {

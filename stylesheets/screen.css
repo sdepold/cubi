@@ -51,7 +51,7 @@ table td, table td:after {
   width: 24px;
 }
 
-table .inaccessable, table .tower {
+table .accessable, table .tower {
   background: url('../images/surfaces/ice.gif');
 }
 

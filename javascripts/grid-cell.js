@@ -4,11 +4,11 @@
 
     this.grid        = grid
     this.type        = GridCell.TYPES.ACCESSIBLE
-    this.dom         = document.createElement('td')
-    this.dom.cell    = this
-    this.dom.onclick = function() {
-      self.fire('click')
-    }
+    this.dom         = Utils.createDomNode('td', {
+      cell: this,
+      onclick:function() { this.fire('click') }.bind(this)
+    })
+    this.dom.appendChild(Utils.createDomNode('div'))
 
     this.setType(this.type)
   }

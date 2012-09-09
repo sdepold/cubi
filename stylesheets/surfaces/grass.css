@@ -1,10 +1,10 @@
-.grass td, .grass td:after {
+.grass td {
   width: 20px;
   height: 20px;
-  background: url('../images/surfaces/grass/tiles.gif');
+  background: url('../../images/surfaces/grass/tiles.gif');
 }
 
-.grass .accessible {
+.grass .accessible, .grass table td.tower {
   background-position: 0 -160px;
 }
 
@@ -80,7 +80,7 @@
   background-position: -120px -160px;
 }
 
-.grass .selected:before {
+.grass .selected > div:before {
   content: '';
   height: 18px;
   width: 18px;
@@ -89,7 +89,7 @@
   border: 1px solid rgba(255, 240, 80, 0.5);
 }
 
-.grass td:not(.selected):hover:before {
+.grass td:not(.selected):hover > div:before {
   content: '';
   height: 18px;
   width: 18px;

@@ -1,0 +1,129 @@
+#meta-data {
+  background: black;
+  box-shadow:  0 0 5px 0 rgba(0, 0, 0, 1);
+  color: white;
+  padding: 5px;
+}
+
+#meta-data span {
+  padding: 0 5px;
+}
+
+#meta-data span:not(:last-child) {
+  border-right: 1px solid white;
+}
+
+#force-next-wave {
+  cursor: pointer;
+}
+
+#force-next-wave.disabled {
+  cursor: not-allowed;
+  color: #aaa;
+}
+
+.pop-up {
+  background-color: rgba(10, 10, 10, 0.8);
+  background-size: 16px 16px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow:  0 0 10px 0 rgba(0, 0, 0, 1);
+  opacity: 0.95;
+  color: white;
+  font-size: 14px;
+  z-index: 10;
+}
+
+.menu {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.menu li {
+  color: white;
+  line-height: 32px;
+  height: 32px;
+  vertical-align: top;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.menu .nested {
+  height: auto;
+  line-height: 0;
+  border-top: 1px dashed #888;
+}
+
+.menu > li {
+  padding: 0 5px 0 10px;
+}
+
+.menu li ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu > li:not(.nested):hover {
+  background: #151515;
+  border-radius: 5px;
+}
+
+.menu li:not(.nested):before {
+  content: '';
+  display: inline-block;
+  height: 32px;
+  width: 24px;
+  margin-left: 4px;
+  position: relative;
+  left: -10px;
+  float: left;
+}
+
+.menu .upgrade:before {
+  background: transparent url('../images/menu/upgrade.gif') center right no-repeat;
+}
+.menu .sell:before {
+  background: transparent url('../images/menu/sell.gif') center right no-repeat;
+}
+.menu .stats-range:before {
+  background: transparent url('../images/interface/range.gif') center right no-repeat;
+  left: -12px !important;
+}
+.menu .stats-damage:before {
+  background: transparent url('../images/interface/damage.gif') center right no-repeat;
+  left: -18px !important;
+}
+.menu .stats-frequency:before {
+  background: transparent url('../images/interface/frequency.gif') center right no-repeat;
+  left: -20px !important;
+}
+
+ul.game-over {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul.game-over li:first-child {
+  font-size: 18px;
+  border-bottom: 1px dashed #888;
+}
+
+ul.game-over li {
+  line-height: 28px;
+}
+
+ul.game-over li:last-child {
+  border-top: 1px dashed #888;
+}
+
+ul.game-over a {
+  color: white;
+  margin-top: 5px;
+  display: block;
+}

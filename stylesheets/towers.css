@@ -1,0 +1,45 @@
+/* tower graphics */
+
+table td.tower > div:before {
+  content: "";
+  display: block;
+  height: 40px;
+  left: -2px;
+  position: absolute;
+  top: -10px;
+  width: 20px;
+}
+
+table .turret > div:before, .menu .turret:before {
+  background: transparent url('../images/towers/turret.gif') no-repeat;
+}
+
+table .rocket > div:before, .menu .rocket:before {
+  background: transparent url('../images/towers/rocket.gif') no-repeat;
+}
+
+table .ultra > div:before, .menu .ultra:before {
+  background: transparent url('../images/towers/ultra.gif') no-repeat;
+}
+
+/* level indicator */
+
+table .tower > div:after {
+  color: yellow;
+  content: "I";
+  display: block;
+  font-family: Arial;
+  font-size: 10px;
+  font-weight: bold;
+  position: absolute;
+  right: 0;
+  top: 10px;
+}
+
+table .level-2 > div:after {
+  content: 'II';
+}
+
+table .level-3 > div:after {
+  content: 'III';
+}

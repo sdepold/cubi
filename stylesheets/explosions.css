@@ -1,0 +1,71 @@
+@keyframes explosion-small {
+  0%     { background-position:   0    0; }
+  12.5%  { background-position: -10px  0; }
+  25%    { background-position: -20px  0; }
+  37.5%  { background-position: -30px  0; }
+  50%    { background-position: -40px  0; }
+  62.5%  { background-position: -50px 0; }
+  75%    { background-position: -60px 0; }
+  87.5%  { background-position: -70px 0; }
+  100%   { background-position: -80px 0; }
+}
+
+@keyframes explosion-mid {
+  0%     { background-position:   0    0; }
+  12.5%  { background-position: -20px  0; }
+  25%    { background-position: -40px  0; }
+  37.5%  { background-position: -60px  0; }
+  50%    { background-position: -80px  0; }
+  62.5%  { background-position: -100px 0; }
+  75%    { background-position: -120px 0; }
+  87.5%  { background-position: -140px 0; }
+  100%   { background-position: -160px 0; }
+}
+
+@keyframes explosion-big {
+  0%     { background-position:   0    0; }
+  12.5%  { background-position: -40px  0; }
+  25%    { background-position: -80px  0; }
+  37.5%  { background-position: -120px  0; }
+  50%    { background-position: -160px  0; }
+  62.5%  { background-position: -200px 0; }
+  75%    { background-position: -240px 0; }
+  87.5%  { background-position: -280px 0; }
+  100%   { background-position: -320px 0; }
+}
+
+.explosion {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 21px;
+  animation-timing-function: step-start;
+  background: transparent url('../images/effects/explosion.gif');
+}
+
+.explosion.small {
+  width: 10px;
+  height: 11px;
+  background-position: -80px 0;
+  background-size: 90px;
+  animation-duration: 200ms;
+  animation-name: explosion-small;
+}
+
+.explosion.mid {
+  background-position: -160px 0;
+  animation-name: explosion-mid;
+  animation-duration: 400ms;
+}
+
+.explosion.big {
+  height: 40px;
+  width: 40px;
+  background-position: -320px 0;
+  background-size: 362px;
+  animation-name: explosion-big;
+  animation-duration: 1000ms;
+}
+
+

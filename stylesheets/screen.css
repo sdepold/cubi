@@ -1,3 +1,5 @@
+@import url("/stylesheets/grass.css");
+
 body {
   font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
   font-size: 12px;
@@ -52,11 +54,11 @@ table td, table td:after {
 }
 
 table .accessable, table .tower {
-  background: url('../images/surfaces/ice.gif');
+  /*background: url('../images/surfaces/ice.gif');*/
 }
 
 table .path, table .monster {
-  background: url('../images/surfaces/path.gif') no-repeat;
+  /*background: url('../images/surfaces/path.gif') no-repeat;*/
 }
 
 table .tower:after, table .monster:after {

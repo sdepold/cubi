@@ -146,11 +146,13 @@
 
   var setPosition = function(cell) {
     if(this.cell) {
-      this.cell.setType(GridCell.TYPES.PATH)
+      Utils.removeClassName(this.cell.dom, GridCell.TYPES.MONSTER)
+      Utils.removeClassName(this.cell.dom, getClassName.call(this))
     }
 
     if(cell) {
-      cell.setType(GridCell.TYPES.MONSTER, [getClassName.call(this)])
+      Utils.addClassName(cell.dom, GridCell.TYPES.MONSTER)
+      Utils.addClassName(cell.dom, getClassName.call(this))
     }
 
     this.cell = cell

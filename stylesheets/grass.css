@@ -1,0 +1,81 @@
+.grass td, .grass td:after {
+  width: 20px;
+  height: 20px;
+  background: url('../images/surfaces/grass/tiles.gif');
+}
+
+.grass .accessable {
+  background-position: 0 -160px;
+}
+
+.grass .left {
+  background-position: 0 -40px;
+}
+
+.grass .right {
+  background-position: -80px -40px;
+}
+
+.grass .top {
+  background-position: -40px -0;
+}
+
+.grass .top-right {
+  background-position: -80px 0;
+}
+
+.grass .top-right-inner {
+  background-position: -80px -120px;
+}
+
+.grass .top-left {
+  background-position: 0 0;
+}
+
+.grass .top-left-inner {
+  background-position: -40px -120px;
+}
+
+.grass .bottom {
+  background-position: -40px -80px;
+}
+
+.grass .bottom-left {
+  background-position: 0 -80px;
+}
+
+.grass .bottom-left-inner {
+  background-position: -40px -160px;
+}
+
+.grass .bottom-right {
+  background-position: -80px -80px;
+}
+
+.grass .bottom-right-inner {
+  background-position: -80px -160px;
+}
+
+.grass .path {
+  background-position: -40px -40px;
+}
+
+.grass .path.version-1 {
+  background-position: -120px -0;
+}
+
+.grass .path.version-2 {
+  background-position: -120px -40px;
+}
+
+.grass .path.version-3 {
+  /*background-position: -120px -80px;*/
+}
+
+.grass .path.version-4 {
+  background-position: -120px -120px;
+}
+
+.grass .path.version-5 {
+  background-position: -120px -160px;
+}

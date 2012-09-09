@@ -2,8 +2,8 @@ var readyStateCheckInterval = setInterval(function() {
   if (document.readyState === "complete") {
     clearInterval(readyStateCheckInterval)
 
-    var cellWidth  = 24
-      , cellHeight = 28
+    var cellWidth  = 20
+      , cellHeight = 20
       , windowDim  = Utils.getWindowDimension()
       , cols       = ~~((windowDim.width - (4 * 2) - (1 * 2)) / cellWidth)
       , rows       = ~~((windowDim.height - 24 - (4 * 2) - (1 * 2)) / cellHeight)

@@ -16,9 +16,182 @@
     this.path.forEach(function(cell) {
       cell.setType(GridCell.TYPES.PATH)
     })
+
+    addPathSurroundings.call(this)
   }
 
   // private
+
+  var addPathSurroundings = function() {
+    this.path.forEach(function(cell) {
+      var pos = getPositionOfCell.call(this, cell)
+
+      if(pos.x > 0) {
+        var left = getCell.call(this, pos.x - 1, pos.y)
+
+        if(!Utils.hasClassName(left.dom, 'path')) {
+          Utils.addClassName(left.dom, 'left')
+        }
+      }
+
+      if(pos.x < this.cells[0].length - 1) {
+        var right = getCell.call(this, pos.x + 1, pos.y)
+
+        if(!Utils.hasClassName(right.dom, 'path')) {
+          Utils.addClassName(right.dom, 'right')
+        }
+      }
+
+      if(pos.y > 0) {
+        var top = getCell.call(this, pos.x, pos.y - 1)
+
+        if(!Utils.hasClassName(top.dom, 'path')) {
+          Utils.addClassName(top.dom, 'top')
+        }
+      }
+
+      if(pos.y < this.cells.length - 1) {
+        var bottom = getCell.call(this, pos.x, pos.y + 1)
+
+        if(!Utils.hasClassName(bottom.dom, 'path')) {
+          Utils.addClassName(bottom.dom, 'bottom')
+        }
+      }
+    }.bind(this))
+
+    ;(function() {
+      for(var y = 0; y < this.cells.length; y++) {
+        var colCells = this.cells[y]
+
+        for(var x = 0; x < colCells.length; x++) {
+          var cell = colCells[x]
+
+          if(x > 0) {
+            var left = getCell.call(this, x - 1, y)
+
+            if(!Utils.hasClassName(cell.dom, 'top') && Utils.hasClassName(left.dom, 'top')) {
+              Utils.addClassName(cell.dom, 'top-right')
+            }
+
+            if(!Utils.hasClassName(cell.dom, 'bottom') && Utils.hasClassName(left.dom, 'bottom')) {
+              Utils.addClassName(cell.dom, 'bottom-right')
+            }
+          }
+
+          if(x < colCells.length - 1) {
+            var right = getCell.call(this, x + 1, y)
+
+            if(!Utils.hasClassName(cell.dom, 'top') && Utils.hasClassName(right.dom, 'top')) {
+              Utils.addClassName(cell.dom, 'top-left')
+            }
+
+            if(!Utils.hasClassName(cell.dom, 'bottom') && Utils.hasClassName(right.dom, 'bottom')) {
+              Utils.addClassName(cell.dom, 'bottom-left')
+            }
+          }
+        }
+      }
+    }.bind(this))()
+
+    ;(function() {
+      for(var y = 0; y < this.cells.length; y++) {
+        var colCells = this.cells[y]
+
+        for(var x = 0; x < colCells.length; x++) {
+          var cell = colCells[x]
+
+          if(y > 0) {
+            var top = getCell.call(this, x, y - 1)
+
+            if(Utils.hasClassName(cell.dom, 'top') && Utils.hasClassName(top.dom, 'right')) {
+              Utils.removeClassName(cell.dom, 'top')
+              Utils.removeClassName(cell.dom, 'right')
+              Utils.addClassName(cell.dom, 'top-right-inner')
+            }
+
+            if(Utils.hasClassName(cell.dom, 'top') && Utils.hasClassName(top.dom, 'left')) {
+              Utils.removeClassName(cell.dom, 'top')
+              Utils.removeClassName(cell.dom, 'left')
+              Utils.addClassName(cell.dom, 'top-left-inner')
+            }
+          }
+
+          if(y < this.cells.length - 1) {
+            var bottom = getCell.call(this, x, y + 1)
+
+            if(Utils.hasClassName(cell.dom, 'bottom') && Utils.hasClassName(bottom.dom, 'right')) {
+              Utils.removeClassName(cell.dom, 'bottom')
+              Utils.removeClassName(cell.dom, 'right')
+              Utils.addClassName(cell.dom, 'bottom-right-inner')
+            }
+
+            if(Utils.hasClassName(cell.dom, 'bottom') && Utils.hasClassName(bottom.dom, 'left')) {
+              Utils.removeClassName(cell.dom, 'bottom')
+              Utils.removeClassName(cell.dom, 'left')
+              Utils.addClassName(cell.dom, 'bottom-left-inner')
+            }
+          }
+        }
+      }
+    }.bind(this))()
+
+    ;(function() {
+      for(var y = 0; y < this.cells.length; y++) {
+        var colCells = this.cells[y]
+
+        for(var x = 0; x < colCells.length; x++) {
+          var cell = colCells[x]
+
+          if(y > 0) {
+            var top = getCell.call(this, x, y - 1)
+
+            if(Utils.hasClassName(cell.dom, 'top') && Utils.hasClassName(top.dom, 'top-left')) {
+              Utils.removeClassName(cell.dom, 'top')
+              Utils.removeClassName(cell.dom, 'left')
+              Utils.addClassName(cell.dom, 'top-left-inner')
+            }
+
+            if(Utils.hasClassName(cell.dom, 'top') && Utils.hasClassName(top.dom, 'top-right')) {
+              Utils.removeClassName(cell.dom, 'top')
+              Utils.removeClassName(cell.dom, 'right')
+              Utils.addClassName(cell.dom, 'top-right-inner')
+            }
+          }
+
+          if(y < this.cells.length - 1) {
+            var bottom = getCell.call(this, x, y + 1)
+
+            if(Utils.hasClassName(cell.dom, 'bottom') && Utils.hasClassName(bottom.dom, 'bottom-right')) {
+              Utils.removeClassName(cell.dom, 'bottom')
+              Utils.removeClassName(cell.dom, 'right')
+              Utils.addClassName(cell.dom, 'bottom-right-inner')
+            }
+
+            if(Utils.hasClassName(cell.dom, 'bottom') && Utils.hasClassName(bottom.dom, 'bottom-left')) {
+              Utils.removeClassName(cell.dom, 'bottom')
+              Utils.removeClassName(cell.dom, 'left')
+              Utils.addClassName(cell.dom, 'bottom-left-inner')
+            }
+          }
+        }
+      }
+    }.bind(this))()
+
+    this.path.forEach(function(cell) {
+      var random = Math.random()
+      if(random < 0.025) {
+        Utils.addClassName(cell.dom, 'version-1')
+      } else if(random < 0.05) {
+        Utils.addClassName(cell.dom, 'version-2')
+      } else if(random < 0.1) {
+        Utils.addClassName(cell.dom, 'version-3')
+      } else if(random < 0.125) {
+        Utils.addClassName(cell.dom, 'version-4')
+      } else if(random < 0.15) {
+        Utils.addClassName(cell.dom, 'version-5')
+      }
+    }.bind(this))
+  }
 
   var createDOM = function() {
     var self = this
@@ -65,7 +238,7 @@
         , start = (lastWayPoint !== null) ? lastWayPoint : (~~(Math.random() * this.rows))
         , end   = ~~(Math.random() * this.rows)
 
-      if(colIndex % 2 === 0) {
+      if(colIndex % 4 !== 0) {
         cells.push(start)
         lastWayPoint = start
       } else {
@@ -88,10 +261,30 @@
   }
 
   var getCell = function(x, y) {
+
     var rows = this.container.querySelectorAll('tr')
       , row  = rows[y]
 
     return row.querySelectorAll('td')[x].cell
+  }
+
+  var getPositionOfCell = function(cell) {
+    for(var y = 0; y < this.cells.length; y++) {
+      var colCells = this.cells[y]
+
+      for(var x = 0; x < colCells.length; x++) {
+        var _cell = colCells[x]
+
+        if(cell === _cell) {
+          return {
+            x: x,
+            y: y
+          }
+        }
+      }
+    }
+
+    return { x: null, y: null }
   }
 
   window.Grid = Grid

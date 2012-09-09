@@ -5,16 +5,19 @@
       cols:         10
     }, options || {})
 
-    this.canvas       = document.querySelector(canvasSelector)
-    this.meta         = Utils.createDomNode('div', {id: 'meta-data'})
-    this.grid         = new Grid(this.options.rows, this.options.cols, this.canvas)
-    this.player       = new Player(canvasSelector, this.meta)
-    this.eventManager = new EventManager(this)
+    this.canvas           = document.querySelector(canvasSelector)
+    this.meta             = Utils.createDomNode('div', {id: 'meta-data'})
+    this.grid             = new Grid(this.options.rows, this.options.cols, this.canvas)
+    this.player           = new Player(canvasSelector, this.meta)
+    this.eventManager     = new EventManager(this)
+    this.towers           = []
 
-    this.towers   = []
+    Utils.addClassName(this.canvas, Game.THEMES[0])
   }
 
   Utils.addObserverMethodsToClass(Game)
+
+  Game.THEMES = ['grass']
 
   Game.prototype.render = function(options) {
     this.grid.render()

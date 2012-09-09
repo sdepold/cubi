@@ -1,4 +1,23 @@
 Utils = {
+  addClassName: function(dom, className) {
+    dom.className = dom.className
+      .split(' ')
+      .concat([className])
+      .filter(function(name) { return name !== '' })
+      .join(' ')
+  },
+
+  hasClassName: function(dom, className) {
+    return dom.className.split(' ').indexOf(className) !== -1
+  },
+
+  removeClassName: function(dom, className) {
+    dom.className = dom.className
+      .split(' ')
+      .filter(function(name) { return name !== className })
+      .join(' ')
+  },
+
   getWindowDimension: function() {
     var w=window,d=document,e=d.documentElement,g=d.getElementsByTagName('body')[0],x=w.innerWidth||e.clientWidth||g.clientWidth,y=w.innerHeight||e.clientHeight||g.clientHeight
 

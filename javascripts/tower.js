@@ -16,7 +16,7 @@
       explosionOffset: -2,
       costs:           [50, 100, 200],
       damages:         [3, 5, 7],
-      ranges:          [1, 1.5, 2],
+      ranges:          [3, 3.5, 4],
       frequencies:     [300, 225, 150]
     },
 

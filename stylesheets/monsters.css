@@ -1,0 +1,89 @@
+table .monster > div {
+  position: relative;
+}
+
+table .monster > div:before {
+  content: '';
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  display: block;
+}
+
+table .monster > div:before {
+  background: url('../images/monsters/mech-heavy.gif') no-repeat 4px 5px;
+}
+
+table .beast > div:before {
+  background: url('../images/monsters/beast.gif') no-repeat 4px 9px;
+}
+
+table .scout-lite > div:before {
+  background: url('../images/monsters/scout-lite.gif') no-repeat 6px 10px;
+}
+
+table .scout-mid > div:before {
+  background: url('../images/monsters/scout-mid.gif') no-repeat 4px 9px;
+}
+
+table .scout-heavy > div:before {
+  background: url('../images/monsters/scout-heavy.gif') no-repeat 4px 7px;
+}
+
+table .amphibian-lite > div:before {
+  background: url('../images/monsters/amphibian-lite.gif') no-repeat;
+}
+
+table .tank-lite > div:before {
+  background: url('../images/monsters/tank-lite.gif') no-repeat 3px 8px;
+}
+
+table .tank-lite-2 > div:before {
+  background: url('../images/monsters/tank-lite-2.gif') no-repeat 3px 7px;
+}
+
+table .tank-mid > div:before {
+  background: url('../images/monsters/tank-mid.gif') no-repeat 3px 7px;
+}
+
+table .tank-laser > div:before {
+  background: url('../images/monsters/tank-laser.gif') no-repeat 3px 7px;
+}
+
+table .tank-heavy > div:before {
+  background: url('../images/monsters/tank-heavy.gif') no-repeat 4px 6px;
+}
+
+table .mech-lite > div:before {
+  background: url('../images/monsters/mech-lite.gif') no-repeat 3px 4px;
+}
+
+table .mech-mid > div:before {
+  background: url('../images/monsters/mech-mid.gif') no-repeat 4px 6px;
+}
+
+.giant.airship {
+  position: absolute;
+  top: 50%;
+  margin-top: -60px;
+  left: -260px;
+  transition: all 120s linear;
+
+  width: 256px;
+  height: 100px;
+  background: rgba(0, 0, 0, 0.4);
+  display: block;
+  border-radius: 281px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 1);
+}
+
+.giant.airship:after {
+  content: '';
+  background: url('/images/monsters/airship-giant.gif');
+  display: block;
+  width: 260px;
+  height: 127px;
+  position: relative;
+  top: -36px;
+  left: -16px;
+}

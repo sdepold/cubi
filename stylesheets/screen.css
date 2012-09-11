@@ -11,6 +11,12 @@ body {
   position: relative;
   border: 1px solid black;
   box-shadow:  0 0 5px 0 rgba(0, 0, 0, 1);
+  transition: all 0.02s linear;
+}
+
+#game table {
+  position: relative;
+  transition: all 0.02s linear;
 }
 
 .range {

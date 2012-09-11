@@ -22,6 +22,7 @@ table .turret > div:before, .menu .turret:before {
 
 table .rocket > div:before, .menu .rocket:before {
   background: transparent url('../images/towers/rocket.gif') no-repeat;
+  width: 24px !important;
 }
 
 table .ultra > div:before, .menu .ultra:before {

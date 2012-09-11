@@ -67,7 +67,6 @@ table .mech-mid > div:before {
   top: 50%;
   margin-top: -60px;
   left: -260px;
-  left: 200px;
   transition: all 120s linear, opacity 1.5s linear;
 
   width: 256px;

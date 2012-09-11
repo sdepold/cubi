@@ -14,6 +14,9 @@ var readyStateCheckInterval = setInterval(function() {
 
     game = new Game('#game', { cols: cols, rows: rows }).render()
 
-    document.getElementById('meta-data').style.width = (document.querySelector('#game').offsetWidth - 10) + 'px'
+    var gameDom     = document.getElementById('game')
+      , metaDataDom = document.getElementById('meta-data')
+
+    metaDataDom.style.width = (gameDom.offsetWidth - 10) + 'px'
   }
 }, 10)

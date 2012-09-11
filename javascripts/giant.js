@@ -43,7 +43,7 @@
   Giant.prototype.die = function() {
     if(!this.hasTriggeredKilledEvent) {
       this.hasTriggeredKilledEvent = true
-      document.querySelector('#game').removeChild(this.dom)
+      animateDestruction.call(this)
       this.fire('killed')
     }
   }
@@ -58,6 +58,35 @@
 
   // private
 
+  var animateDestruction = function() {
+    var game = document.getElementById('game')
+
+    Utils.shakeScreen(2000, 20, function() {
+      game.removeChild(this.dom)
+    }.bind(this))
+
+    this.dom.style.opacity = 0
+
+
+    for (var i = 0; i < 50; i++) {
+      setTimeout(function() {
+        var explosion = Utils.createDomNode('div', {
+          className: 'explosion big',
+          style: {
+            left: Math.random() * this.dom.offsetWidth + this.dom.offsetLeft - 40 + 'px',
+            top: Math.random() * this.dom.offsetHeight + this.dom.offsetTop - 40 + 'px'
+          }
+        })
+
+        game.appendChild(explosion)
+
+        setTimeout(function() {
+          game.removeChild(explosion)
+        }, 1000)
+      }.bind(this), Math.random() * 1000)
+
+    }
+  }
 
   window.Giant = Giant
 })()

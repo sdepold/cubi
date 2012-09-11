@@ -121,6 +121,25 @@ Utils = {
     }
 
     return node
+  },
+
+  shakeScreen: function(duration, delay, callback) {
+    var now   = +new Date()
+      , canvas = document.querySelector('#game > table')
+
+    var shakeId = setInterval(function() {
+      canvas.style.left = ((Math.random() - 0.5) * 10) + 'px'
+      canvas.style.top = ((Math.random() - 0.5) * 10) + 'px'
+
+      if ((+new Date() - now) >= duration){
+        canvas.style.left = canvas.style.top = '0px'
+        clearInterval(shakeId)
+
+        if (callback) {
+          callback()
+        }
+      }
+    }, delay)
   }
 }
 

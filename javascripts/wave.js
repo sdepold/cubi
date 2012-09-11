@@ -59,7 +59,7 @@
       monsterType: 'beast',
       monsterCount: 100,
       giantType: 'airship',
-      giantCount: 1
+      giantCount: 10
     }
   ]
 
@@ -196,7 +196,7 @@
     }
 
     if(roundData.giantType) {
-      var giantSpeed = 10 * 1000
+      var giantSpeed = 20 * 1000
 
       spawnMonsterType.call(this, roundData.giantType, roundData.giantCount, giantSpeed)
 

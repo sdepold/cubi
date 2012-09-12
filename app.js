@@ -1,5 +1,5 @@
 const staticServer = require('node-static')
-    , Sequelize    = require('Sequelize')
+    , Sequelize    = require('sequelize')
     , fs           = require("fs")
     , http         = require('http')
     , router       = require('router')

@@ -5,7 +5,7 @@ const staticServer = require('node-static')
     , router       = require('router')
     , route        = router()
     , port         = process.env.PORT || 8080
-
+    , querystring  = require('querystring')
 
 var file       = new staticServer.Server('./')
   , configFile = __dirname + "/" + (process.env.CONFIG_PATH || "config/config.json")
@@ -28,8 +28,33 @@ sequelize
     console.log('Successfully synced database scheme.')
 
     route.get('/highscore', function(request, response) {
-      response.writeHead(200)
-      response.end('hello index page')
+      Highscore.findAll({ order: 'score desc', limit: 100 }).success(function(data) {
+        response.writeHead(200)
+        response.end(JSON.stringify(data))
+      })
+    })
+
+    route.post('/highscore', function(request, response) {
+      var body = ''
+
+      request.on('data', function (data) {
+        body += data
+      })
+
+      request.on('end', function () {
+        var params = querystring.parse(body)
+
+        Highscore.create({
+          username: params.username,
+          score:    params.score
+        }).success(function() {
+          response.writeHead(200)
+          response.end(JSON.stringify(params))
+        }).error(function() {
+          response.writeHead(400)
+          response.end()
+        })
+      })
     })
 
     route.get("/*", function(request, response) {
@@ -37,7 +62,6 @@ sequelize
         file.serve(request, response)
       })
     })
-
 
     http.createServer(route).listen(8080);
 

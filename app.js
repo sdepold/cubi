@@ -6,8 +6,6 @@ const staticServer = require('node-static')
     , route        = router()
     , querystring  = require('querystring')
 
-
-
 var file       = new staticServer.Server('./')
   , port       = process.env.PORT || 8080
   , configFile = __dirname + "/" + (process.env.CONFIG_PATH || "config/config.json")
@@ -65,7 +63,7 @@ sequelize
       })
     })
 
-    http.createServer(route).listen(8080);
+    http.createServer(route).listen(port);
 
     console.log('Started server under http://127.0.0.1:' + port)
   })

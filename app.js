@@ -4,10 +4,12 @@ const staticServer = require('node-static')
     , http         = require('http')
     , router       = require('router')
     , route        = router()
-    , port         = process.env.PORT || 8080
     , querystring  = require('querystring')
 
+
+
 var file       = new staticServer.Server('./')
+  , port       = process.env.PORT || 8080
   , configFile = __dirname + "/" + (process.env.CONFIG_PATH || "config/config.json")
   , config     = JSON.parse(process.env.CONFIG || fs.readFileSync(configFile))
   , sequelize  = new Sequelize(config.database, config.username, config.password, {

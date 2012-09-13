@@ -57,6 +57,12 @@ sequelize
       })
     })
 
+    route.get('/', function(request, response) {
+      request.addListener('end', function() {
+        file.serveFile('/index.html', 200, {}, request, response);
+      })
+    })
+
     route.get("/*", function(request, response) {
       request.addListener('end', function () {
         file.serve(request, response)

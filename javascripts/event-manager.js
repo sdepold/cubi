@@ -41,6 +41,7 @@
         clearInterval(intervalId)
         this.game.player.earn(monster.getRevenue())
         this.game.player.recordStat('killedMonsters', 1)
+        this.game.player.recordStat('highscore', ~(this.game.player.cash * this.game.player.life / 1000))
       }.bind(this))
 
       monster.on('goal:reached', function() {

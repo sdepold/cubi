@@ -8,7 +8,8 @@
       spentMoney:     0,
       earnedMoney:    0,
       killedMonsters: 0,
-      upgradedTowers: 0
+      upgradedTowers: 0,
+      highscore:      0
     }
   }
 

@@ -41,7 +41,7 @@
         clearInterval(intervalId)
         this.game.player.earn(monster.getRevenue())
         this.game.player.recordStat('killedMonsters', 1)
-        this.game.player.recordStat('highscore', ~(this.game.player.cash * this.game.player.life / 1000))
+        this.game.player.recordStat('highscore', ~~(this.game.player.cash * this.game.player.life / 1000))
       }.bind(this))
 
       monster.on('goal:reached', function() {
@@ -169,60 +169,18 @@
   }
 
   var showGameEndDialog = function(headline) {
-    var div = document.createElement('div')
-      , ul  = Utils.createDomNode('ul', { className: 'game-over' })
+    var template = document.getElementById('highscore-template').innerHTML
+      , div      = document.createElement('div')
 
-    ul.appendChild(Utils.createDomNode('li', { value: headline }))
-    ul.appendChild(Utils.createDomNode('li'))
-    ul.appendChild(Utils.createDomNode('li', { value: "Spent money: " + this.game.player.stats.spentMoney + '$' }))
-    ul.appendChild(Utils.createDomNode('li', { value: "Earned money: " + this.game.player.stats.earnedMoney + '$' }))
-    ul.appendChild(Utils.createDomNode('li', { value: "Killed monsters: " + this.game.player.stats.killedMonsters }))
-    ul.appendChild(Utils.createDomNode('li', { value: "Upgraded towers: " + this.game.player.stats.upgradedTowers }))
+    template = template.replace('%{spentMoney}', this.game.player.stats.spentMoney)
+                       .replace('%{earnedMoney}', this.game.player.stats.earnedMoney)
+                       .replace('%{killedMonsters}', this.game.player.stats.killedMonsters)
+                       .replace('%{killedMonsters}', this.game.player.stats.killedMonsters)
+                       .replace('%{upgradedTowers}', this.game.player.stats.upgradedTowers)
+                       .replace('%{upgradedTowers}', this.game.player.stats.upgradedTowers)
+                       .replace('%{highscore}', this.game.player.stats.highscore)
 
-    var link = Utils.createDomNode('li')
-    link.appendChild(Utils.createDomNode('a', {
-      value: 'Restart the game!',
-      href: '#',
-      onclick: function() { window.location.reload() }
-    }))
-    ul.appendChild(link)
-
-    div.appendChild(ul)
-
-    div.appendChild(Utils.createDomNode('a', {
-      href: 'https://twitter.com/share',
-      className: 'twitter-share-button',
-      'data-url': 'http://cubi.depold.com',
-      'data-text': "Just played Cubi by @sdepold and killed " + this.game.player.stats.killedMonsters + " monsters :) Give it a try!",
-      'data-count': "horizontal",
-      value: 'Tweet'
-    }))
-    div.appendChild(Utils.createDomNode('iframe', {
-      src: 'http://www.facebook.com/plugins/like.php?href=http://cubi.depold.com/&amp;send=false&amp;layout=button_count&amp;width=110&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font=segoe+ui&amp;height=21',
-      scrolling: 'no',
-      frameborder: '0',
-      style: {
-        border: 'none',
-        overflow: 'hidden',
-        width: '130px',
-        height: '21px'
-      },
-      allowTransparency: 'true'
-    }))
-    div.appendChild(Utils.createDomNode('g:plusone', {
-      size: 'medium',
-      href: 'http://cubi.depold.com'
-    }))
-
-    document.body.appendChild(Utils.createDomNode('script', {
-      type: 'text/javascript',
-      src: 'https://apis.google.com/js/plusone.js'
-    }))
-
-    document.body.appendChild(Utils.createDomNode('script', {
-      type: 'text/javascript',
-      src: 'http://platform.twitter.com/widgets.js'
-    }))
+    div.innerHTML = template
 
     PopUp.notify(div, { sticky: true })
   }

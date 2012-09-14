@@ -28,7 +28,7 @@ sequelize
     console.log('Successfully synced database scheme.')
 
     route.get('/highscore', function(request, response) {
-      Highscore.findAll({ order: 'score desc', limit: 100 }).success(function(data) {
+      Highscore.findAll({ order: 'score desc', limit: 5 }).success(function(data) {
         response.writeHead(200)
         response.end(JSON.stringify(data))
       })

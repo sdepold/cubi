@@ -1,27 +1,54 @@
 (function() {
-  var GameOver = function(headline) {
+  var GameOver = function(headline, stats) {
     this.headline = headline
+    this.stats    = stats
   }
 
   GameOver.prototype.getTemplate = function() {
     return document.getElementById('highscore-template').innerHTML
   }
 
-  GameOver.prototype.render = function(stats) {
-    var div  = document.createElement('div')
+  GameOver.prototype.render = function() {
+    var div = Utils.createDomNode('div', { className: 'game-over' })
 
-    div.innerHTML = this.getTemplate()
-      .replace('%{headline}',        this.headline)
-      .replace('%{spentMoney}',      stats.spentMoney)
-      .replace('%{earnedMoney}',     stats.earnedMoney)
-      .replace('%{killedMonsters}',  stats.killedMonsters)
-      .replace('%{killedMonsters}',  stats.killedMonsters)
-      .replace('%{upgradedTowers}',  stats.upgradedTowers)
-      .replace('%{upgradedTowers}',  stats.upgradedTowers)
-      .replace('%{highscore}',       stats.highscore)
+    this.getHighscore(function(highscores) {
+      div.innerHTML = this.getTemplate()
+        .replace('%{headline}',        this.headline)
+        .replace('%{spentMoney}',      this.stats.spentMoney)
+        .replace('%{earnedMoney}',     this.stats.earnedMoney)
+        .replace('%{killedMonsters}',  this.stats.killedMonsters)
+        .replace('%{killedMonsters}',  this.stats.killedMonsters)
+        .replace('%{upgradedTowers}',  this.stats.upgradedTowers)
+        .replace('%{upgradedTowers}',  this.stats.upgradedTowers)
+        .replace('%{highscore}',       this.stats.highscore)
+        .replace('%{highscoreList}',   eval(highscores).map(function(highscore) {
+          return '<li>' + highscore.score + ' (' + highscore.username + ')</li>'
+        }).join(''))
 
-    var popUp = PopUp.notify(div, { sticky: true })
+      var popUp = PopUp.notify(div, { sticky: true })
 
+      document.body.appendChild(Utils.createDomNode('div', {
+        className: 'game-over-background'
+      }))
+
+      setPosition.call(this, popUp)
+      bindHighscoreButton.call(this)
+    }.bind(this))
+  }
+
+
+  GameOver.prototype.getHighscore = function(callback) {
+    microAjax('/highscore', callback)
+  }
+
+  GameOver.prototype.postHighscore = function(username) {
+    var postData = "username=" + username + "&score=" + this.stats.highscore
+    microAjax('/highscore', function(data) {}, postData)
+  }
+
+  // private
+
+  var setPosition = function(popUp) {
     popUp.dom.style.left = popUp.dom.style.top = '50%'
     popUp.dom.style.marginLeft = -(popUp.dom.offsetWidth / 2) + 'px'
     popUp.dom.style.marginTop  = -(popUp.dom.offsetHeight / 2) + 'px'
@@ -37,10 +64,20 @@
 
     shadow.style.marginLeft = left + 4 + 'px'
     shadow.style.marginTop = top + 4 + 'px'
+  }
 
-    document.body.appendChild(Utils.createDomNode('div', {
-      className: 'game-over-background'
-    }))
+  var bindHighscoreButton = function() {
+    var button = document.getElementById('save-highscore-button')
+
+    button.onclick = function() {
+      var username = prompt('Please enter a nickname:')
+
+      if(username !== null) {
+        this.postHighscore(username)
+      }
+
+      return false
+    }.bind(this)
   }
 
   window.PopUp.GameOver = GameOver

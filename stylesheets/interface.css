@@ -112,26 +112,22 @@ div.game-over-background {
   left: -20px !important;
 }
 
-ul.game-over {
+.game-over ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
 
-ul.game-over li:first-child {
-  font-size: 18px;
-  border-bottom: 1px dashed #888;
-}
-
-ul.game-over li {
-  line-height: 28px;
-}
-
-ul.game-over li:last-child {
+.game-over ul:not(.headline) li:first-child {
+  /*font-size: 18px;*/
   border-top: 1px dashed #888;
 }
 
-ul.game-over a {
+.game-over li {
+  line-height: 28px;
+}
+
+.game-over a {
   color: white;
   margin-top: 5px;
   display: block;

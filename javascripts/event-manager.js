@@ -108,14 +108,14 @@
 
   var observePlayer = function() {
     this.game.player.on('killed', function() {
-      new PopUp.GameOver('Oh my gosh, you died!').render(this.game.player.stats)
+      new PopUp.GameOver('Oh my gosh, you died!', this.game.player.stats).render()
     }.bind(this))
 
     this.game.player.on('won', function() {
       document.querySelectorAll('.monster').forEach(function(monster) {
         monster.className = monster.className.replace('monster', 'path')
       })
-      new PopUp.GameOver("Woot woot! You've won the match!").render(this.game.player.stats)
+      new PopUp.GameOver("Woot woot! You've won the match!", this.game.player.stats).render()
     }.bind(this))
   }
 

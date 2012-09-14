@@ -1,0 +1,50 @@
+.badge, .badge-shadow, .badge-value {
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}
+
+.badge,
+.badge:before,
+.badge:after,
+.badge-value
+{
+  height: 80px;
+  width: 80px;
+  background: white;
+  opacity: 0.7;
+}
+
+.badge-shadow,
+.badge-shadow:before,
+.badge-shadow:after
+{
+  height: 72px;
+  width: 72px;
+  background: black;
+  opacity: 0.95;
+}
+
+.badge-value {
+  padding-top: 30px;
+  font-size: 20px;
+  background: transparent;
+  opacity: 1;
+  color: white;
+}
+
+.badge:before, .badge:after, .badge-shadow:before, .badge-shadow:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.badge:before, .badge-shadow:before {
+  transform: rotate(30deg);
+}
+
+.badge:after, .badge-shadow:after {
+  transform: rotate(60deg);
+}

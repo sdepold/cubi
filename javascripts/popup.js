@@ -23,6 +23,8 @@
         }
       }, 2000)
     }
+
+    return popUp
   }
 
   PopUp.prototype.setContent = function(content) {

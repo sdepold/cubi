@@ -108,14 +108,14 @@
 
   var observePlayer = function() {
     this.game.player.on('killed', function() {
-      showGameEndDialog.call(this, 'Oh my gosh, you died!')
+      new PopUp.GameOver('Oh my gosh, you died!').render(this.game.player.stats)
     }.bind(this))
 
     this.game.player.on('won', function() {
       document.querySelectorAll('.monster').forEach(function(monster) {
         monster.className = monster.className.replace('monster', 'path')
       })
-      showGameEndDialog.call(this, "Woot woot! You've won the match!")
+      new PopUp.GameOver("Woot woot! You've won the match!").render(this.game.player.stats)
     }.bind(this))
   }
 
@@ -169,6 +169,7 @@
   }
 
   var showGameEndDialog = function(headline) {
+
     var template = document.getElementById('highscore-template').innerHTML
       , div      = document.createElement('div')
 

@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" href="stylesheets/screen.css" />
     <link rel="stylesheet" href="stylesheets/interface.css" />
+    <link rel="stylesheet" href="stylesheets/badge.css" />
     <link rel="stylesheet" href="stylesheets/surfaces/grass.css" />
     <link rel="stylesheet" href="stylesheets/grid.css" />
     <link rel="stylesheet" href="stylesheets/explosions.css" />
@@ -14,9 +15,11 @@
     <link rel="stylesheet" href="stylesheets/monsters.css" />
 
     <script src="javascripts/prefixfree.min.js"></script>
+    <script src="javascripts/microajax.minified.js"></script>
     <script src="javascripts/polyfills.js"></script>
     <script src="javascripts/utils.js"></script>
     <script src="javascripts/popup.js"></script>
+    <script src="javascripts/popup.gameover.js"></script>
     <script src="javascripts/event-manager.js"></script>
     <script src="javascripts/grid.js"></script>
     <script src="javascripts/grid-cell.js"></script>
@@ -34,14 +37,16 @@
     <div id="game"></div>
 
     <script type="text/template" id="highscore-template">
+      <div class="badge"></div>
+      <div class="badge-shadow"></div>
+      <div class="badge-value">%{highscore}</div>
       <ul class="game-over">
-        <li>Oh my gosh, you died!</li>
+        <li>%{headline}</li>
         <li></li>
         <li>Spent money: %{spentMoney}$</li>
         <li>Earned money: %{earnedMoney}$</li>
         <li>Killed monsters: %{killedMonsters}</li>
         <li>Upgraded towers: %{upgradedTowers}</li>
-        <li>Highscore: %{highscore}</li>
         <li><a href="/">Restart the game!</a></li>
       </ul>
     </script>

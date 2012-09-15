@@ -23,7 +23,7 @@ var Highscore = sequelize.define('highscore', {
 })
 
 sequelize
-  .sync({ force: true })
+  .sync()
   .success(function() {
     console.log('Successfully synced database scheme.')
 

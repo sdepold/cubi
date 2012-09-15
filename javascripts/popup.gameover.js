@@ -21,8 +21,8 @@
         .replace('%{upgradedTowers}',  this.stats.upgradedTowers)
         .replace('%{upgradedTowers}',  this.stats.upgradedTowers)
         .replace('%{highscore}',       this.stats.highscore)
-        .replace('%{highscoreList}',   eval(highscores).map(function(highscore) {
-          return '<li>' + highscore.score + ' (' + highscore.username + ')</li>'
+        .replace('%{highscoreList}',   eval(highscores).map(function(highscore, i) {
+          return '<li>' + (i + 1) + '. ' + highscore.score + ' (' + highscore.username + ')</li>'
         }).join(''))
 
       var popUp = PopUp.notify(div, { sticky: true })
@@ -67,13 +67,18 @@
   }
 
   var bindHighscoreButton = function() {
-    var button = document.getElementById('save-highscore-button')
+    var button  = document.getElementById('save-highscore-button')
+      , clicked = false
 
     button.onclick = function() {
-      var username = prompt('Please enter a nickname:')
+      if(!clicked) {
+        var username = prompt('Please enter a nickname:')
 
-      if(username !== null) {
-        this.postHighscore(username)
+        if(username !== null) {
+          clicked = true
+          this.postHighscore(username)
+          button.innerHTML = 'Highscore saved!'
+        }
       }
 
       return false

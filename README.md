@@ -3,7 +3,7 @@ This project is my entry for [js13kgames](http://js13kgames.com/). It's a tower 
 
 ## Play the game!
 
-[Just click here :)](http://sdepold.github.com/cubi/index.html)
+[Just click here :)](http://cubi.depold.com)
 
 ## "13" related details
 - 13 monster types
@@ -58,10 +58,10 @@ npm run check
 
 ## Full featured game start
 
-As this game uses `prefixfree` it is necessary to start the game via a webserver:
+As this game uses `stylus` it is necessary to start the game via a webserver:
 
 ```js
-npm run server
+node app.js
 ```
 
 Afterwards just open the game via `http://localhost:8080`.

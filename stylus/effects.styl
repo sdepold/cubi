@@ -1,0 +1,23 @@
+@import 'nib';
+
+@keyframes blink {
+  0%   { opacity: 1; }
+  10%  { opacity: 0.8; }
+  20%  { opacity: 0.6; }
+  30%  { opacity: 0.4; }
+  40%  { opacity: 0.2; }
+  50%  { opacity: 0; }
+  60%  { opacity: 0.2; }
+  70%  { opacity: 0.4; }
+  80%  { opacity: 0.6; }
+  90%  { opacity: 0.8; }
+  100% { opacity: 1; }
+}
+
+.blink {
+  opacity: 1;
+  animation-timing-function: step-start;
+  animation-duration: 1000ms;
+  animation-name: blink;
+  animation-iteration-count: infinite;
+}

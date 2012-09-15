@@ -76,8 +76,13 @@
 
         if(username !== null) {
           clicked = true
+          button.className = 'blink'
           this.postHighscore(username)
           button.innerHTML = 'Highscore saved!'
+
+          setTimeout(function() {
+            button.parentNode.parentNode.removeChild(button.parentNode)
+          }, 1000)
         }
       }
 

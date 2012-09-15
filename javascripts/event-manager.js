@@ -115,7 +115,7 @@
       document.querySelectorAll('.monster').forEach(function(monster) {
         monster.className = monster.className.replace('monster', 'path')
       })
-      new PopUp.GameOver("Woot woot! You've won the match!", this.game.player.stats).render()
+      new PopUp.GameOver("You've won the match!", this.game.player.stats).render()
     }.bind(this))
   }
 

@@ -5,6 +5,8 @@ const staticServer = require('node-static')
     , router       = require('router')
     , route        = router()
     , querystring  = require('querystring')
+    , stylus       = require('stylus')
+    , nib          = require('nib')
 
 var file       = new staticServer.Server('./')
   , port       = process.env.PORT || 8080
@@ -63,7 +65,32 @@ sequelize
       })
     })
 
+    route.get("/stylesheets/*", function(request, response) {
+      try {
+        var path       = __dirname + '/stylus/' + request.params.wildcard
+          , stylesheet = fs.readFileSync(path.replace('.css', '.stylus')).toString()
+
+        stylus(stylesheet)
+          .set('filename', path)
+          // .set('compress', true)
+          .use(nib())
+          .render(function(err, css) {
+            if (err) {
+              throw err
+            } else {
+              console.log(css)
+              response.writeHead(200)
+              response.end(css)
+            }
+          })
+      } catch(e) {
+        response.writeHead(404)
+        response.end(JSON.stringify(e))
+      }
+    })
+
     route.get("/*", function(request, response) {
+      console.log('Static file call to: ' + request.params.wildcard)
       request.addListener('end', function () {
         file.serve(request, response)
       })

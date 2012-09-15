@@ -1,0 +1,41 @@
+@import 'nib';
+
+body {
+  font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
+  font-size: 12px;
+  margin: 4px;
+  padding: 0;
+}
+
+#game {
+  overflow: hidden;
+  display: inline-block;
+  position: relative;
+  border: 1px solid black;
+  box-shadow:  0 0 5px 0 rgba(0, 0, 0, 1);
+  transition: all 0.02s linear;
+}
+
+#game table {
+  position: relative;
+  transition: all 0.02s linear;
+}
+
+.range {
+  position: absolute;
+  background: orange;
+  border-radius: 50%;
+  opacity: 0.5;
+  border: 2px solid yellow;
+}
+
+.bullet {
+  transition: all 0.25s linear;
+  position: absolute;
+  height: 5px;
+  width: 5px;
+  background: black;
+  opacity: 0.9;
+  border-radius: 50%;
+}
+

@@ -78,7 +78,6 @@ sequelize
             if (err) {
               throw err
             } else {
-              console.log(css)
               response.writeHead(200)
               response.end(css)
             }

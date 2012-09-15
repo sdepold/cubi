@@ -1,3 +1,5 @@
+@import 'nib';
+
 table .monster > div {
   position: relative;
 }

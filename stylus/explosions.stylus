@@ -1,3 +1,5 @@
+@import 'nib';
+
 @keyframes explosion-small {
   0%     { background-position:   0    0; }
   12.5%  { background-position: -10px  0; }

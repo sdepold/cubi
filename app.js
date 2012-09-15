@@ -68,7 +68,7 @@ sequelize
     route.get("/stylesheets/*", function(request, response) {
       try {
         var path       = __dirname + '/stylus/' + request.params.wildcard
-          , stylesheet = fs.readFileSync(path.replace('.css', '.stylus')).toString()
+          , stylesheet = fs.readFileSync(path.replace('.css', '.styl')).toString()
 
         stylus(stylesheet)
           .set('filename', path)

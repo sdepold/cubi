@@ -112,6 +112,10 @@ div.game-over-background {
   left: -20px !important;
 }
 
+.game-over {
+  min-width: 240px;
+}
+
 .game-over ul {
   list-style-type: none;
   margin: 0;

@@ -22,6 +22,7 @@
   SoundManager.SOUND_DELAY   = 100
 
   SoundManager.prototype.play = function(type) {
+    return;
     var sound = this.sounds[type]
 
     if (!sound) {

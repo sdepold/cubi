@@ -13,7 +13,7 @@
     TURRET: {
       name:            'Turret',
       explosion:       'small',
-      explosionOffset: -2,
+      explosionOffset: 0,
       costs:           [50, 100, 200],
       damages:         [3, 5, 7],
       ranges:          [3, 3.5, 4],
@@ -23,7 +23,7 @@
     ROCKET: {
       name:            'Rocket Tower',
       explosion:       'mid',
-      explosionOffset: -6,
+      explosionOffset: -5,
       costs:           [200, 400, 600],
       damages:         [200, 300, 400],
       ranges:          [5, 7, 9],

@@ -10,7 +10,7 @@
         volume: 30
       },
       'turret-shoot':     {
-        file:   '/sounds/turret-shoot-4.wav',
+        file:   '/sounds/turret-shoot.wav',
         volume: 70
       }
     }

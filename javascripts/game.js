@@ -6,9 +6,9 @@
     }, options || {})
 
     this.canvas           = document.querySelector(canvasSelector)
-    this.meta             = Utils.createDomNode('div', {id: 'meta-data'})
+    this.metaBar          = new MetaBar()
     this.grid             = new Grid(this.options.rows, this.options.cols, this.canvas)
-    this.player           = new Player(canvasSelector, this.meta)
+    this.player           = new Player(canvasSelector, this.metaBar)
     this.eventManager     = new EventManager(this)
     this.towers           = []
 
@@ -22,8 +22,8 @@
   Game.prototype.render = function(options) {
     this.grid.render()
     this.player.render()
+    this.metaBar.render()
 
-    document.body.appendChild(this.meta)
     drawForceSpawnMenu.call(this)
 
     this.eventManager.init()
@@ -42,35 +42,23 @@
   }
 
   Game.prototype.disableForcedSpawn = function() {
-    getForceSpawnMenu.call(this).className = 'disabled'
+    this.metaBar.get('force-next-wave').className = 'disabled'
   }
 
   Game.prototype.enableForcedSpawn = function() {
-    getForceSpawnMenu.call(this).className = ''
+    this.metaBar.get('force-next-wave').className = ''
   }
 
   // private
 
-  var getForceSpawnMenu = function() {
-    var container = document.getElementById('force-next-wave')
-
-    if(!container) {
-      container = this.meta.appendChild(
-        Utils.createDomNode('span', {id: 'force-next-wave'})
-      )
-    }
-
-    return container
-  }
-
   var drawForceSpawnMenu = function() {
-    var container = getForceSpawnMenu.call(this)
-      , message   = Utils.needsReducedLayout() ? 'Next wave' : "Force next wave"
+    var value = Utils.needsReducedLayout() ? 'Next wave' : "Force next wave"
 
-    container.innerHTML = message
-    container.onclick = function() {
-      this.fire('wave:spawn')
-    }.bind(this)
+    this.metaBar.add( 'force-next-wave', value, {
+      onclick: function() {
+        this.fire('wave:spawn')
+      }.bind(this)
+    })
   }
 
   window.Game = Game

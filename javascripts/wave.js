@@ -1,12 +1,12 @@
 (function() {
-  var Wave = function(round, path) {
+  var Wave = function(round, path, metaBar) {
     this.round                 = round
     this.path                  = path
 
     this.spawnedMonsters       = 0
     this.monsters              = []
 
-    this.meta                  = document.getElementById('meta-data')
+    this.metaBar               = metaBar
     this.moveIntervalId        = null
     this.updateTimerIntervalId = null
     this.spawnTimeoutId        = null
@@ -143,40 +143,29 @@
     }.bind(this), 100)
   }
 
-  var getTimerContainer = function() {
-    var container = document.getElementById('wave-duration')
-
-    if(!container) {
-      container = document.createElement('span')
-      container.id = 'wave-duration'
-
-      this.meta.appendChild(container)
-    }
-
-    return container
-  }
-
   var setTimerContainerText = function(seconds) {
-    var container = getTimerContainer.call(this)
-      , message   = Utils.needsReducedLayout() ? "#%{wave}: %{seconds}s" : "Wave #%{wave} starts in %{seconds}s"
+    var message   = Utils.needsReducedLayout() ? "#%{wave}: %{seconds}s" : "Wave #%{wave} starts in %{seconds}s"
+      , value     = Utils.interpolate(message, {
+          wave: this.round,
+          seconds: seconds
+        })
+      , className = ''
 
     if(seconds === 0) {
-      setTimerContainerClass.call(this, 'disabled')
+      className = 'disabled'
       this.fire('timer:disabled')
     } else {
-      setTimerContainerClass.call(this, '')
       this.fire('timer:enabled')
     }
 
-    container.innerHTML = Utils.interpolate(message, {
-      wave: this.round,
-      seconds: seconds
+    this.metaBar.updateOrAdd('wave-duration', value, {
+      className: className
     })
   }
 
   var setTimerContainerClass = function(classes) {
     classes = Array.isArray(classes) ? classes : [classes]
-    getTimerContainer.call(this).className = classes.join(' ')
+    this.metaBar.get('wave-duration').className = classes.join(' ')
   }
 
   var spawnMonsters = function() {

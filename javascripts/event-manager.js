@@ -242,7 +242,7 @@
       round = prevWave.round + 1
     }
 
-    observeWave.call(this, new Wave(round, this.game.grid.path).spawn(delay))
+    observeWave.call(this, new Wave(round, this.game.grid.path, this.game.metaBar).spawn(delay))
   }
 
   window.EventManager = EventManager

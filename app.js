@@ -65,6 +65,12 @@ sequelize
       })
     })
 
+    route.get('/soundmanager2_debug.swf', function(request, response) {
+      request.addListener('end', function() {
+        file.serveFile('/javascripts/soundmanager/swf/soundmanager2_debug.swf', 200, {}, request, response);
+      })
+    })
+
     route.get("/stylesheets/*", function(request, response) {
       try {
         var path       = __dirname + '/stylus/' + request.params.wildcard

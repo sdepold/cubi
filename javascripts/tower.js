@@ -17,7 +17,10 @@
       costs:           [50, 100, 200],
       damages:         [3, 5, 7],
       ranges:          [3, 3.5, 4],
-      frequencies:     [300, 225, 150]
+      frequencies:     [300, 225, 150],
+      sounds:          {
+        shoot: 'turret-shoot'
+      }
     },
 
     ROCKET: {
@@ -27,7 +30,11 @@
       costs:           [200, 400, 600],
       damages:         [200, 300, 400],
       ranges:          [5, 7, 9],
-      frequencies:     [3000, 2000, 1000]
+      frequencies:     [3000, 2000, 1000],
+      sounds:          {
+        explosion: 'rocket-explosion'//,
+        // shoot:     'rocket-shoot'
+      }
     },
 
     ULTRA: {
@@ -88,6 +95,10 @@
     return Tower.TYPES[this.type].explosionOffset
   }
 
+  Tower.prototype.getSounds = function() {
+    return Tower.TYPES[this.type].sounds || {}
+  }
+
   Tower.prototype.checkDistanceTo = function(monster) {
     var monsterPosition = monster.getPosition()
 
@@ -135,6 +146,10 @@
 
     body.appendChild(bullet)
 
+    if(this.getSounds().shoot) {
+      SoundManager.play(this.getSounds().shoot)
+    }
+
     setTimeout(function() {
       bullet.style.left = xTarget + 'px'
       bullet.style.top  = yTarget + 'px'
@@ -148,6 +163,10 @@
       explosion.style.top = (parseInt(bullet.style.top, 10) + this.getExplosionOffset()) + 'px'
 
       body.appendChild(explosion)
+
+      if(this.getSounds().explosion) {
+        SoundManager.play(this.getSounds().explosion)
+      }
 
       setTimeout(function() {
         body.removeChild(explosion)

@@ -231,6 +231,72 @@
         Utils.addClassName(cell.dom, 'version-5')
       }
     }.bind(this))
+
+    ;(function() {
+      for(var y = 0; y < this.cells.length; y++) {
+        var colCells = this.cells[y]
+
+        for(var x = 0; x < colCells.length; x++) {
+          var cell           = colCells[x]
+            , isInaccessible = Utils.hasClassName(cell.dom, GridCell.TYPES.INACCESSIBLE)
+            , isPath         = Utils.hasClassName(cell.dom, GridCell.TYPES.PATH)
+
+          if (!isInaccessible && !isPath) {
+            var random = Math.random()
+
+            if (random < 0.01) {
+              cell.setType(GridCell.TYPES.INACCESSIBLE, ['obstacle-1'])
+            } else if (random < 0.02) {
+              cell.setType(GridCell.TYPES.INACCESSIBLE, ['obstacle-2'])
+            } else if (random < 0.03) {
+              cell.setType(GridCell.TYPES.INACCESSIBLE, ['obstacle-3'])
+            } else if (y !== 0) {
+              var upperCell = this.cells[y - 1][x]
+
+              if (random < 0.04) {
+                if (Utils.hasClassName(upperCell.dom, GridCell.TYPES.ACCESSIBLE)) {
+                  upperCell.setType(GridCell.TYPES.INACCESSIBLE, ['obstacle-4-1'])
+                  cell.setType(GridCell.TYPES.INACCESSIBLE, ['obstacle-4-2'])
+                }
+              } else if (random < 0.05) {
+                if (Utils.hasClassName(upperCell.dom, GridCell.TYPES.ACCESSIBLE)) {
+                  upperCell.setType(GridCell.TYPES.INACCESSIBLE, ['obstacle-5-1'])
+                  cell.setType(GridCell.TYPES.INACCESSIBLE, ['obstacle-5-2'])
+                }
+              } else if (random < 0.06) {
+                var isLastRow  = (y === this.cells.length - 1)
+                  , isFirstCol = (x === 0)
+                  , isLastCol  = (x === colCells.length - 1)
+                  , validField = !(isLastRow || isFirstCol || isLastCol)
+                  , coords     = [
+                      [y - 1, x - 1], // north-west
+                      [y - 1, x],     // north
+                      [y - 1, x + 1], // north-east
+                      [y, x - 1],     // west
+                      [y, x],         // center
+                      [y, x + 1],     // east
+                      [y + 1, x - 1], // south-west
+                      [y + 1, x],     // south
+                      [y + 1, x + 1]  // south-west
+                    ]
+
+                if (validField) {
+                  var surroundCellsAreOK = coords.every(function(_coords) {
+                    return Utils.hasClassName(this.cells[_coords[0]][_coords[1]].dom, GridCell.TYPES.ACCESSIBLE)
+                  }.bind(this))
+
+                  if(surroundCellsAreOK) {
+                    coords.forEach(function(_coords, i) {
+                      this.cells[_coords[0]][_coords[1]].setType(GridCell.TYPES.INACCESSIBLE, ['obstacle-6-' + (i + 1)])
+                    }.bind(this))
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }.bind(this))()
   }
 
   var createDOM = function() {
